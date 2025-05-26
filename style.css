@@ -97,7 +97,7 @@ main {
   color: #0b0022;
 }
 
-/* Optional: Add this if you're inserting the colorful ring as a background image */
+/*colorful ring as a background image */
 .content::before {
   content: "";
   position: absolute;
