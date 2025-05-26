@@ -1,1 +1,111 @@
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0b0022;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Logo */
+.logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1.4;
+  letter-spacing: 2px;
+  color: white;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 4rem;
+  position: relative;
+  z-index: 10;
+}
+
+/* Navigation */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2.5rem;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: #a867ff;
+}
+
+/* Main content */
+main {
+  text-align: center;
+  padding: 6rem 2rem 2rem;
+  position: relative;
+}
+
+.content h1 {
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #ffffff;
+  z-index: 5;
+  position: relative;
+}
+
+.content h1 span {
+  font-weight: 300;
+  color: #cdbfff;
+}
+
+/* Learn More Link */
+.learn-more {
+  margin-top: 4rem;
+}
+
+.learn-more a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  border: 2px solid white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.learn-more a:hover {
+  background-color: white;
+  color: #0b0022;
+}
+
+/* Optional: Add this if you're inserting the colorful ring as a background image */
+.content::before {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: url('6f63228c-8bae-4176-ad7e-8d79e7d2f54c.png') no-repeat center center/contain;
+  width: 450px;
+  height: 450px;
+  opacity: 0.8;
+  z-index: 0;
+}
+
