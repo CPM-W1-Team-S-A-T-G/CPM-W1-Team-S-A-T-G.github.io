@@ -59,6 +59,20 @@ main {
   position: relative;
 }
 
+.intro-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: url('/mnt/data/ea86bd40-e961-4448-989d-dfbb3334f0d2.jpg') no-repeat center center/contain;
+  opacity: 0.8;
+  z-index: 0;
+  animation: zoomIn 5s ease forwards;
+}
+
+
+
 .content h1 {
   font-size: 4rem;
   font-weight: 600;
