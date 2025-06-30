@@ -1,4 +1,3 @@
-
 * {
   margin: 0;
   padding: 0;
@@ -6,12 +5,11 @@
 }
 
 body {
-  background-color: #0b0022;
+  background-color: #0b0022; /* This is already the correct background color */
   color: #ffffff;
   font-family: 'Arial', sans-serif;
   overflow-x: hidden;
 }
-
 
 .logo {
   font-size: 1.2rem;
@@ -20,7 +18,6 @@ body {
   letter-spacing: 2px;
   color: white;
 }
-
 
 header {
   display: flex;
@@ -33,8 +30,6 @@ header {
   position: relative;
   z-index: 10;
 }
-
-
 
 .nav-links {
   list-style: none;
@@ -56,32 +51,48 @@ header {
   color: #a867ff;
 }
 
-
 main {
+  padding-top: 6rem; /* Adjust as needed to provide space from the header */
   text-align: center;
-  padding: 6rem 2rem 2rem;
-  position: relative;
+  position: relative; /* Essential for absolutely positioned children */
+  min-height: calc(100vh - 6rem); /* Adjust 6rem if header height is different, ensures content fills screen */
+  display: flex; /* Use flexbox to center content vertically */
+  flex-direction: column;
+  justify-content: center; /* Vertically centers the content */
+  align-items: center; /* Horizontally centers the content */
 }
 
 .content {
   text-align: center;
-  padding: 8rem 2rem 2rem;
-  position: relative;
+  position: relative; /* Keep relative for text z-index */
   z-index: 1;
+  padding: 2rem; /* Add some internal padding if needed for text */
 }
 
-/* Colorful ring image, now properly sized */
+/* Colorful ring image, now properly sized and centered relative to its container (main) */
 .intro-bg {
   position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 300px; /* CONTROL SIZE */
-  height: 300px;
-  background: url('bg.jpg') no-repeat center center / contain;
-  opacity: 0.5;
-  z-index: -1;
-  animation: zoomIn 4s ease forwards;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust for its own size */
+  width: 450px; /* Adjust size to match the desired appearance */
+  height: 450px; /* Adjust size to match the desired appearance */
+  background: url('bg.jpg') no-repeat center center / contain; /* Use your background image here. Make sure 'bg.jpg' is the correct path to your ring image. If it's the one from the prompt, you need to change this to '6f63228c-8bae-4176-ad7e-8d79e7d2f54c.png' */
+  opacity: 0.8; /* Adjust opacity as desired */
+  z-index: -1; /* Place it behind the text */
+  animation: zoomIn 4s ease forwards; /* Assuming you have a zoomIn keyframe defined in your script or later in CSS */
+}
+
+/* Keyframe for zoomIn animation (if you don't have it elsewhere) */
+@keyframes zoomIn {
+  from {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
 }
 
 
@@ -91,14 +102,13 @@ main {
   line-height: 1.2;
   color: #ffffff;
   z-index: 5;
-  position: relative;
+  position: relative; /* Ensure text is above the background image */
 }
 
 .content h1 span {
   font-weight: 300;
   color: #cdbfff;
 }
-
 
 .learn-more {
   position: fixed;
@@ -123,18 +133,3 @@ main {
   background-color: white;
   color: #0b0022;
 }
-
-/*colorful ring as a background image */
-.content::before {
-  content: "";
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: url('6f63228c-8bae-4176-ad7e-8d79e7d2f54c.png') no-repeat center center/contain;
-  width: 450px;
-  height: 450px;
-  opacity: 0.8;
-  z-index: 0;
-}
-
