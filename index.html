@@ -1,37 +1,345 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quantum Computing</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <link rel="stylesheet" href="style.css"> <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <style>
+    /* Your provided CSS from the previous interaction starts here */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0b0022;
+      color: #ffffff;
+      font-family: 'Arial', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: bold;
+      line-height: 1.4;
+      letter-spacing: 2px;
+      color: white;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 4rem;
+      background-color: rgba(11, 0, 34, 0.8);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: fixed; /* Changed to fixed for a sticky header */
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover,
+    .nav-links li a.active {
+      color: #a867ff;
+    }
+
+    main {
+      padding-top: 6rem; /* Adjust as needed to provide space from the fixed header */
+    }
+
+    /* Styles for the initial 'home' content section */
+    .content {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      padding: 2rem;
+      min-height: calc(100vh - 6rem); /* Make intro section full viewport height (minus header) */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #ffffff;
+    }
+
+    /* Colorful ring image */
+    .intro-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 450px;
+      height: 450px;
+      /* IMPORTANT: Ensure this path is correct for your image */
+      background: url('bg.jpg') no-repeat center center / contain;
+      opacity: 0.8;
+      z-index: -1;
+      animation: zoomIn 4s ease forwards;
+    }
+
+    /* Keyframe for zoomIn animation */
+    @keyframes zoomIn {
+      from {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+      }
+      to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+      }
+    }
+
+    .content h1 {
+      font-size: 4rem;
+      font-weight: 600;
+      line-height: 1.2;
+      color: #ffffff;
+      z-index: 5;
+      position: relative;
+    }
+
+    .content h1 span {
+      font-weight: 300;
+      color: #cdbfff;
+    }
+
+    .learn-more {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 999;
+    }
+
+    .learn-more a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      border: 2px solid white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .learn-more a:hover {
+      background-color: white;
+      color: #0b0022;
+    }
+
+    /* Styles for the content sections (History, Algorithm, Info) */
+    .content-section {
+      padding: 50px 20px;
+      text-align: center;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .content-section:nth-of-type(odd) {
+      background-color: #1a0044; /* Darker background for alternating sections */
+      color: #ffffff; /* Ensure text is visible */
+    }
+
+    .content-section:nth-of-type(even) {
+      background-color: #0b0022; /* Match body background for alternating sections */
+      color: #ffffff; /* Ensure text is visible */
+    }
+
+    .content-section h2 {
+      font-size: 2.5em;
+      margin-bottom: 30px;
+      color: #a867ff; /* Consistent accent color for headings */
+    }
+
+    .content-section p {
+      max-width: 800px;
+      line-height: 1.8;
+      color: #e0e0e0; /* Lighter text for readability on dark backgrounds */
+      font-size: 1.1em;
+    }
+
+    /* --- Styles for the Pop-up Quiz (ADJUSTED FOR CONSISTENCY) --- */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7); /* Darker, slightly transparent overlay */
+      display: none; /* Hidden by default */
+      justify-content: center;
+      align-items: center;
+      z-index: 1001; /* Above header */
+      backdrop-filter: blur(5px); /* Add a subtle blur to the background */
+    }
+
+    .popup-content {
+      background: #0b0022; /* Use your main body background color */
+      color: #ffffff; /* Use your main body text color */
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Stronger shadow for depth */
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+      border: 1px solid #a867ff; /* Add a subtle accent border */
+      font-family: 'Arial', sans-serif; /* Ensure consistent font */
+    }
+
+    .popup-content h3 {
+      margin-bottom: 20px;
+      font-size: 1.8em;
+      color: #cdbfff; /* Use your accent color for headings */
+    }
+
+    .popup-content p {
+        color: #e0e0e0; /* Lighter text for readability */
+        margin-bottom: 25px;
+    }
+
+    .popup-content button {
+      background-color: #a867ff; /* Use your accent color for buttons */
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: bold; /* Make button text bold */
+      transition: background-color 0.3s ease;
+      margin: 0 10px; /* Spacing between buttons */
+    }
+
+    .popup-content button:hover {
+      background-color: #8c4bff; /* Darker accent on hover */
+    }
+    /* Your provided CSS ends here */
+  </style>
 </head>
-  <body>
-    <header>
-      <div class="logo">Team<br>S.A.T.G</div>
+<body>
+  <header>
+    <div class="logo">Team<br>S.A.T.G</div>
     <nav>
-     <ul class="nav-links">
-       <li><a href="index.html">Home</a></li>
-       <li><a href="history.html">History</a></li>
-       <li><a href="algorithm.html">Algorithm</a></li>
-       <li><a href="info.html">Info</a></li>
-       <li><a href="quiz.html">Quiz</a></li>
-     </ul>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#history">History</a></li>
+        <li><a href="#algorithm">Algorithm</a></li>
+        <li><a href="#info">Info</a></li>
+      </ul>
     </nav>
-    </header>
-   <main>
-    <div class="content">
-      <div class="intro-bg"></div> 
+  </header>
+
+  <main>
+    <div class="content" id="home">
+      <div class="intro-bg"></div>
       <h1><span>QUANTUM</span><br>COMPUTING</h1>
-      <!--img of bg lter-->
-    </div>
+      </div>
     <div class="learn-more">
-      <a href="#">LEARN MORE ⓘ</a>
+      <a href="#history">LEARN MORE ⓘ</a>
     </div>
+
+    <section id="history" class="content-section">
+      <h2>History</h2>
+      <p>This is where the detailed content from your original `history.html` page will go. Expand on the "HISTORY" text you had previously.</p>
+      <p>Include significant milestones, key figures, and the evolution of the field discussed on that page.</p>
+    </section>
+
+    <section id="algorithm" class="content-section">
+      <h2>Algorithm</h2>
+      <p>Here you can place the comprehensive information from your original `algorithm.html` page, which previously contained "# ALGORITHM".</p>
+      <p>Describe the algorithms, their principles, and their applications in detail.</p>
+    </section>
+
+    <section id="info" class="content-section">
+      <h2>Info</h2>
+      <p>This section is dedicated to the content from your `info.html` page, which was simply "INFO" before.</p>
+      <p>Add all the relevant information, resources, and details that were intended for that page.</p>
+    </section>
   </main>
 
-  <script src="script.js"></script>
-     
-      
-  </body>
+  <div class="popup-overlay" id="quizPopup">
+    <div class="popup-content">
+      <h3>Time for a Pop Quiz!</h3>
+      <p>Test your knowledge about Quantum Computing!</p>
+      <button id="startQuizButton">Start Quiz</button>
+      <button id="closeQuizButton">Not Now</button>
+      </div>
+  </div>
+
+  <script>
+    // Ensure GSAP and ScrollTrigger are loaded before using them
+    gsap.registerPlugin(ScrollTrigger);
+
+    // --- Pop-up Quiz Logic ---
+    const quizPopup = document.getElementById('quizPopup');
+    const startQuizButton = document.getElementById('startQuizButton');
+    const closeQuizButton = document.getElementById('closeQuizButton');
+    const infoSection = document.getElementById('info');
+
+    // Function to show the quiz pop-up
+    function showQuizPopup() {
+      quizPopup.style.display = 'flex'; // Show the overlay
+    }
+
+    // Function to hide the quiz pop-up
+    function hideQuizPopup() {
+      quizPopup.style.display = 'none'; // Hide the overlay
+    }
+
+    // Event listener for starting the quiz (you'd link this to your actual quiz logic)
+    startQuizButton.addEventListener('click', () => {
+      alert('Quiz started! (You would redirect to a quiz page or load quiz questions here)');
+      hideQuizPopup(); // Hide the pop-up after starting
+    });
+
+    // Event listener to close the pop-up
+    closeQuizButton.addEventListener('click', hideQuizPopup);
+
+    // Trigger the pop-up when the user scrolls to the end of the #info section
+    ScrollTrigger.create({
+      trigger: infoSection,
+      start: "bottom bottom", // When the bottom of the info section hits the bottom of the viewport
+      onEnter: () => {
+        showQuizPopup();
+      },
+      // You might want to remove onEnterBack if you don't want it to pop up again on scroll up
+      // onEnterBack: () => hideQuizPopup()
+    });
+
+    // --- Add any other GSAP animations or JS code here that you would have in script.js ---
+    // Example for smooth scrolling for nav links (optional, as scroll-behavior: smooth handles basic scrolling)
+    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+  </script>
+</body>
+</html>
