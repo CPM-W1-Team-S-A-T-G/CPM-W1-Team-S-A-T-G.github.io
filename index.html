@@ -1,37 +1,87 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quantum Computing</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-</head>
-  <body>
-    <header>
-      <div class="logo">Team<br>S.A.T.G</div>
-    <nav>
-     <ul class="nav-links">
-       <li><a href="index.html">Home</a></li>
-       <li><a href="history.html">History</a></li>
-       <li><a href="algorithm.html">Algorithm</a></li>
-       <li><a href="info.html">Info</a></li>
-       <li><a href="quiz.html">Quiz</a></li>
-     </ul>
-    </nav>
-    </header>
-   <main>
-    <div class="content">
-      <div class="intro-bg"></div> 
-      <h1><span>QUANTUM</span><br>COMPUTING</h1>
-      <!--img of bg lter-->
-    </div>
-    <div class="learn-more">
-      <a href="#">LEARN MORE ⓘ</a>
-    </div>
-  </main>
+  <title>Your Site</title>
+  <style>
+    body, html {
+      margin: 0;
+      font-family: sans-serif;
+      scroll-behavior: smooth;
+    }
 
-  <script src="script.js"></script>
-     
-      
-  </body>
+    /* Fixed navigation at the top */
+    nav {
+      position: fixed;
+      width: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      z-index: 100;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Parallax sections */
+    .parallax {
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 100vh;
+    }
+    .parallax-1 { background-image: url('images/bg1.jpg'); }
+    .parallax-2 { background-image: url('images/bg2.jpg'); }
+
+    /* Content area styling */
+    .content {
+      padding: 80px 20px;
+      background: white;
+      text-align: center;
+    }
+    .content h2 {
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
+    .content p {
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="history.html">History</a>
+    <a href="algorithm.html">Team</a>
+    <a href="info.html">Projects</a>
+    <a href="quiz.html">Contact</a>
+  </nav>
+
+  <div class="parallax parallax-1"></div>
+
+  <section class="content">
+    <h2>Welcome!</h2>
+    <p>Your introductory text goes here, describing your team/site...</p>
+  </section>
+
+  <div class="parallax parallax-2"></div>
+
+  <section class="content">
+    <h2>Explore the Site</h2>
+    <p>Invite users to check History, Team, Projects, or Contact pages.</p>
+  </section>
+
+</body>
+</html>
