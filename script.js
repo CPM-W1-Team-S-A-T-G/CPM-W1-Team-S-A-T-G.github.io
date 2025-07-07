@@ -51,12 +51,23 @@ ScrollTrigger.create({
   // onEnterBack: () => hideQuizPopup() // Uncomment if you want it to hide when scrolling back up
 });
 
-// --- Your existing script.js content (if any) would go here ---
-// For example, if you have other GSAP animations or interactive elements:
-// gsap.from("h1", { duration: 1, y: 100, opacity: 0 });
-// ScrollTrigger.create({
-//   trigger: "#history",
-//   start: "top center",
-//   animation: gsap.to("#history h2", { opacity: 1, y: 0 }),
-//   toggleActions: "play none none reverse"
+// --- Your existing GSAP animations or other script.js content would go here ---
+// Example from your original CSS animation:
+// This animation is purely CSS, but if you wanted to control it with GSAP:
+// gsap.from(".intro-bg", {
+//   scale: 0.5,
+//   opacity: 0,
+//   duration: 4,
+//   ease: "power2.out"
 // });
+
+// Example for smooth scrolling when clicking nav links (optional, as scroll-behavior: smooth handles basic scrolling)
+document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
