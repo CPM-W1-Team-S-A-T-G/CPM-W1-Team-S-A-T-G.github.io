@@ -7,127 +7,6 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <style>
-    /* Basic styling for sections, if not already in style.css */
-    .content-section {
-      padding: 50px 20px;
-      text-align: center;
-      min-height: 80vh; /* Ensure sections are tall enough to scroll */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .content-section:nth-of-type(odd) {
-      background-color: #f0f0f0; /* Light background for alternating sections */
-    }
-
-    .content-section:nth-of-type(even) {
-      background-color: #ffffff; /* White background for alternating sections */
-    }
-
-    .content-section h2 {
-      font-size: 2.5em;
-      margin-bottom: 30px;
-      color: #333;
-    }
-
-    .content-section p {
-      max-width: 800px;
-      line-height: 1.8;
-      color: #555;
-      font-size: 1.1em;
-    }
-
-    /* Styles for the main landing page content to fit the continuous scroll */
-    main .content {
-      min-height: 100vh; /* Make the intro section full viewport height */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative; /* Needed for intro-bg positioning */
-      color: white; /* Example color for text over intro-bg */
-    }
-
-    .intro-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('your-intro-background.jpg'); /* Replace with your actual intro background image */
-      background-size: cover;
-      background-position: center;
-      z-index: -1; /* Place behind content */
-    }
-
-    main .content h1 {
-      font-size: 4em;
-      text-align: center;
-      z-index: 1; /* Ensure text is above background */
-    }
-
-    .learn-more {
-      text-align: center;
-      padding: 20px;
-      background-color: rgba(0,0,0,0.7); /* Example background for the 'learn more' button section */
-      position: sticky; /* Or relative, depending on desired behavior */
-      bottom: 0;
-      width: 100%;
-      box-sizing: border-box;
-      z-index: 99;
-    }
-
-    .learn-more a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.2em;
-    }
-
-    /* Adjust header for fixed positioning if desired, and add padding to body */
-    header {
-        position: fixed;
-        width: 100%;
-        top: 0;
-        left: 0;
-        z-index: 1000;
-        background-color: rgba(0,0,0,0.8); /* Example background */
-        padding: 10px 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    header .logo {
-        color: white;
-        font-size: 1.5em;
-        margin-left: 20px;
-    }
-
-    nav .nav-links {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-    }
-
-    nav .nav-links li {
-        margin-right: 20px;
-    }
-
-    nav .nav-links a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-    body {
-        padding-top: 80px; /* Adjust based on your header's height to prevent content from going under it */
-    }
-  </style>
 </head>
 <body>
   <header>
@@ -138,7 +17,6 @@
         <li><a href="#history">History</a></li>
         <li><a href="#algorithm">Algorithm</a></li>
         <li><a href="#info">Info</a></li>
-        <li><a href="#quiz">Quiz</a></li>
       </ul>
     </nav>
   </header>
@@ -169,14 +47,16 @@
       <p>This section is dedicated to the content from your `info.html` page, which was simply "INFO" before.</p>
       <p>Add all the relevant information, resources, and details that were intended for that page.</p>
     </section>
-
-    <section id="quiz" class="content-section">
-      <h2>Quiz</h2>
-      <p>This section could contain an embedded quiz, or a final call to action to engage with the quiz on a separate page if it's more complex.</p>
-      <p>You can add questions directly here or simply link to an external quiz resource.</p>
-    </section>
-
   </main>
+
+  <div class="popup-overlay" id="quizPopup">
+    <div class="popup-content">
+      <h3>Time for a Pop Quiz!</h3>
+      <p>Test your knowledge about Quantum Computing!</p>
+      <button id="startQuizButton">Start Quiz</button>
+      <button id="closeQuizButton">Not Now</button>
+      </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
