@@ -1,226 +1,135 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  background-color: #0b0022; /* This is already the correct background color */
-  color: #ffffff;
-  font-family: 'Arial', sans-serif;
-  overflow-x: hidden;
+  background-color: #0b0022; /* This is already the correct background color */
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  overflow-x: hidden;
 }
 
 .logo {
-  font-size: 1.2rem;
-  font-weight: bold;
-  line-height: 1.4;
-  letter-spacing: 2px;
-  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1.4;
+  letter-spacing: 2px;
+  color: white;
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2rem 4rem;
-  background-color: rgba(11, 0, 34, 0.8); /* match body bg with transparency */
-  backdrop-filter: blur(6px); /* smooth blur effect */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  position: fixed; /* Changed to fixed for a sticky header */
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000; /* Higher z-index to ensure it's on top */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 4rem;
+  background-color: rgba(11, 0, 34, 0.8); /* match body bg with transparency */
+  backdrop-filter: blur(6px); /* smooth blur effect */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 10;
 }
 
 .nav-links {
-  list-style: none;
-  display: flex;
-  gap: 2.5rem;
+  list-style: none;
+  display: flex;
+  gap: 2.5rem;
 }
 
 .nav-links li a {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
-  letter-spacing: 1px;
-  transition: color 0.3s ease;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
 }
 
 .nav-links li a:hover,
 .nav-links li a.active {
-  color: #a867ff;
+  color: #a867ff;
 }
 
 main {
-  padding-top: 6rem; /* Adjust as needed to provide space from the fixed header */
-  /* The min-height, display, flex-direction, justify-content, align-items properties
-     for 'main' should ideally be applied to the '.content' div or a specific section,
-     as 'main' will now contain multiple scrollable sections.
-     The 'content' class below is specifically for the first 'home' section. */
+  padding-top: 6rem; /* Adjust as needed to provide space from the header */
+  text-align: center;
+  position: relative; /* Essential for absolutely positioned children */
+  min-height: calc(100vh - 6rem); /* Adjust 6rem if header height is different, ensures content fills screen */
+  display: flex; /* Use flexbox to center content vertically */
+  flex-direction: column;
+  justify-content: center; /* Vertically centers the content */
+  align-items: center; /* Horizontally centers the content */
 }
 
-/* Styles for the initial 'home' content section */
 .content {
-  text-align: center;
-  position: relative; /* Keep relative for text z-index */
-  z-index: 1;
-  padding: 2rem; /* Add some internal padding if needed for text */
-  min-height: calc(100vh - 6rem); /* Make intro section full viewport height (minus header) */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #ffffff; /* Ensure text color is visible on background */
+  text-align: center;
+  position: relative; /* Keep relative for text z-index */
+  z-index: 1;
+  padding: 2rem; /* Add some internal padding if needed for text */
 }
 
-/* Colorful ring image, now properly sized and centered relative to its container (.content) */
+/* Colorful ring image, now properly sized and centered relative to its container (main) */
 .intro-bg {
-  position: absolute;
-  top: 50%; /* Center vertically */
-  left: 50%; /* Center horizontally */
-  transform: translate(-50%, -50%); /* Adjust for its own size */
-  width: 450px; /* Adjust size to match the desired appearance */
-  height: 450px; /* Adjust size to match the desired appearance */
-  /* IMPORTANT: Ensure 'bg.jpg' is the correct path to your ring image.
-     If it was '6f63228c-8bae-4176-ad7e-8d79e7d2f54c.png' then change this line: */
-  background: url('bg.jpg') no-repeat center center / contain; /* OR url('6f63228c-8bae-4176-ad7e-8d79e7d2f54c.png') */
-  opacity: 0.8; /* Adjust opacity as desired */
-  z-index: -1; /* Place it behind the text */
-  animation: zoomIn 4s ease forwards;
+  position: absolute;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust for its own size */
+  width: 450px; /* Adjust size to match the desired appearance */
+  height: 450px; /* Adjust size to match the desired appearance */
+  background: url('bg.jpg') no-repeat center center / contain; /* Use your background image here. Make sure 'bg.jpg' is the correct path to your ring image. If it's the one from the prompt, you need to change this to '6f63228c-8bae-4176-ad7e-8d79e7d2f54c.png' */
+  opacity: 0.8; /* Adjust opacity as desired */
+  z-index: -1; /* Place it behind the text */
+  animation: zoomIn 4s ease forwards; /* Assuming you have a zoomIn keyframe defined in your script or later in CSS */
 }
 
-/* Keyframe for zoomIn animation */
+/* Keyframe for zoomIn animation (if you don't have it elsewhere) */
 @keyframes zoomIn {
-  from {
-    transform: translate(-50%, -50%) scale(0.5);
-    opacity: 0;
-  }
-  to {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.8;
-  }
+  from {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
 }
+
 
 .content h1 {
-  font-size: 4rem;
-  font-weight: 600;
-  line-height: 1.2;
-  color: #ffffff;
-  z-index: 5;
-  position: relative; /* Ensure text is above the background image */
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #ffffff;
+  z-index: 5;
+  position: relative; /* Ensure text is above the background image */
 }
 
 .content h1 span {
-  font-weight: 300;
-  color: #cdbfff;
+  font-weight: 300;
+  color: #cdbfff;
 }
 
 .learn-more {
-  position: fixed; /* Fixed position relative to viewport */
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 999;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index:999;
 }
 
 .learn-more a {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
-  letter-spacing: 2px;
-  border: 2px solid white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 30px;
-  transition: all 0.3s ease;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  border: 2px solid white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  transition: all 0.3s ease;
 }
 
 .learn-more a:hover {
-  background-color: white;
-  color: #0b0022;
-}
-
-/* Styles for the content sections (History, Algorithm, Info) */
-.content-section {
-  padding: 50px 20px;
-  text-align: center;
-  min-height: 80vh; /* Ensure sections are tall enough to scroll */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* These sections will use the body's default text color (#ffffff) unless overridden */
-}
-
-.content-section:nth-of-type(odd) {
-  background-color: #1a0044; /* Darker background for alternating sections */
-  color: #ffffff; /* Ensure text is visible */
-}
-
-.content-section:nth-of-type(even) {
-  background-color: #0b0022; /* Match body background for alternating sections */
-  color: #ffffff; /* Ensure text is visible */
-}
-
-.content-section h2 {
-  font-size: 2.5em;
-  margin-bottom: 30px;
-  color: #a867ff; /* Consistent accent color for headings */
-}
-
-.content-section p {
-  max-width: 800px;
-  line-height: 1.8;
-  color: #e0e0e0; /* Lighter text for readability on dark backgrounds */
-  font-size: 1.1em;
-}
-
-/* Styles for the Pop-up Quiz */
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: none; /* Hidden by default */
-  justify-content: center;
-  align-items: center;
-  z-index: 1001; /* Above header */
-}
-
-.popup-content {
-  background: #0b0022; /* Match body background */
-  color: #ffffff; /* Ensure text is visible */
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-  text-align: center;
-  max-width: 500px;
-  width: 90%;
-  border: 1px solid #a867ff; /* Accent border */
-}
-
-.popup-content h3 {
-  margin-bottom: 20px;
-  font-size: 1.8em;
-  color: #cdbfff; /* Accent color for pop-up heading */
-}
-
-.popup-content button {
-  background-color: #a867ff; /* Accent button color */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.3s ease;
-  margin: 0 10px; /* Spacing between buttons */
-}
-
-.popup-content button:hover {
-  background-color: #8c4bff; /* Darker accent on hover */
+  background-color: white;
+  color: #0b0022;
 }
