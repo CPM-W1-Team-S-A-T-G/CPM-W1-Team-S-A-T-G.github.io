@@ -1,4 +1,5 @@
 // script.js
+
 // Ensure GSAP and ScrollTrigger are loaded before using them
 gsap.registerPlugin(ScrollTrigger);
 
