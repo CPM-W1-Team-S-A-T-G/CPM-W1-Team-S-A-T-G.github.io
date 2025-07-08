@@ -1,1 +1,209 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0b0022;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Logo and Header */
+.logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1.4;
+  letter-spacing: 2px;
+  color: white;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 4rem;
+  background-color: rgba(11, 0, 34, 0.8);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Navigation */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2.5rem;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: #a867ff;
+}
+
+/* Main Layout */
+main {
+  padding-top: 6rem;
+}
+
+/* Intro Content (Home) */
+.content {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+  min-height: calc(100vh - 6rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+}
+
+.intro-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  height: 450px;
+  background: url('bg.jpg') no-repeat center center / contain;
+  opacity: 0.8;
+  z-index: -1;
+}
+
+.content h1 {
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #ffffff;
+  z-index: 5;
+  position: relative;
+}
+
+.content h1 span {
+  font-weight: 300;
+  color: #cdbfff;
+}
+
+/* Learn More Button */
+.learn-more {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 999;
+}
+
+.learn-more a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  border: 2px solid white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.learn-more a:hover {
+  background-color: white;
+  color: #0b0022;
+}
+
+/* Section Content Styles */
+.content-section {
+  padding: 50px 20px;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-section h2 {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  color: #a867ff;
+}
+
+.content-section p {
+  max-width: 800px;
+  line-height: 1.8;
+  color: #e0e0e0;
+  font-size: 1.1em;
+}
+
+/* Pop-up Quiz */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+  backdrop-filter: blur(5px);
+}
+
+.popup-content {
+  background: #0b0022;
+  color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  border: 1px solid #a867ff;
+  font-family: 'Arial', sans-serif;
+}
+
+.popup-content h3 {
+  margin-bottom: 20px;
+  font-size: 1.8em;
+  color: #cdbfff;
+}
+
+.popup-content p {
+  color: #e0e0e0;
+  margin-bottom: 25px;
+}
+
+.popup-content button {
+  background-color: #a867ff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin: 0 10px;
+}
+
+.popup-content button:hover {
+  background-color: #8c4bff;
+}
 
