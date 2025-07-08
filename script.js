@@ -53,22 +53,24 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- Animate Intro Background on Scroll into #home ---
-  ScrollTrigger.create({
-    trigger: "#home",
-    start: "top center",
-    onEnter: () => {
-      gsap.fromTo(".intro-bg",
-        { scale: 0.5, opacity: 0 },
-        { scale: 1, opacity: 0.8, duration: 2, ease: "power2.out" }
-      );
-    },
-    onEnterBack: () => {
-      gsap.fromTo(".intro-bg",
-        { scale: 0.5, opacity: 0 },
-        { scale: 1, opacity: 0.8, duration: 2, ease: "power2.out" }
-      );
-    }
-  });
+// --- Animate Intro Background on Scroll into #home ---
+ScrollTrigger.create({
+  trigger: "#home",
+  start: "top center",
+  onEnter: () => {
+    gsap.fromTo(".intro-bg",
+      { scale: 0.5, opacity: 0 },
+      { scale: 1, opacity: 0.8, duration: 1.5, ease: "power2.out" }
+    );
+  },
+  onEnterBack: () => {
+    gsap.fromTo(".intro-bg",
+      { scale: 0.5, opacity: 0 },
+      { scale: 1, opacity: 0.8, duration: 1.5, ease: "power2.out" }
+    );
+  }
+});
+
 
   // --- Smooth Scrolling for Anchor Links ---
   document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
