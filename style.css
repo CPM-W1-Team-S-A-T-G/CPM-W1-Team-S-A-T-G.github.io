@@ -135,7 +135,7 @@ main {
 /* Title Page Section (e.g., HISTORY) */
 .title-section {
   height: 100vh;
-  background: #15003a;
+  background: #0b0022;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -152,7 +152,7 @@ main {
 /* Content Section with Image and Text */
 .content-section {
   height: 100vh;
-  background: #1e004b;
+  background: #0b0022;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
