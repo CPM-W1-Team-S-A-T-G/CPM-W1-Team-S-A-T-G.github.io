@@ -14,68 +14,59 @@
     <nav>
       <ul class="nav-links">
         <li><a href="#home">Home</a></li>
-        <li><a href="#history">History</a></li>
-        <li><a href="#algorithm">Algorithm</a></li>
-        <li><a href="#info">Info</a></li>
+        <li><a href="#history-title">History</a></li>
+        <li><a href="#algorithm-title">Algorithm</a></li>
+        <li><a href="#info-title">Info</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <!-- Intro -->
+    <!-- Home Section -->
     <div class="content" id="home">
       <div class="intro-bg"></div>
       <h1><span>QUANTUM</span><br>COMPUTING</h1>
     </div>
 
     <div class="learn-more">
-      <a href="#history">LEARN MORE ⓘ</a>
+      <a href="#history-title">LEARN MORE ⓘ</a>
     </div>
 
-    <!-- History -->
-    <section id="history" class="content-section alt">
-      <div class="section-img">
-        <img src="img1.jpg" alt="Quantum History" />
-      </div>
-      <div class="section-text">
-        <h2>History</h2>
-        <p>It all originated from modern quantum theory developed in the 1920s to explain wave-particle duality at atomic scales. This eventually led to the development of digital computers, replacing human computers due to their limitations.</p>
-      </div>
+    <!-- History Title Page -->
+    <section class="title-section" id="history-title">
+      <h2>HISTORY</h2>
     </section>
 
-    <!-- Algorithm -->
-    <section id="algorithm" class="content-section">
-      <div class="section-text">
-        <h2>Algorithm</h2>
-        <p>Quantum algorithms like Shor’s and Grover’s provide significant speedups over classical counterparts by utilizing quantum principles such as superposition and entanglement.</p>
-      </div>
-      <div class="section-img">
-        <img src="img2.jpg" alt="Quantum Algorithm" />
-      </div>
+    <!-- History Content Page -->
+    <section class="content-section">
+      <img src="https://via.placeholder.com/120x120" alt="History Image" />
+      <p>Quantum computing started with theoretical discussions in the 1980s by physicists like Richard Feynman and David Deutsch. It aims to use the principles of quantum mechanics to perform calculations that classical computers can't handle efficiently.</p>
     </section>
 
-    <!-- Info -->
-    <section id="info" class="content-section alt">
-      <div class="section-img">
-        <img src="img3.jpg" alt="Quantum Info" />
-      </div>
-      <div class="section-text">
-        <h2>Info</h2>
-        <p>Quantum computing is an emerging field poised to revolutionize cryptography, materials science, and complex problem-solving. Tech giants and researchers are rapidly advancing this transformative technology.</p>
-      </div>
+    <!-- Algorithm Title Page -->
+    <section class="title-section" id="algorithm-title">
+      <h2>ALGORITHM</h2>
+    </section>
+
+    <!-- Algorithm Content Page -->
+    <section class="content-section reverse">
+      <p>Quantum algorithms like Shor’s (for factoring large numbers) and Grover’s (for searching unsorted databases) demonstrate exponential or quadratic speedups over classical counterparts. These use quantum principles like superposition and entanglement.</p>
+      <img src="https://via.placeholder.com/120x120" alt="Algorithm Image" />
+    </section>
+
+    <!-- Info Title Page -->
+    <section class="title-section" id="info-title">
+      <h2>INFO</h2>
+    </section>
+
+    <!-- Info Content Page -->
+    <section class="content-section">
+      <img src="https://via.placeholder.com/120x120" alt="Info Image" />
+      <p>Quantum computing is an emerging field that can transform cryptography, materials science, and complex problem solving. Major companies and universities are actively developing quantum processors and quantum software frameworks.</p>
     </section>
   </main>
-
-  <!-- Popup Quiz -->
-  <div class="popup-overlay" id="quizPopup">
-    <div class="popup-content">
-      <h3>Time for a Pop Quiz!</h3>
-      <p>Test your knowledge about Quantum Computing!</p>
-      <button id="startQuizButton">Start Quiz</button>
-      <button id="closeQuizButton">Not Now</button>
-    </div>
-  </div>
 
   <script src="script.js"></script>
 </body>
 </html>
+
