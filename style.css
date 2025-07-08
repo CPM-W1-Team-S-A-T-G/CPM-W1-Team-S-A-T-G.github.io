@@ -1,11 +1,10 @@
-/* Reset */
+/* Reset and Base Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body */
 body {
   background-color: #0b0022;
   color: #ffffff;
@@ -13,22 +12,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Header */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 2rem 4rem;
-  background: rgba(11, 0, 34, 0.8);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
-}
-
+/* Logo and Header */
 .logo {
   font-size: 1.2rem;
   font-weight: bold;
@@ -37,6 +21,22 @@ header {
   color: white;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 4rem;
+  background-color: rgba(11, 0, 34, 0.8);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Navigation */
 .nav-links {
   list-style: none;
   display: flex;
@@ -62,16 +62,18 @@ main {
   padding-top: 6rem;
 }
 
-/* Intro Section (Home) */
+/* Intro Content (Home) */
 .content {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-align: center;
+  position: relative;
   z-index: 1;
   padding: 2rem;
+  min-height: calc(100vh - 6rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
 }
 
 .intro-bg {
@@ -125,74 +127,30 @@ main {
   color: #0b0022;
 }
 
-/* Title Page Section (e.g., HISTORY) */
-.title-section {
-  height: 100vh;
-  background: #15003a;
+/* Section Content Styles */
+.content-section {
+  padding: 50px 20px;
+  text-align: center;
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
 }
 
-.title-section h2 {
-  font-size: 3.5rem;
-  font-weight: bold;
-  color: #ffffff;
-  letter-spacing: 2px;
-}
-
-/* Content Section */
-.content-section {
-  min-height: 100vh;
-  background: #1e004b;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 2rem;
-  gap: 2rem;
-  flex-wrap: wrap;
-  text-align: center;
-}
-
-.content-section.reverse {
-  flex-direction: row-reverse;
+.content-section h2 {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  color: #a867ff;
 }
 
 .content-section p {
-  max-width: 600px;
-  font-size: 1.1em;
+  max-width: 800px;
   line-height: 1.8;
   color: #e0e0e0;
+  font-size: 1.1em;
 }
 
-.content-section img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 2px solid #cdbfff;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .nav-links {
-    gap: 1.5rem;
-  }
-
-  .content-section {
-    flex-direction: column !important;
-    padding: 3rem 1rem;
-  }
-
-  .content h1 {
-    font-size: 2.5rem;
-  }
-
-  .title-section h2 {
-    font-size: 2.5rem;
-  }
-}
 /* Pop-up Quiz */
 .popup-overlay {
   position: fixed;
@@ -228,7 +186,7 @@ main {
 }
 
 .popup-content p {
-color: #e0e0e0;
+  color: #e0e0e0;
   margin-bottom: 25px;
 }
 
@@ -246,5 +204,5 @@ color: #e0e0e0;
 }
 
 .popup-content button:hover {
-  background-color: #8c4bff;
+  background-color: #8c4bff;
 }
