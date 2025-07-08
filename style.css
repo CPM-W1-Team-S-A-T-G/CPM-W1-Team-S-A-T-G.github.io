@@ -86,7 +86,6 @@ main {
   background: url('bg.jpg') no-repeat center center / contain;
   opacity: 0.8;
   z-index: -1;
-  animation: zoomIn 4s ease forwards;
 }
 
 @keyframes zoomIn {
