@@ -39,32 +39,27 @@ document.addEventListener('DOMContentLoaded', () => {
     onLeaveBack: () => popupDismissed = false,
   });
 
-  // Animate intro-bg when entering #home
+  // Animate the intro image every time you scroll into home
   ScrollTrigger.create({
     trigger: "#home",
     start: "top center",
-    onEnter: () => {
-      gsap.fromTo(".intro-bg", 
-        { scale: 0.5, opacity: 0 },
-        { scale: 1, opacity: 0.8, duration: 1.5, ease: "power2.out" }
-      );
-    },
-    onEnterBack: () => {
-      gsap.fromTo(".intro-bg", 
-        { scale: 0.5, opacity: 0 },
-        { scale: 1, opacity: 0.8, duration: 1.5, ease: "power2.out" }
-      );
-    }
+    onEnter: () => animateIntroBG(),
+    onEnterBack: () => animateIntroBG()
   });
 
-  // Smooth scroll for nav links
-  document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+  function animateIntroBG() {
+    gsap.fromTo(".intro-bg",
+      { scale: 0.5, opacity: 0 },
+      { scale: 1, opacity: 0.8, duration: 1.5, ease: "power2.out" }
+    );
+  }
+
+  // Smooth scroll behavior for nav
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
-        behavior: 'smooth'
-      });
+      const section = document.querySelector(this.getAttribute('href'));
+      section.scrollIntoView({ behavior: 'smooth' });
     });
   });
 });
-
