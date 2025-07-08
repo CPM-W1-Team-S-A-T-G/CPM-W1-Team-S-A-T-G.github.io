@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // --- Navigation Highlight ---
+  // Highlight nav
   const navLinks = document.querySelectorAll('.nav-links a');
   const currentPath = window.location.pathname.split('/').pop();
 
@@ -10,10 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- GSAP + ScrollTrigger ---
+  // Quiz popup logic
   gsap.registerPlugin(ScrollTrigger);
 
-  // --- Pop-up Quiz Logic ---
   const quizPopup = document.getElementById('quizPopup');
   const startQuizButton = document.getElementById('startQuizButton');
   const closeQuizButton = document.getElementById('closeQuizButton');
@@ -33,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   startQuizButton.addEventListener('click', () => {
     alert('Quiz started! (Redirect to quiz logic)');
-    popupDismissed = false; // Reset or leave true if you want it to stop
+    popupDismissed = false; // or true if you want it to stop showing
     hideQuizPopup();
   });
 
@@ -42,35 +41,26 @@ document.addEventListener('DOMContentLoaded', () => {
     hideQuizPopup();
   });
 
+  // ScrollTrigger to show popup when entering Info section
   ScrollTrigger.create({
     trigger: infoSection,
-    start: "top 80%",
-    end: "bottom bottom",
-    onEnter: () => showQuizPopup(),
-    onEnterBack: () => showQuizPopup(),
-    onLeave: () => popupDismissed = false,
-    onLeaveBack: () => popupDismissed = false
-  });
-
-  // --- Animate Intro Background on Scroll into #home ---
-  ScrollTrigger.create({
-    trigger: "#home",
     start: "top center",
+    end: "bottom center",
     onEnter: () => {
-      gsap.fromTo(".intro-bg",
-        { scale: 0.5, opacity: 0 },
-        { scale: 1, opacity: 0.8, duration: 2, ease: "power2.out" }
-      );
+      showQuizPopup();
     },
     onEnterBack: () => {
-      gsap.fromTo(".intro-bg",
-        { scale: 0.5, opacity: 0 },
-        { scale: 1, opacity: 0.8, duration: 2, ease: "power2.out" }
-      );
+      showQuizPopup();
+    },
+    onLeave: () => {
+      popupDismissed = false; // allow showing again
+    },
+    onLeaveBack: () => {
+      popupDismissed = false; // allow showing again
     }
   });
 
-  // --- Smooth Scrolling for Anchor Links ---
+  // Smooth scrolling
   document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
