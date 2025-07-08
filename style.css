@@ -1,4 +1,3 @@
-/* Reset and Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -12,12 +11,9 @@ body {
   overflow-x: hidden;
 }
 
-/* Logo and Header */
 .logo {
   font-size: 1.2rem;
   font-weight: bold;
-  line-height: 1.4;
-  letter-spacing: 2px;
   color: white;
 }
 
@@ -27,16 +23,11 @@ header {
   align-items: center;
   padding: 2rem 4rem;
   background-color: rgba(11, 0, 34, 0.8);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   z-index: 1000;
 }
 
-/* Navigation */
 .nav-links {
   list-style: none;
   display: flex;
@@ -48,7 +39,6 @@ header {
   color: white;
   font-weight: bold;
   font-size: 1rem;
-  letter-spacing: 1px;
   transition: color 0.3s ease;
 }
 
@@ -57,23 +47,19 @@ header {
   color: #a867ff;
 }
 
-/* Main Layout */
 main {
   padding-top: 6rem;
 }
 
-/* Intro Content (Home) */
 .content {
   text-align: center;
   position: relative;
-  z-index: 1;
   padding: 2rem;
   min-height: calc(100vh - 6rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #ffffff;
 }
 
 .intro-bg {
@@ -83,9 +69,10 @@ main {
   transform: translate(-50%, -50%);
   width: 450px;
   height: 450px;
-  background: url('bg.jpg') no-repeat center center / contain;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Quantum_Computer.png/800px-Quantum_Computer.png') no-repeat center center / contain;
   opacity: 0.8;
   z-index: -1;
+  animation: zoomIn 1.5s ease;
 }
 
 @keyframes zoomIn {
@@ -102,10 +89,7 @@ main {
 .content h1 {
   font-size: 4rem;
   font-weight: 600;
-  line-height: 1.2;
-  color: #ffffff;
   z-index: 5;
-  position: relative;
 }
 
 .content h1 span {
@@ -113,7 +97,6 @@ main {
   color: #cdbfff;
 }
 
-/* Learn More Button */
 .learn-more {
   position: fixed;
   bottom: 2rem;
@@ -124,9 +107,6 @@ main {
 .learn-more a {
   text-decoration: none;
   color: white;
-  font-weight: bold;
-  font-size: 1rem;
-  letter-spacing: 2px;
   border: 2px solid white;
   padding: 0.75rem 1.5rem;
   border-radius: 30px;
@@ -138,7 +118,6 @@ main {
   color: #0b0022;
 }
 
-/* Section Content Styles */
 .content-section {
   padding: 50px 20px;
   text-align: center;
@@ -162,7 +141,6 @@ main {
   font-size: 1.1em;
 }
 
-/* Pop-up Quiz */
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -182,12 +160,10 @@ main {
   color: #ffffff;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   text-align: center;
   max-width: 500px;
   width: 90%;
   border: 1px solid #a867ff;
-  font-family: 'Arial', sans-serif;
 }
 
 .popup-content h3 {
@@ -197,7 +173,6 @@ main {
 }
 
 .popup-content p {
-  color: #e0e0e0;
   margin-bottom: 25px;
 }
 
@@ -208,10 +183,8 @@ main {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1em;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
   margin: 0 10px;
+  transition: background-color 0.3s ease;
 }
 
 .popup-content button:hover {
