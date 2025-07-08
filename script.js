@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const quizPopup = document.getElementById('quizPopup');
   const startQuizButton = document.getElementById('startQuizButton');
   const closeQuizButton = document.getElementById('closeQuizButton');
-  const infoSection = document.getElementById('info');
+  const infoSection = document.getElementById('info-title'); // update ID
+
 
   let popupDismissed = false;
 
