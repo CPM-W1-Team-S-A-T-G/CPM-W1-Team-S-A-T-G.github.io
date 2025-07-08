@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Highlight nav
   const navLinks = document.querySelectorAll('.nav-links a');
   const currentPath = window.location.pathname.split('/').pop();
 
@@ -9,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Quiz Pop-up Logic
+  // Quiz popup logic
   gsap.registerPlugin(ScrollTrigger);
 
   const quizPopup = document.getElementById('quizPopup');
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeQuizButton = document.getElementById('closeQuizButton');
   const infoSection = document.getElementById('info');
 
-  let popupDismissed = false; // Track if user clicked "Not Now"
+  let popupDismissed = false;
 
   function showQuizPopup() {
     if (!popupDismissed) {
@@ -30,8 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   startQuizButton.addEventListener('click', () => {
-    alert('Quiz started! (Redirect to your quiz logic here)');
-    popupDismissed = false; // Optional: allow showing again if quiz starts
+    alert('Quiz started! (Redirect to quiz logic)');
+    popupDismissed = false; // or true if you want it to stop showing
     hideQuizPopup();
   });
 
@@ -40,15 +41,23 @@ document.addEventListener('DOMContentLoaded', () => {
     hideQuizPopup();
   });
 
-  // Trigger when entering the Info section (from top or bottom)
+  // ScrollTrigger to show popup when entering Info section
   ScrollTrigger.create({
     trigger: infoSection,
-    start: "top 80%",
-    end: "bottom bottom",
-    onEnter: () => showQuizPopup(),
-    onEnterBack: () => showQuizPopup(),
-    onLeave: () => popupDismissed = false,      // Reset flag when user leaves section
-    onLeaveBack: () => popupDismissed = false   // Reset flag when user scrolls back up
+    start: "top center",
+    end: "bottom center",
+    onEnter: () => {
+      showQuizPopup();
+    },
+    onEnterBack: () => {
+      showQuizPopup();
+    },
+    onLeave: () => {
+      popupDismissed = false; // allow showing again
+    },
+    onLeaveBack: () => {
+      popupDismissed = false; // allow showing again
+    }
   });
 
   // Smooth scrolling
@@ -61,3 +70,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
