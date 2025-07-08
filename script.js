@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Highlight current nav link (for external pages if used)
+  // Highlight nav based on current page
   const navLinks = document.querySelectorAll('.nav-links a');
   const currentPath = window.location.pathname.split('/').pop();
 
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // GSAP ScrollTrigger logic for quiz
+  // Quiz pop-up behavior
   gsap.registerPlugin(ScrollTrigger);
 
   const quizPopup = document.getElementById('quizPopup');
@@ -36,8 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
   ScrollTrigger.create({
     trigger: infoSection,
     start: "top 80%",
-    once: true,
     onEnter: () => {
+      showQuizPopup();
+    },
+    onEnterBack: () => {
       showQuizPopup();
     }
   });
@@ -52,3 +54,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
