@@ -174,12 +174,15 @@ main {
 }
 
 .content-section img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 2px solid #cdbfff;
+  width: 350px;
+  height: auto;
+  object-fit: contain;
+  border: none;
+  border-radius: 0;
+  opacity: 0;
+  transform: scale(0.8);
 }
+
 
 /* Popup Quiz (Optional Feature) */
 .popup-overlay {
