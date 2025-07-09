@@ -9,6 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
     onEnterBack: animateIntroBG
   });
 
+  // Animate history image
+gsap.to('.content-section img', {
+  scrollTrigger: {
+    trigger: '.content-section img',
+    start: 'top 80%',
+    toggleActions: 'play none none reset'
+  },
+  opacity: 1,
+  scale: 1,
+  duration: 1.2,
+  ease: 'power2.out'
+});
+
   function animateIntroBG() {
     gsap.fromTo(".intro-bg",
       { scale: 0.5, opacity: 0 },
