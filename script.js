@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
 
-  // Animate the intro image
+  // Animate intro background
   ScrollTrigger.create({
     trigger: "#home",
     start: "top center",
@@ -9,25 +9,27 @@ document.addEventListener('DOMContentLoaded', () => {
     onEnterBack: animateIntroBG
   });
 
-  // Animate history image
-gsap.to('.content-section img', {
-  scrollTrigger: {
-    trigger: '.content-section img',
-    start: 'top 80%',
-    toggleActions: 'play none none reset'
-  },
-  opacity: 1,
-  scale: 1,
-  duration: 1.2,
-  ease: 'power2.out'
-});
-
   function animateIntroBG() {
     gsap.fromTo(".intro-bg",
       { scale: 0.5, opacity: 0 },
       { scale: 1, opacity: 0.8, duration: 1.5, ease: "power2.out" }
     );
   }
+
+  // Animate all images with fade-in and scale
+  document.querySelectorAll('.content-section img').forEach(img => {
+    gsap.to(img, {
+      scrollTrigger: {
+        trigger: img,
+        start: 'top 80%',
+        toggleActions: 'play none none reset'
+      },
+      opacity: 1,
+      scale: 1,
+      duration: 1.2,
+      ease: 'power2.out'
+    });
+  });
 
   // Smooth scroll for nav
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -38,7 +40,7 @@ gsap.to('.content-section img', {
     });
   });
 
-  // Pop-up Quiz logic
+  // Pop-up Quiz
   const quizPopup = document.getElementById('quizPopup');
   const startQuizButton = document.getElementById('startQuizButton');
   const closeQuizButton = document.getElementById('closeQuizButton');
