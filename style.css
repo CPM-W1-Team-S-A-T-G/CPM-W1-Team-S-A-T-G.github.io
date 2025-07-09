@@ -1,11 +1,9 @@
-/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body & Fonts */
 body {
   background-color: #0b0022;
   color: #ffffff;
@@ -19,7 +17,6 @@ section {
   scroll-snap-align: start;
 }
 
-/* Header */
 header {
   position: fixed;
   top: 0;
@@ -43,7 +40,6 @@ header {
   color: white;
 }
 
-/* Navigation */
 .nav-links {
   list-style: none;
   display: flex;
@@ -64,12 +60,10 @@ header {
   color: #a867ff;
 }
 
-/* Main Layout */
 main {
   padding-top: 6rem;
 }
 
-/* Intro (Home) Section */
 .content {
   position: relative;
   min-height: 100vh;
@@ -107,7 +101,6 @@ main {
   color: #cdbfff;
 }
 
-/* Learn More Button */
 .learn-more {
   position: fixed;
   bottom: 2rem;
@@ -132,7 +125,6 @@ main {
   color: #0b0022;
 }
 
-/* Title Page Section (e.g., HISTORY) */
 .title-section {
   height: 100vh;
   background: #0b0022;
@@ -149,7 +141,6 @@ main {
   letter-spacing: 3px;
 }
 
-/* Content Section with Image and Text */
 .content-section {
   height: 100vh;
   background: #0b0022;
@@ -183,8 +174,6 @@ main {
   transform: scale(0.8);
 }
 
-
-/* Popup Quiz (Optional Feature) */
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -209,7 +198,6 @@ main {
   max-width: 500px;
   width: 90%;
   border: 1px solid #a867ff;
-  font-family: 'Arial', sans-serif;
 }
 
 .popup-content h3 {
@@ -240,7 +228,6 @@ main {
   background-color: #8c4bff;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 768px) {
   .nav-links {
     gap: 1.5rem;
