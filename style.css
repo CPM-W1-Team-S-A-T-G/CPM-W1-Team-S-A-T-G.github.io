@@ -1,9 +1,11 @@
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Body & Fonts */
 body {
   background-color: #0b0022;
   color: #ffffff;
@@ -17,6 +19,7 @@ section {
   scroll-snap-align: start;
 }
 
+/* Header */
 header {
   position: fixed;
   top: 0;
@@ -40,6 +43,7 @@ header {
   color: white;
 }
 
+/* Navigation */
 .nav-links {
   list-style: none;
   display: flex;
@@ -60,11 +64,12 @@ header {
   color: #a867ff;
 }
 
+/* Main Layout */
 main {
   padding-top: 6rem;
 }
 
-/* Home Section */
+/* Intro Section */
 .content {
   position: relative;
   min-height: 100vh;
@@ -73,7 +78,7 @@ main {
   align-items: center;
   text-align: center;
   padding: 2rem;
-  perspective: 1200px;
+  perspective: 1500px;
 }
 
 .intro-bg {
@@ -85,7 +90,6 @@ main {
   background: url('bg.png') no-repeat center center / contain;
   transform: translate(-50%, -50%);
   transform-style: preserve-3d;
-  opacity: 0.8;
   z-index: -1;
   will-change: transform;
 }
@@ -104,6 +108,7 @@ main {
   color: #cdbfff;
 }
 
+/* Learn More */
 .learn-more {
   position: fixed;
   bottom: 2rem;
@@ -128,6 +133,7 @@ main {
   color: #0b0022;
 }
 
+/* Title Pages */
 .title-section {
   height: 100vh;
   background: #0b0022;
@@ -144,6 +150,7 @@ main {
   letter-spacing: 3px;
 }
 
+/* Content Sections */
 .content-section {
   height: 100vh;
   background: #0b0022;
@@ -171,13 +178,14 @@ main {
   width: 350px;
   height: auto;
   object-fit: contain;
-  border: none;
   background-color: #0b0022;
+  border: none;
+  border-radius: 0;
   opacity: 0;
   transform: scale(0.8);
 }
 
-/* Popup */
+/* Pop-up Quiz */
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -202,7 +210,6 @@ main {
   max-width: 500px;
   width: 90%;
   border: 1px solid #a867ff;
-  font-family: 'Arial', sans-serif;
 }
 
 .popup-content h3 {
@@ -233,6 +240,7 @@ main {
   background-color: #8c4bff;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .nav-links {
     gap: 1.5rem;
