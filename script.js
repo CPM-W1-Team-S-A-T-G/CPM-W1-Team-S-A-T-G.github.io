@@ -1,33 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
 
-  // Scroll-based 3D ring rotation
-  gsap.to(".intro-bg", {
-    scrollTrigger: {
-      trigger: "#home",
-      start: "top top",
-      end: "+=4000",
-      scrub: true
-    },
-    rotationY: 720,
-    ease: "none",
-    transformOrigin: "center center"
+  // Animate intro background
+  ScrollTrigger.create({
+    trigger: "#home",
+    start: "top center",
+    onEnter: animateIntroBG,
+    onEnterBack: animateIntroBG
   });
 
-  // Animate section images
-  gsap.to('.content-section img', {
-    scrollTrigger: {
-      trigger: '.content-section img',
-      start: 'top 80%',
-      toggleActions: 'play none none reset'
-    },
-    opacity: 1,
-    scale: 1,
-    duration: 1.2,
-    ease: 'power2.out'
+  function animateIntroBG() {
+    gsap.fromTo(".intro-bg",
+      { scale: 0.5, opacity: 0 },
+      { scale: 1, opacity: 0.8, duration: 1.5, ease: "power2.out" }
+    );
+  }
+
+  // Animate all images with fade-in and scale
+  document.querySelectorAll('.content-section img').forEach(img => {
+    gsap.to(img, {
+      scrollTrigger: {
+        trigger: img,
+        start: 'top 80%',
+        toggleActions: 'play none none reset'
+      },
+      opacity: 1,
+      scale: 1,
+      duration: 1.2,
+      ease: 'power2.out'
+    });
   });
 
-  // Smooth scroll
+  // Smooth scroll for nav
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
@@ -44,7 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let popupDismissed = false;
 
   function showQuizPopup() {
-    if (!popupDismissed) quizPopup.style.display = 'flex';
+    if (!popupDismissed) {
+      quizPopup.style.display = 'flex';
+    }
   }
 
   function hideQuizPopup() {
