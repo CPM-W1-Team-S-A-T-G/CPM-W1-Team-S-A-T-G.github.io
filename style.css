@@ -1,11 +1,9 @@
-/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body & Fonts */
 body {
   background-color: #0b0022;
   color: #ffffff;
@@ -19,7 +17,6 @@ section {
   scroll-snap-align: start;
 }
 
-/* Header */
 header {
   position: fixed;
   top: 0;
@@ -43,7 +40,6 @@ header {
   color: white;
 }
 
-/* Navigation */
 .nav-links {
   list-style: none;
   display: flex;
@@ -64,12 +60,11 @@ header {
   color: #a867ff;
 }
 
-/* Main Layout */
 main {
   padding-top: 6rem;
 }
 
-/* Intro Section */
+/* Home Section */
 .content {
   position: relative;
   min-height: 100vh;
@@ -85,10 +80,11 @@ main {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   width: 450px;
   height: 450px;
   background: url('bg.png') no-repeat center center / contain;
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
   opacity: 0.8;
   z-index: -1;
   will-change: transform;
@@ -108,7 +104,6 @@ main {
   color: #cdbfff;
 }
 
-/* Learn More */
 .learn-more {
   position: fixed;
   bottom: 2rem;
@@ -133,7 +128,6 @@ main {
   color: #0b0022;
 }
 
-/* Title Pages */
 .title-section {
   height: 100vh;
   background: #0b0022;
@@ -150,7 +144,6 @@ main {
   letter-spacing: 3px;
 }
 
-/* Content Sections */
 .content-section {
   height: 100vh;
   background: #0b0022;
@@ -180,12 +173,11 @@ main {
   object-fit: contain;
   border: none;
   background-color: #0b0022;
-  border-radius: 0;
   opacity: 0;
   transform: scale(0.8);
 }
 
-/* Popup Quiz */
+/* Popup */
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -241,7 +233,6 @@ main {
   background-color: #8c4bff;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .nav-links {
     gap: 1.5rem;
@@ -260,4 +251,3 @@ main {
     font-size: 2.5rem;
   }
 }
-
