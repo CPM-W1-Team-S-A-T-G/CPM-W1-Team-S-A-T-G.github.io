@@ -1,20 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
 
-  // 3D Scroll Rotate Effect
+  // 3D Scroll Rotate Ring
   gsap.to(".intro-bg", {
     scrollTrigger: {
       trigger: "#home",
       start: "top top",
-      end: "+=4000", // 4-5 scrolls
+      end: "+=4000",
       scrub: true,
     },
-    rotationY: 720, // Two full rotations
+    rotationY: 720,
     ease: "none",
     transformOrigin: "center center"
   });
 
-  // Animate image on scroll
+  // Animate content-section images
   gsap.to('.content-section img', {
     scrollTrigger: {
       trigger: '.content-section img',
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ease: 'power2.out'
   });
 
-  // Smooth Scroll
+  // Smooth scroll on nav click
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Pop-up Quiz
+  // Pop-up Quiz Logic
   const quizPopup = document.getElementById('quizPopup');
   const startQuizButton = document.getElementById('startQuizButton');
   const closeQuizButton = document.getElementById('closeQuizButton');
