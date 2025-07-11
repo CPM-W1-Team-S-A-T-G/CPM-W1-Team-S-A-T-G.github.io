@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-
   gsap.registerPlugin(ScrollTrigger);
 
   // Animate intro background
@@ -17,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
-  // Animate all images with fade-in and scale
-  document.querySelectorAll('.content-section img').forEach(img => {
+  // Animate images
+  document.querySelectorAll('.animated-image').forEach(img => {
     gsap.to(img, {
       scrollTrigger: {
         trigger: img,
@@ -32,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Smooth scroll for nav
+  // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
@@ -41,11 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Pop-up Quiz
+  // Quiz popup
   const quizPopup = document.getElementById('quizPopup');
   const startQuizButton = document.getElementById('startQuizButton');
   const closeQuizButton = document.getElementById('closeQuizButton');
   const infoSection = document.getElementById('info');
+  const quizContainer = document.getElementById('quizContainer');
   let popupDismissed = false;
 
   function showQuizPopup() {
@@ -59,9 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   startQuizButton.addEventListener('click', () => {
-    alert("Redirecting to quiz...");
-    popupDismissed = false;
     hideQuizPopup();
+    quizContainer.style.display = 'flex';
+    startQuiz();
   });
 
   closeQuizButton.addEventListener('click', () => {
@@ -78,3 +78,4 @@ document.addEventListener('DOMContentLoaded', () => {
     onLeaveBack: () => popupDismissed = false
   });
 });
+
