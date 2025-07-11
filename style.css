@@ -247,3 +247,45 @@ main {
   }
 }
 
+.quiz-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0b0022;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.quiz-box {
+  max-width: 600px;
+  width: 100%;
+  background: #1c003a;
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid #a867ff;
+  text-align: center;
+}
+
+#quiz-options button {
+  display: block;
+  margin: 1rem auto;
+  background: #a867ff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: background 0.3s ease;
+}
+
+#quiz-options button:hover {
+  background: #8c4bff;
+}
