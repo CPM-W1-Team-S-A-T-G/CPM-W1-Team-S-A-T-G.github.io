@@ -1,4 +1,4 @@
-/* General Body and Main Container Styles (Keep these as they are) */
+/* General Body and Main Container Styles */
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
@@ -11,7 +11,7 @@ main {
   position: relative; /* Needed for absolute positioning of quiz popup */
 }
 
-/* Header/Navigation Styles (Keep these as they are) */
+/* Header/Navigation Styles */
 header {
   position: fixed;
   top: 0;
@@ -59,7 +59,7 @@ nav ul li a:hover {
   border-radius: 5px;
 }
 
-/* Intro Section Styles (Keep these as they are) */
+/* Intro Section Styles */
 #home {
   height: 100vh;
   display: flex;
@@ -121,7 +121,7 @@ nav ul li a:hover {
   transform: translateY(-3px);
 }
 
-/* Section Titles (Keep these as they are) */
+/* Section Titles */
 .title-section {
   height: 100vh; /* Make title sections full height */
   display: flex;
@@ -139,7 +139,7 @@ nav ul li a:hover {
   margin: 0;
 }
 
-/* Horizontal Scroll Container Styles (Keep these as they are) */
+/* Horizontal Scroll Container Styles */
 .horizontal-scroll-wrapper {
   height: 100vh; /* Essential for pinning */
   overflow: hidden; /* Hide scrollbars */
@@ -154,7 +154,7 @@ nav ul li a:hover {
   will-change: transform; /* Optimize for GSAP transform */
 }
 
-/* Individual Slide Styles (Keep these as they are) */
+/* Individual Slide Styles */
 .history-slide,
 .algorithm-slide,
 .info-slide {
@@ -165,24 +165,23 @@ nav ul li a:hover {
   align-items: center; /* Vertically centers the content within the slide */
   justify-content: center; /* Horizontally centers the entire pair of content */
   padding: 2rem; /* Add padding for content spacing */
-  gap: 4rem; /* Increased gap for better separation */
+  gap: 4rem; /* Increased gap for better separation of image and text */
   flex-wrap: wrap; /* Allows stacking on smaller screens */
   text-align: center; /* Default text alignment */
   background: #0b0022;
   color: #e0e0e0;
 }
 
-
-/* !!! KEY CHANGES FOR FIXED SIZE/POSITION HERE !!! */
+/* Common content-section style within slides */
 .content-section {
-    /* Previously defined for general sections. Now ensuring it aligns content properly within the slide */
-    display: flex; /* This is already on history-slide, etc., but good to re-emphasize */
+    /* These styles apply to the section inside each slide */
+    display: flex;
     align-items: center;
-    justify-content: center; /* Changed from space-evenly to center for fixed positioning */
-    width: 100%; /* Important: Takes full width of its parent slide */
-    height: 100%; /* Important: Takes full height of its parent slide */
-    box-sizing: border-box; /* Include padding in width/height calculation */
-    padding: 2rem; /* Ensure padding around the content */
+    justify-content: center; /* Centers the img and p horizontally within this section */
+    width: 100%; /* Take full width of parent slide */
+    height: 100%; /* Take full height of parent slide */
+    box-sizing: border-box; /* Include padding in width/height */
+    padding: 2rem; /* Consistent padding inside the content area */
 }
 
 .content-section.reverse {
@@ -190,63 +189,60 @@ nav ul li a:hover {
 }
 
 .content-section p {
-  /* Set a fixed max-width and remove flex-grow */
-  max-width: 500px; /* Adjust this value as needed for your text */
-  width: 100%; /* Allow it to shrink if needed, but respect max-width */
+  /* FIXED WIDTH FOR TEXT */
+  max-width: 500px; /* Max width for text block on large screens */
+  width: 100%; /* Allows it to shrink if needed below max-width */
   font-size: 1.1em;
   line-height: 1.8;
   color: #e0e0e0;
-  /* Removed flex: 1; */
-  /* Added margin-right/left based on .reverse */
-  text-align: left; /* Text alignment within its fixed width */
+  /* IMPORTANT: flex: 1; was removed here */
+  text-align: left; /* Align text within its fixed width */
 }
 
 .content-section img {
-  /* Set a fixed width and height with object-fit */
-  width: 400px; /* Adjust this value for desired image width */
-  height: 400px; /* Adjust this value for desired image height to make it square */
+  /* FIXED SIZE FOR IMAGE */
+  width: 400px; /* Fixed width */
+  height: 400px; /* Fixed height (makes it square) */
   object-fit: contain; /* Ensures the entire image is visible, no cropping */
   border: none;
   border-radius: 0;
   opacity: 0; /* Initial state for GSAP animation */
   transform: scale(0.8); /* Initial state for GSAP animation */
-  /* Removed flex: 1; */
-  /* Added margin-right/left based on .reverse */
+  /* IMPORTANT: flex: 1; was removed here */
 }
 
 /* Positioning adjustments for image and text inside .content-section */
-/* If content-section is NOT reverse, text is left, image is right */
+/* These push the elements to the outer edges while keeping a gap, for larger screens */
 .history-slide:not(.reverse) p,
 .algorithm-slide:not(.reverse) p,
 .info-slide:not(.reverse) p {
   margin-right: 40px; /* Space between text and image */
-  margin-left: auto; /* Push text to the left within the available space */
+  margin-left: auto; /* Push text to the left */
 }
 
 .history-slide:not(.reverse) img,
 .algorithm-slide:not(.reverse) img,
 .info-slide:not(.reverse) img {
   margin-left: 40px; /* Space between image and text */
-  margin-right: auto; /* Push image to the right within the available space */
+  margin-right: auto; /* Push image to the right */
 }
 
-/* If content-section IS reverse, image is left, text is right */
 .history-slide.reverse p,
 .algorithm-slide.reverse p,
 .info-slide.reverse p {
   margin-left: 40px; /* Space between text and image */
-  margin-right: auto; /* Push text to the right within the available space */
+  margin-right: auto; /* Push text to the right */
 }
 
 .history-slide.reverse img,
 .algorithm-slide.reverse img,
 .info-slide.reverse img {
   margin-right: 40px; /* Space between image and text */
-  margin-left: auto; /* Push image to the left within the available space */
+  margin-left: auto; /* Push image to the left */
 }
 
 
-/* Scroll Indicator Styles (Keep these as they are) */
+/* Scroll Indicator Styles */
 .scroll-indicator {
   position: fixed;
   bottom: 20px;
@@ -283,7 +279,7 @@ nav ul li a:hover {
   }
 }
 
-/* Quiz Popup Styles (Keep these as they are) */
+/* Quiz Popup Styles */
 #quizPopup {
   position: fixed;
   top: 0;
@@ -342,7 +338,7 @@ nav ul li a:hover {
   cursor: pointer;
 }
 
-/* Quiz Container Styles (Keep these as they are) */
+/* Quiz Container Styles */
 #quizContainer {
   position: fixed;
   top: 0;
@@ -392,7 +388,7 @@ nav ul li a:hover {
   font-size: 1.1em;
   cursor: pointer;
   transition: background-color 0.3s ease, border-color 0.3s ease;
-  text-align: left; /* Align text within button */
+  text-align: left;
 }
 
 .option-button:hover {
@@ -401,12 +397,12 @@ nav ul li a:hover {
 }
 
 .option-button.correct {
-  background-color: #28a745; /* Green for correct */
+  background-color: #28a745;
   border-color: #218838;
 }
 
 .option-button.wrong {
-  background-color: #dc3545; /* Red for wrong */
+  background-color: #dc3545;
   border-color: #c82333;
 }
 
@@ -433,7 +429,7 @@ nav ul li a:hover {
   font-weight: bold;
 }
 
-/* Media Queries for Responsiveness (Keep and adjust as needed) */
+/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   header {
     flex-direction: column;
@@ -475,13 +471,13 @@ nav ul li a:hover {
     flex-direction: column-reverse !important;
   }
 
-  .content-section img,
-  .content-section p {
-    flex: none; /* Remove flex property for fixed width/height */
+  .content-section p,
+  .content-section img {
+    /* On mobile, remove fixed width/height and let it be responsive */
+    flex: none; /* Ensure no flex-grow/shrink */
     width: 90%; /* Occupy most of the width */
-    max-width: 300px; /* Constrain max size for mobile images */
-    min-width: unset;
-    height: auto; /* Allow image height to adjust based on width */
+    max-width: 300px; /* Constrain max size for mobile images/text */
+    height: auto; /* Auto height for images */
     margin: 1rem auto; /* Center with margin */
   }
 
@@ -489,7 +485,7 @@ nav ul li a:hover {
     text-align: center; /* Center text on mobile */
   }
 
-  /* Remove specific margins for not(.reverse) and .reverse on mobile */
+  /* Remove specific margins that were for desktop positioning for mobile */
   .history-slide:not(.reverse) p,
   .algorithm-slide:not(.reverse) p,
   .info-slide:not(.reverse) p,
