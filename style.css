@@ -1,340 +1,509 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* General Body and Main Container Styles */
 body {
-  background-color: #0b0022;
-  color: #ffffff;
-  font-family: 'Arial', sans-serif;
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-  /* scroll-behavior: smooth; -- GSAP handles this better */
-  /* scroll-snap-type: y mandatory; -- Removed, GSAP will manage */
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #0d002a;
+  color: #e0e0e0;
+  overflow-x: hidden; /* Prevent horizontal scrollbar from main body */
 }
 
-/* section {
-  scroll-snap-align: start; -- Removed, GSAP will manage
-} */
+main {
+  position: relative; /* Needed for absolute positioning of quiz popup */
+}
 
+/* Header/Navigation Styles */
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 2rem 4rem;
-  background: rgba(11, 0, 34, 0.8);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 2rem;
+  background-color: rgba(13, 0, 42, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .logo {
-  font-size: 1.2rem;
+  font-size: 1.8em;
   font-weight: bold;
-  line-height: 1.4;
-  letter-spacing: 2px;
-  color: white;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 2.5rem;
-}
-
-.nav-links li a {
+  color: #e0e0e0;
   text-decoration: none;
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
-  letter-spacing: 1px;
-  transition: color 0.3s ease;
 }
 
-.nav-links li a:hover,
-.nav-links li a.active {
-  color: #a867ff;
-}
-
-main {
-  padding-top: 6rem;
-}
-
-.content {
-  position: relative;
-  min-height: 100vh;
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
+}
+
+nav ul li {
+  margin-left: 2rem;
+}
+
+nav ul li a {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 1em;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #a0d9ff;
+  background-color: rgba(160, 217, 255, 0.1);
+  border-radius: 5px;
+}
+
+/* Intro Section Styles */
+#home {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  z-index: 1;
-  padding: 2rem;
+  position: relative;
+  overflow: hidden; /* Ensure bg image doesn't overflow */
 }
 
 .intro-bg {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 450px;
-  height: 450px;
-  background: url('bg.jpg') no-repeat center center / contain;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('bg.jpg') no-repeat center center/cover;
   opacity: 0.8;
   z-index: -1;
+  transform: scale(1); /* Initial state, GSAP animates from scale(0.5) */
+  filter: brightness(0.6); /* Slightly darken the background */
 }
 
-.content h1 {
-  font-size: 4rem;
-  font-weight: 600;
-  line-height: 1.2;
+.intro-content {
+  z-index: 1;
   color: #ffffff;
-  z-index: 5;
-  position: relative;
+  padding: 1rem;
 }
 
-.content h1 span {
-  font-weight: 300;
-  color: #cdbfff;
+.intro-content h1 {
+  font-size: 4em;
+  margin-bottom: 0.5em;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-.learn-more {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 999;
+.intro-content p {
+  font-size: 1.5em;
+  max-width: 800px;
+  line-height: 1.6;
+  margin: 0 auto;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.learn-more a {
+.intro-button {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  background-color: #a0d9ff;
+  color: #0d002a;
   text-decoration: none;
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
-  letter-spacing: 2px;
-  border: 2px solid white;
-  padding: 0.75rem 1.5rem;
   border-radius: 30px;
-  transition: all 0.3s ease;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.learn-more a:hover {
-  background-color: white;
-  color: #0b0022; /* Changed to a visible color on hover */
+.intro-button:hover {
+  background-color: #79c5ff;
+  transform: translateY(-3px);
 }
 
+/* Section Titles */
 .title-section {
-  height: 100vh;
-  background: #0b0022;
+  height: 100vh; /* Make title sections full height */
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #0b0022;
+  color: #e0e0e0;
   text-align: center;
 }
 
 .title-section h2 {
-  font-size: 4rem;
-  font-weight: bold;
-  color: #ffffff;
-  letter-spacing: 3px;
+  font-size: 4em;
+  opacity: 0; /* Will be animated by GSAP */
+  transform: translateY(50px); /* Will be animated by GSAP */
+  margin: 0;
 }
 
-/* New styles for horizontal scrolling sections */
+/* Horizontal Scroll Container Styles */
 .horizontal-scroll-wrapper {
-  height: 100vh;
-  overflow: hidden; /* Hide the native horizontal scrollbar */
-  position: relative; /* Needed for GSAP pinning */
-  background: #0b0022; /* Ensure consistent background */
+  height: 100vh; /* Essential for pinning */
+  overflow: hidden; /* Hide scrollbars */
+  position: relative;
+  background: #0b0022;
 }
 
 .horizontal-content-container {
-  display: flex; /* Arrange children (content-sections) horizontally */
-  height: 100%; /* Take full height of the wrapper */
-  width: max-content; /* Allow content to dictate total width */
-  will-change: transform; /* Optimize for animation */
-}
-
-.content-section {
-  /* Common styles for all content sections, including those in horizontal scroll */
   display: flex;
-  align-items: center;
-  justify-content: space-evenly; /* Distribute items with space */
-  padding: 2rem;
-  gap: 2rem;
-  flex-wrap: wrap; /* Allows image/paragraph to wrap on smaller screens within the 100vw slide */
-  text-align: center;
-  background: #0b0022; /* Ensure consistent background */
+  height: 100%;
+  width: max-content; /* Allows content to extend horizontally */
+  will-change: transform; /* Optimize for GSAP transform */
 }
 
-/* Specific styles for individual slides within horizontal sections */
+/* Individual Slide Styles (Parent of content-section) */
 .history-slide,
 .algorithm-slide,
 .info-slide {
   flex-shrink: 0; /* Prevent slides from shrinking */
-  width: 100vw; /* Each slide takes full viewport width */
-  height: 100vh; /* Each slide takes full viewport height */
-  /* Inherits display: flex and content alignment from .content-section */
+  width: 100vw; /* Each slide takes up one full viewport width */
+  height: 100vh; /* Each slide takes up one full viewport height */
+  display: flex; /* Make the slide itself a flex container */
+  align-items: center; /* Vertically centers the content within the slide */
+  justify-content: center; /* Horizontally centers the entire pair of content */
+  padding: 2rem; /* Add padding for content spacing */
+  gap: 4rem; /* Increased gap for better separation of image and text */
+  flex-wrap: wrap; /* Allows stacking on smaller screens */
+  text-align: center; /* Default text alignment */
+  background: #0b0022;
+  color: #e0e0e0;
+}
+
+/* Common content-section style within slides */
+.content-section {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers the img and p horizontally within this section */
+    width: 100%; /* Take full width of parent slide */
+    height: 100%; /* Take full height of parent slide */
+    box-sizing: border-box; /* Include padding in width/height */
+    padding: 2rem; /* Consistent padding inside the content area */
 }
 
 .content-section.reverse {
-  flex-direction: row-reverse;
+  flex-direction: row-reverse; /* Reverses order for image/text on alternating slides */
 }
 
-.content-section p {
-  max-width: 600px;
-  font-size: 1.1em;
-  line-height: 1.8;
+/* --- CRITICAL FIXES FOR IMAGE AND TEXT SIZING --- */
+
+/* Target images within any horizontal slide type */
+.history-slide .animated-image,
+.algorithm-slide .animated-image,
+.info-slide .animated-image {
+  width: 400px; /* Fixed width for the image */
+  height: 400px; /* Fixed height for the image (makes it square) */
+  object-fit: contain; /* Ensures the entire image is visible, no cropping */
+  flex: none; /* VERY IMPORTANT: Prevents flex-grow/shrink */
+  min-width: unset; /* Override any min-width that might conflict */
+}
+
+/* Target paragraphs within any horizontal slide type */
+.history-slide p,
+.algorithm-slide p,
+.info-slide p {
+  max-width: 500px; /* Fixed max-width for the text block */
+  width: 100%; /* Allows it to shrink if needed below max-width */
+  flex: none; /* VERY IMPORTANT: Prevents flex-grow/shrink */
+  min-width: unset; /* Override any min-width that might conflict */
+  text-align: left; /* Align text within its fixed width */
+}
+
+/* Positioning adjustments for image and text inside .content-section */
+/* These push the elements to the outer edges while keeping a gap, for larger screens */
+
+/* For non-reversed slides (Image on Right, Text on Left) */
+.history-slide:not(.reverse) p,
+.algorithm-slide:not(.reverse) p,
+.info-slide:not(.reverse) p {
+  margin-right: 40px; /* Space between text and image */
+  margin-left: auto; /* Push text to the left within the available space */
+}
+
+.history-slide:not(.reverse) .animated-image,
+.algorithm-slide:not(.reverse) .animated-image,
+.info-slide:not(.reverse) .animated-image {
+  margin-left: 40px; /* Space between image and text */
+  margin-right: auto; /* Push image to the right within the available space */
+}
+
+/* For reversed slides (Image on Left, Text on Right) */
+.history-slide.reverse p,
+.algorithm-slide.reverse p,
+.info-slide.reverse p {
+  margin-left: 40px; /* Space between text and image */
+  margin-right: auto; /* Push text to the right within the available space */
+}
+
+.history-slide.reverse .animated-image,
+.algorithm-slide.reverse .animated-image,
+.info-slide.reverse .animated-image {
+  margin-right: 40px; /* Space between image and text */
+  margin-left: auto; /* Push image to the left within the available space */
+}
+
+
+/* Scroll Indicator Styles */
+.scroll-indicator {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   color: #e0e0e0;
-  flex: 1; /* Allow paragraph to take up available space */
-  min-width: 300px; /* Prevent text from becoming too narrow */
+  font-size: 0.9em;
+  opacity: 0.7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 999;
 }
 
-.content-section img {
-  width: 350px;
-  height: auto;
-  object-fit: contain;
-  border: none;
-  border-radius: 0;
-  opacity: 0; /* Initial state for GSAP animation */
-  transform: scale(0.8); /* Initial state for GSAP animation */
-  flex: 1; /* Allow image to take up available space */
-  min-width: 250px; /* Prevent image from becoming too small */
+.scroll-indicator .arrow {
+  border: solid #e0e0e0;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  animation: bounce 1.5s infinite;
 }
 
-/* Popup and Quiz styles (kept as is) */
-.popup-overlay {
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0) rotate(45deg);
+  }
+  40% {
+    transform: translateY(-10px) rotate(45deg);
+  }
+  60% {
+    transform: translateY(-5px) rotate(45px);
+  }
+}
+
+/* Quiz Popup Styles */
+#quizPopup {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: none;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1001;
-  backdrop-filter: blur(5px);
+  z-index: 2000;
+  display: none; /* Hidden by default */
 }
 
 .popup-content {
-  background: #0b0022;
-  color: #ffffff;
+  background-color: #1a0141;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   max-width: 500px;
   width: 90%;
-  border: 1px solid #a867ff;
+  color: #e0e0e0;
+  position: relative;
 }
 
 .popup-content h3 {
-  margin-bottom: 20px;
-  font-size: 1.8em;
-  color: #cdbfff;
-}
-
-.popup-content p {
-  color: #e0e0e0;
-  margin-bottom: 25px;
+  font-size: 2em;
+  margin-bottom: 1em;
 }
 
 .popup-content button {
-  background-color: #a867ff;
-  color: white;
+  background-color: #a0d9ff;
+  color: #0d002a;
   border: none;
   padding: 10px 20px;
+  margin: 10px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.popup-content button:hover {
+  background-color: #79c5ff;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: #e0e0e0;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+/* Quiz Container Styles */
+#quizContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  display: none; /* Hidden by default */
+  overflow-y: auto; /* Enable scrolling if quiz content is tall */
+}
+
+#quizBox {
+  background-color: #1a0141;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+  max-width: 700px;
+  width: 90%;
+  color: #e0e0e0;
+  text-align: center;
+  position: relative;
+}
+
+#questionDisplay {
+  font-size: 1.5em;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.option-button {
+  background-color: #2a0a57;
+  color: #e0e0e0;
+  border: 1px solid #4a1e7b;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  text-align: left;
+}
+
+.option-button:hover {
+  background-color: #3a1a67;
+  border-color: #6a3e9b;
+}
+
+.option-button.correct {
+  background-color: #28a745;
+  border-color: #218838;
+}
+
+.option-button.wrong {
+  background-color: #dc3545;
+  border-color: #c82333;
+}
+
+#quiz-controls button {
+  background-color: #a0d9ff;
+  color: #0d002a;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1em;
   font-weight: bold;
   transition: background-color 0.3s ease;
   margin: 0 10px;
 }
 
-.popup-content button:hover {
-  background-color: #8c4bff;
+#quiz-controls button:hover {
+  background-color: #79c5ff;
 }
 
-.quiz-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #0b0022;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-  flex-direction: column;
-  padding: 2rem;
+#quiz-result {
+  margin-top: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
 }
 
-.quiz-box {
-  max-width: 600px;
-  width: 100%;
-  background: #1c003a;
-  padding: 2rem;
-  border-radius: 10px;
-  border: 1px solid #a867ff;
-  text-align: center;
-}
-
-#quiz-options button {
-  display: block;
-  margin: 1rem auto;
-  background: #a867ff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 1em;
-  transition: background 0.3s ease;
-}
-
-#quiz-options button:hover {
-  background: #8c4bff;
-}
-
-/* Media Queries for responsiveness */
+/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   header {
-    padding: 1.5rem 2rem;
+    flex-direction: column;
+    padding: 1rem;
   }
 
-  .nav-links {
-    gap: 1.5rem;
+  nav ul {
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
-  .content h1 {
-    font-size: 2.5rem;
+  nav ul li {
+    margin: 0.5rem 1rem;
+  }
+
+  .intro-content h1 {
+    font-size: 2.5em;
+  }
+
+  .intro-content p {
+    font-size: 1.2em;
   }
 
   .title-section h2 {
-    font-size: 2.5rem;
+    font-size: 2.5em;
   }
 
-  /* Make horizontal slides stack content vertically on mobile */
+  /* Adjustments for horizontal slides on smaller screens */
   .content-section {
-    flex-direction: column !important; /* Force column for mobile on these slides */
+    flex-direction: column !important; /* Force column layout on small screens */
     padding: 3rem 1rem;
-    justify-content: center; /* Vertically center content */
+    justify-content: center;
   }
 
   .content-section.reverse {
-    flex-direction: column-reverse !important; /* Ensure reverse works for columns too */
+    flex-direction: column-reverse !important;
   }
 
-  .content-section img,
+  /* Specific targeting for images and paragraphs on mobile to ensure responsiveness */
+  .history-slide .animated-image,
+  .algorithm-slide .animated-image,
+  .info-slide .animated-image,
+  .history-slide p,
+  .algorithm-slide p,
+  .info-slide p {
+    flex: none; /* Essential: Override any flex properties from desktop styles */
+    width: 90%; /* Make them take up most of the width */
+    max-width: 300px; /* Constrain max size even on mobile */
+    min-width: unset; /* Remove any conflicting min-width */
+    height: auto; /* Auto height for images */
+    margin: 1rem auto; /* Center with margin */
+  }
+
   .content-section p {
-    flex: none; /* Remove flex-grow on mobile so they stack */
-    width: 90%; /* Adjust width for mobile */
-    max-width: none;
-    min-width: unset; /* Remove min-width restriction */
+    text-align: center; /* Center text on mobile */
+  }
+
+  /* Remove specific margins that were for desktop positioning for mobile */
+  .history-slide:not(.reverse) p,
+  .algorithm-slide:not(.reverse) p,
+  .info-slide:not(.reverse) p,
+  .history-slide:not(.reverse) .animated-image,
+  .algorithm-slide:not(.reverse) .animated-image,
+  .info-slide:not(.reverse) .animated-image,
+  .history-slide.reverse p,
+  .algorithm-slide.reverse p,
+  .info-slide.reverse p,
+  .history-slide.reverse .animated-image,
+  .algorithm-slide.reverse .animated-image,
+  .info-slide.reverse .animated-image {
+    margin: 1rem auto; /* Consistent margin for both image and text on mobile */
   }
 }
