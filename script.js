@@ -28,58 +28,79 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = wrapper.querySelector('.horizontal-content-container');
     const slides = gsap.utils.toArray(`.${slideClass}`);
 
-    // Calculate total width to scroll based on all slides' widths
     let totalSlidesWidth = 0;
     slides.forEach(slide => {
       totalSlidesWidth += slide.offsetWidth;
     });
 
-    // The scroll amount is the total width of all slides minus one viewport width.
-    // This makes the last slide align to the right edge of the viewport.
     const scrollAmount = totalSlidesWidth - window.innerWidth;
 
     if (scrollAmount <= 0) {
-      // If content fits within one viewport, no horizontal scroll needed
       return;
     }
 
     // Main horizontal scroll animation
     const horizontalScrollTween = gsap.to(container, {
       x: -scrollAmount,
-      ease: "none", // Linear movement
+      ease: "none",
       scrollTrigger: {
         trigger: wrapper,
-        pin: true, // Pin the wrapper to keep it in view while scrolling horizontally
-        scrub: 1, // Smoothly link scroll progress to animation progress
-        start: "top top", // Start pinning when the top of the wrapper hits the top of the viewport
-        end: () => `+=${scrollAmount}`, // End when we've scrolled the full horizontal content width vertically
-        invalidateOnRefresh: true, // Recalculate on window resize for correct scrollAmount
-        // markers: true, // Uncomment for debugging scroll triggers
+        pin: true,
+        scrub: 1,
+        start: "top top",
+        end: () => `+=${scrollAmount}`,
+        invalidateOnRefresh: true,
+        // Uncomment below for snapping (optional)
+        // snap: {
+        //   snapTo: 1 / (slides.length - 1),
+        //   duration: 0.3
+        // }
       }
     });
 
-    // Animate images within horizontal slides using containerAnimation
+    // Animate image and text within each horizontal slide using containerAnimation
     slides.forEach(slide => {
       const img = slide.querySelector('.animated-image');
+      const text = slide.querySelector('p'); // Select the paragraph element
+
+      // Create a timeline for each slide's content to control its fade-in/out
+      // This timeline will be controlled by the main horizontal scroll
+      const slideContentTL = gsap.timeline({
+        scrollTrigger: {
+          trigger: slide, // Trigger for this specific slide
+          containerAnimation: horizontalScrollTween, // Linked to the main horizontal scroll
+          start: "left 80%", // Start animating when 80% of the slide enters the viewport from left
+          end: "right 20%",  // Finish animating when 20% of the slide leaves the viewport from right
+          scrub: true, // Smoothly animate based on scroll position
+          // markers: true, // Uncomment for debugging each slide's content trigger
+        }
+      });
+
+      // Animate image and text together within this timeline
       if (img) {
-        gsap.fromTo(img,
-          { opacity: 0, scale: 0.8 }, // Initial state (can also be defined in CSS)
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.8, // Duration for the image animation
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: slide, // Each slide is the trigger for its own image
-              containerAnimation: horizontalScrollTween, // Link to the parent horizontal scroll animation
-              start: "left center", // When the left edge of the slide hits the center of the viewport
-              end: "right center", // When the right edge of the slide leaves the center of the viewport
-              toggleActions: 'play none none reverse', // Play animation on enter, reverse on leave
-              // markers: true, // Uncomment for debugging individual slide triggers
-            }
-          }
+        slideContentTL.fromTo(img,
+          { opacity: 0, scale: 0.8 },
+          { opacity: 1, scale: 1, duration: 1, ease: 'power2.out' }, // Animate in
+          0 // Start at the beginning of this timeline
         );
       }
+      if (text) {
+        slideContentTL.fromTo(text,
+          { opacity: 0, y: 20 }, // Initial state for text (can adjust y for subtle slide-up)
+          { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }, // Animate in
+          0 // Start at the same time as the image
+        );
+      }
+
+      // Add a fade out to the same timeline.
+      // This will automatically reverse based on `scrub: true`
+      if (img) {
+          slideContentTL.to(img, { opacity: 0, scale: 0.8, duration: 1, ease: 'power2.out' }, ">-0.5"); // Fade out slightly before the end of the trigger
+      }
+      if (text) {
+          slideContentTL.to(text, { opacity: 0, y: 20, duration: 1, ease: 'power2.out' }, "<"); // Fade out at the same time as the image
+      }
+
     });
   }
 
@@ -100,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
           duration: 1,
           scrollTo: {
             y: section.offsetTop,
-            autoKill: false // Prevents ScrollTo from stopping if user interacts
+            autoKill: false
           },
           ease: "power2.inOut"
         });
@@ -113,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const startQuizButton = document.getElementById('startQuizButton');
   const closeQuizButton = document.getElementById('closeQuizButton');
   const quizContainer = document.getElementById('quizContainer');
-  let popupDismissed = false; // Flag to check if popup has been dismissed
+  let popupDismissed = false;
 
   function showQuizPopup() {
     if (!popupDismissed) {
@@ -128,22 +149,24 @@ document.addEventListener('DOMContentLoaded', () => {
   startQuizButton.addEventListener('click', () => {
     hideQuizPopup();
     quizContainer.style.display = 'flex';
-    startQuiz(); // Assuming startQuiz() is defined in quiz.js
+    if (typeof startQuiz === 'function') { // Check if startQuiz is defined
+        startQuiz();
+    } else {
+        console.warn("startQuiz() function not found. Make sure quiz.js is loaded correctly.");
+    }
   });
 
   closeQuizButton.addEventListener('click', () => {
-    popupDismissed = true; // Set flag when dismissed
+    popupDismissed = true;
     hideQuizPopup();
   });
 
   // Trigger quiz popup when user finishes scrolling through the 'Info' horizontal section
   ScrollTrigger.create({
-    trigger: "#info-scroll-wrapper", // Use the horizontal wrapper as the trigger
-    start: "bottom bottom", // When the bottom of the wrapper leaves the bottom of the viewport
-    onEnter: showQuizPopup, // Show popup when trigger condition is met
-    onLeaveBack: hideQuizPopup, // Hide popup if scrolling back up into the section
-    // onLeave and onEnterBack for popupDismissed could be added for more complex behavior
-    // For simplicity, `popupDismissed` remains true once set, until page reload.
-    // markers: true, // Uncomment for debugging
+    trigger: "#info-scroll-wrapper",
+    start: "bottom bottom",
+    onEnter: showQuizPopup,
+    onLeaveBack: hideQuizPopup,
+    // markers: true,
   });
 });
