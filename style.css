@@ -425,3 +425,47 @@ main {
         min-width: unset;
     }
 }
+
+.scroll-zoom-wrapper {
+  position: relative;
+}
+.zoom-frame {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: white;
+  z-index: 10;
+}
+.zoom-content {
+  position: relative;
+  text-align: center;
+}
+.zoom-img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  transition: transform 1s ease-out, clip-path 1s ease-out;
+  clip-path: circle(100% at center);
+  z-index: 1;
+}
+.zoom-heading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: black;
+  z-index: 2;
+}
+.zoom-frame.zoom .zoom-img {
+  transform: scale(1.5);
+  clip-path: circle(20% at center);
+}
+
+/* Optional: better background separation */
+.zoom-frame:nth-child(even) {
+  background: #e0e0e0;
+}
