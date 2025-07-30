@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (scrollAmount <= 0) {
             // If content fits within one viewport, no horizontal scroll needed
-            // Remove any pinning or horizontal movement for this section if it was previously applied
             ScrollTrigger.getAll().forEach(st => {
                 if (st.trigger === wrapper) {
                     st.kill();
@@ -63,10 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Animate image and text within each horizontal slide using containerAnimation
         slides.forEach((slide, i) => {
-            // Check if this is the first history slide for our test drive
-            const isFirstHistorySlide = slide.classList.contains('history-slide') && i === 0;
-
-            // Select elements for the new, more complex animation
+            // Select elements for the complex animation (if they exist)
             const mainImageView = slide.querySelector('.slide-main-view');
             const mainImage = slide.querySelector('.main-image');
             const mainText = slide.querySelector('.main-text');
@@ -76,17 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const detailImage = slide.querySelector('.detail-image');
             const detailText = slide.querySelector('.detail-text');
 
-            // Set initial state for new elements
-            gsap.set([detailView, zoomOverlay, detailImage, detailText], { opacity: 0, pointerEvents: 'none' }); // Hide detail view initially
-            gsap.set(zoomOverlay, { scale: 0, xPercent: -50, yPercent: -50, transformOrigin: "center center" }); // For a center-out reveal
-
-            // Elements for existing simple animation (used for other slides)
-            const img = slide.querySelector('.animated-image');
-            const text = slide.querySelector('p');
-            // Ensure initial state for elements that will animate (for non-test-drive slides)
-            if (!isFirstHistorySlide) {
-                gsap.set([img, text], { opacity: 0 });
-            }
+            // Select elements for simple animation (fallback for slides without complex structure)
+            const simpleImg = slide.querySelector('.animated-image:not(.main-image):not(.detail-image)');
+            const simpleText = slide.querySelector('p:not(.main-text):not(.detail-text)');
 
 
             const slideContentTL = gsap.timeline({
@@ -100,64 +88,66 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // --- Animation Sequence for the First History Slide ---
-            if (isFirstHistorySlide) {
+            // Check if the slide has the new complex structure
+            if (mainImageView && detailView && zoomOverlay) {
+                // Set initial state for new elements
+                gsap.set([detailView, zoomOverlay, detailImage, detailText], { opacity: 0, pointerEvents: 'none' });
+                gsap.set(zoomOverlay, { scale: 0, xPercent: -50, yPercent: -50, transformOrigin: "center center" });
+
                 // Phase 1: Main image and text enter
-                slideContentTL.to(mainImageView, { opacity: 1, ease: 'power2.out' }, 0); // Ensure main view is visible
+                slideContentTL.to(mainImageView, { opacity: 1, ease: 'power2.out' }, 0);
                 slideContentTL.fromTo(mainImage,
                     { scale: 0.8, opacity: 0.5 },
-                    { scale: 1, opacity: 1, ease: 'power2.out' }, 0 // Scale in the main image slightly
+                    { scale: 1, opacity: 1, ease: 'power2.out' }, 0
                 );
                 slideContentTL.fromTo(mainText,
                     { opacity: 0, y: 20 },
-                    { opacity: 1, y: 0, ease: 'power2.out' }, 0.1 // Fade in and slide up text shortly after
+                    { opacity: 1, y: 0, ease: 'power2.out' }, 0.1
                 );
 
                 // Phase 2: Zoom into the main image and reveal detail view
-                // These timings (0.3, 0.4, 0.45, 0.5, 0.6) are percentages of the slide's active scroll duration.
-                // Adjust them to fine-tune when each part of the animation occurs.
                 slideContentTL.to(mainImage, {
-                    scale: 1.2, // Zoom into the image
-                    // You might adjust x and y here to zoom into a specific point if your image has one.
+                    scale: 1.2,
                     ease: 'power1.inOut'
-                }, 0.3); // Start zoom at 30% of the slide's horizontal scroll journey
+                }, 0.3);
 
-                // Reveal the "black spot" overlay from the center
                 slideContentTL.to(zoomOverlay, {
                     opacity: 1,
                     scale: 1,
                     ease: 'power2.in',
-                    pointerEvents: 'auto' // Make it interactive if needed
-                }, 0.4); // Start overlay reveal at 40%
+                    pointerEvents: 'auto'
+                }, 0.4);
 
-                // Instantly hide main view and show detail view
                 slideContentTL.to(mainImageView, { opacity: 0, duration: 0.01, pointerEvents: 'none' }, 0.45);
                 slideContentTL.to(detailView, { opacity: 1, duration: 0.01, pointerEvents: 'auto' }, 0.45);
 
-                // Fade out the "black spot" and fade in the detail image and text
-                slideContentTL.to(zoomOverlay, { opacity: 0, ease: 'power2.out' }, 0.5); // Fade out overlay at 50%
+                slideContentTL.to(zoomOverlay, { opacity: 0, ease: 'power2.out' }, 0.5);
                 slideContentTL.fromTo(detailImage,
                     { scale: 0.9, opacity: 0 },
-                    { scale: 1, opacity: 1, ease: 'power2.out' }, 0.5 // Detail image fades in
+                    { scale: 1, opacity: 1, ease: 'power2.out' }, 0.5
                 );
                 slideContentTL.fromTo(detailText,
                     { opacity: 0, y: 20 },
-                    { opacity: 1, y: 0, ease: 'power2.out' }, 0.6 // Detail text fades in shortly after
+                    { opacity: 1, y: 0, ease: 'power2.out' }, 0.6
                 );
 
                 // Phase 3: All content for this slide fades out as it leaves the screen
-                slideContentTL.to([detailImage, detailText, zoomOverlay], { // Fade out all relevant elements
+                slideContentTL.to([detailImage, detailText, zoomOverlay], {
                     opacity: 0,
                     ease: 'power2.out',
                     pointerEvents: 'none'
-                }, 0.9); // Start fading out towards 90% of the slide's journey
+                }, 0.9);
             } else {
-                // Original animation for other slides
-                slideContentTL.to(img, { opacity: 1, scale: 1, ease: 'power2.out' }, 0);
-                slideContentTL.to(text, { opacity: 1, y: 0, ease: 'power2.out' }, 0);
+                // Original simple animation for slides that don't have the new structure
+                if (simpleImg && simpleText) { // Only apply if these elements exist
+                    gsap.set([simpleImg, simpleText], { opacity: 0 }); // Ensure initial state
 
-                slideContentTL.to(img, { opacity: 0, scale: 0.8, ease: 'power2.out' }, 0.8);
-                slideContentTL.to(text, { opacity: 0, y: -20, ease: 'power2.out' }, 0.8);
+                    slideContentTL.to(simpleImg, { opacity: 1, scale: 1, ease: 'power2.out' }, 0);
+                    slideContentTL.to(simpleText, { opacity: 1, y: 0, ease: 'power2.out' }, 0);
+
+                    slideContentTL.to(simpleImg, { opacity: 0, scale: 0.8, ease: 'power2.out' }, 0.8);
+                    slideContentTL.to(simpleText, { opacity: 0, y: -20, ease: 'power2.out' }, 0.8);
+                }
             }
         });
     }
