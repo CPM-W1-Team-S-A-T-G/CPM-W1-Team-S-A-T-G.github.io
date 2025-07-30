@@ -1,134 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quantum Computing</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quantum Computing</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 </head>
 <body>
-  <header>
-    <div class="logo">Team<br>S.A.T.G</div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#history-title">History</a></li>
-        <li><a href="#algorithm-title">Algorithm</a></li>
-        <li><a href="#info-title">Info</a></li>
-      </ul>
-    </nav>
-  </header>
+    <header>
+        <div class="logo">Team<br>S.A.T.G</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#history-title">History</a></li>
+                <li><a href="#algorithm-title">Algorithm</a></li>
+                <li><a href="#info-title">Info</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <main>
-    <div class="content" id="home">
-      <div class="intro-bg"></div>
-      <h1><span>QUANTUM</span><br>COMPUTING</h1>
+    <main>
+        <div class="content" id="home">
+            <div class="intro-bg"></div>
+            <h1><span>QUANTUM</span><br>COMPUTING</h1>
+        </div>
+
+        <div class="learn-more">
+            <a href="#history-title">LEARN MORE ⓘ</a>
+        </div>
+
+        <section class="title-section" id="history-title">
+            <h2>HISTORY</h2>
+        </section>
+        <div class="horizontal-scroll-wrapper" id="history-scroll-wrapper">
+            <div class="horizontal-content-container">
+                <section class="content-section history-slide">
+                    <div class="slide-inner-content">
+                        <div class="slide-main-view">
+                            <img src="his1-removebg-preview.png" alt="History Image" class="animated-image main-image" />
+                            <p class="main-text">It all originated from modern quantum theory which was developed in the 1920s, used to explain wave-particle duality observed at atomic scales. Thus leading to the creation of digital computers which paved the way to the removal of human computers due to human computers being incapable of doing tedious calculations for long periods of time.</p>
+                        </div>
+                        <div class="slide-detail-view">
+                            <div class="zoom-reveal-overlay"></div>
+                            <img src="his1-detail-part.png" alt="Detail Image" class="animated-image detail-image" />
+                            <p class="detail-text">This detail highlights the early theoretical foundations of quantum mechanics that paved the way for computational concepts beyond classical limits.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section history-slide reverse">
+                    <div class="slide-inner-content">
+                        <div class="slide-main-view">
+                            <img src="his2.jpg" alt="History Image" class="animated-image main-image" />
+                            <p class="main-text">Physicists swapped out bits for qubits in quantum computing, thus quantum mechanics and computer science started to converge. In 1980, physicist Paul Benioff introduced the Quantum Turing Machine, which uses quantum theory to describe a simple computer. Quantum algorithms emerged afterwards to solve oracle problems. Peter Shor used results from solved oracle problems, and built on them with "Shor's algorithm" to solve widely known and used encryption protocols, thus drawing a lot of attention to quantum computing.</p>
+                        </div>
+                        <div class="slide-detail-view">
+                            <div class="zoom-reveal-overlay"></div>
+                            <img src="his2-detail-part.png" alt="Detail Image" class="animated-image detail-image" />
+                            <p class="detail-text">A closer look at the convergence of quantum mechanics and computation, focusing on the revolutionary concept of qubits replacing classical bits.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section history-slide">
+                    <div class="slide-inner-content">
+                        <div class="slide-main-view">
+                            <img src="his3-removebg-preview.png" alt="History Image" class="animated-image main-image" />
+                            <p class="main-text">In 2019, Google AI and NASA announced that they had achieved quantum supremacy with a 54-qubit machine, performing a computation that any classical machine cannot replicate. However, the validity of this claim is still being researched.</p>
+                        </div>
+                        <div class="slide-detail-view">
+                            <div class="zoom-reveal-overlay"></div>
+                            <img src="his3-detail-part.png" alt="Detail Image" class="animated-image detail-image" />
+                            <p class="detail-text">Exploring the details of the 2019 quantum supremacy claim, and the specific architecture of the 54-qubit Sycamore processor used by Google AI and NASA.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section history-slide reverse">
+                    <div class="slide-inner-content">
+                        <div class="slide-main-view">
+                            <img src="his4-removebg-preview.png" alt="History Image" class="animated-image main-image" />
+                            <p class="main-text">In December 2023, scientists from Harvard University successfully created "quantum circuits" that correct errors more efficiently than alternative methods, which may remove a major obstacle to practical quantum computers.</p>
+                        </div>
+                        <div class="slide-detail-view">
+                            <div class="zoom-reveal-overlay"></div>
+                            <img src="his4-detail-part.png" alt="Detail Image" class="animated-image detail-image" />
+                            <p class="detail-text">A deeper dive into the recent advancements from Harvard University in December 2023, focusing on novel quantum circuit designs for enhanced error correction.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <section class="title-section" id="algorithm-title">
+            <h2>ALGORITHM</h2>
+        </section>
+        <div class="horizontal-scroll-wrapper" id="algorithm-scroll-wrapper">
+            <div class="horizontal-content-container">
+                <section class="content-section algorithm-slide">
+                    <img src="alg1.jpg" alt="Algorithm Image" class="animated-image"/>
+                    <p>Quantum algorithms can be roughly catogorized by the type of speedup achieved over corresponding classical algorithms. There doesn't exist any mathematical proof that a classical algorithm can't match the computing speed of a quantum algorithm but evidence shows that it is unlikely to happen.</p>
+                </section>
+                <section class="content-section algorithm-slide reverse">
+                    <img src="alg2.jpg" alt="Algorithm image" class="animated-image" />
+                    <p>Quantum algorithms include the aforementioned 'Shor's algorithm', which is a widely known quantum algorithm.</p>
+                </section>
+                <section class="content-section algorithm-slide">
+                    <img src="alg3.jpg" alt="Algorithm Image" class="animated-image" />
+                    <p>Shor's algorithm is a quantum algorithm for finding prime factors in an integer. It is one of the few known quantum algorithms with compelling potential applications and strong evidence of superpolynomial speedup compared to best known classical algorithms.</p>
+                </section>
+                <section class="content-section algorithm-slide reverse">
+                    <img src="alg4.jpg" alt="Algorithm Image" class="animated-image" />
+                    <p>The concerns for Shor's algorithm include that factoring numbers of practical significance require more qubits than available in the future. Another concern is that noise in quantum circuits may undermine results.</p>
+                </section>
+                <section class="content-section algorithm-slide">
+                    <img src="alg5.jpg" alt="Algorithm Image" class="animated-image" />
+                    <p>Shor proposed multiple similar algorithms for solving the factoring problem, discrete logarithm problem and the period-finding problem. 'Shor's algorithm' usually refers to the factoring problem, but it can actually be referring of the 3 mentioned. The discrete logarithm and factoring problem are instances of the period-finding problem. While all 3 of them are instances of the hidden subgroup problem.</p>
+                </section>
+                <section class="content-section algorithm-slide reverse">
+                    <img src="alg6.jpg" alt="Algorithm Image" class="animated-image" />
+                    <p>Hidden subgroup problem(HSP) is a framework that captures problems such as the factoring, discrete logarithm, graph isomorphism, and the shortest vector problem. That makes it essential in the theory of quantum computing.</p>
+                </section>
+            </div>
+        </div>
+
+        <section class="title-section" id="info-title">
+            <h2>INFO</h2>
+        </section>
+        <div class="horizontal-scroll-wrapper" id="info-scroll-wrapper">
+            <div class="horizontal-content-container">
+                <section class="content-section info-slide">
+                    <img src="info1-removebg-preview.png" alt="Info Image" class="animated-image"/>
+                    <p>Bit is the basic concept of classical information theory, while as a qubit is the fundamental unit of quantum information. A bit, by definition exists in two physical states. Which can be denoted to 0 and 1. A qubit is also described a state, often written as |0> and |1>. Those two serve as the quantum counterparts of the of the classical states of 0 and 1.</p>
+                </section>
+                <section class="content-section info-slide reverse">
+                    <img src="info2__2_-removebg-preview.png" alt="Info Image" class="animated-image" />
+                    <p>The quantum states |0> and |1> belong to a vector space. This means that they can be multiplied by constants and added together. Such a combination is known as a superposition of |0> and |1>. A 2-dimensional vector mathematically represents a qubit state. Physicists typically use Dirac's notation for linear algebra, writing |Ψ>. 'ket psi', for a vector labeled Ψ.</p>
+                </section>
+                <section class="content-section info-slide">
+                    <img src="info3.png" alt="Info Image" class="animated-image" />
+                    <p>A qubit is a 2-state system. Any qubit takes the form α|0> + ß|1> as its standard basis states. While α and ß are the probability amplitudes, which are in general complex numbers. If either α or ß is a zero, the qubit is essentially a classical bit. But when both are non-zero, the qubit is in superposition.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <div class="popup-overlay" id="quizPopup">
+        <div class="popup-content">
+            <h3>Time for a Pop Quiz!</h3>
+            <p>Test your knowledge about Quantum Computing!</p>
+            <button id="startQuizButton">Start Quiz</button>
+            <button id="closeQuizButton">Not Now</button>
+        </div>
     </div>
 
-    <div class="learn-more">
-      <a href="#history-title">LEARN MORE ⓘ</a>
+    <div class="quiz-container" id="quizContainer" style="display: none;">
+        <div class="quiz-box">
+            <div id="quiz-question">Question?</div>
+            <div id="quiz-options"></div>
+            <button id="nextQuestionButton" style="display: none;">Next</button>
+            <div id="quiz-result" style="display: none;"></div>
+        </div>
     </div>
 
-    <section class="title-section" id="history-title">
-      <h2>HISTORY</h2>
-    </section>
-    <div class="horizontal-scroll-wrapper" id="history-scroll-wrapper">
-      <div class="horizontal-content-container">
-        <section class="content-section history-slide">
-          <img src="his1-removebg-preview.png" alt="History Image" class="animated-image" />
-          <p>It all originated from modern quantum theory which was developed in the 1920s, used to explain wave-particle duality observed at atomic scales. Thus leading to the creation of digital computers which paved the way to the removal of human computers due to human computers being incapable of doing tedious calculations for long periods of time.</p>
-        </section>
-        <section class="content-section history-slide reverse">
-          <img src="his2.jpg" alt="History Image" class="animated-image" />
-          <p>Physicists swapped out bits for qubits in quantum computing, thus quantum mechanics and computer science started to converge. In 1980, physicist Paul Benioff introduced the Quantum Turing Machine, which uses quantum theory to describe a simple computer. Quantum algorithms emerged afterwards to solve oracle problems. Peter Shor used results from solved oracle problems, and built on them with "Shor's algorithm" to solve widely known and used encryption protocols, thus drawing a lot of attention to quantum computing.</p>
-        </section>
-        <section class="content-section history-slide">
-          <img src="his3-removebg-preview.png" alt="History Image" class="animated-image" />
-          <p>In 2019, Google AI and NASA announced that they had achieved quantum supremacy with a 54-qubit machine, performing a computation that any classical machine cannot replicate. However, the validity of this claim is still being researched.</p>
-        </section>
-        <section class="content-section history-slide reverse">
-          <img src="his4-removebg-preview.png" alt="History Image" class="animated-image" />
-          <p>In December 2023, scientists from Harvard University successfully created "quantum circuits" that correct errors more efficiently than alternative methods, which may remove a major obstacle to practical quantum computers.</p>
-        </section>
-      </div>
-    </div>
-
-    <section class="title-section" id="algorithm-title">
-      <h2>ALGORITHM</h2>
-    </section>
-    <div class="horizontal-scroll-wrapper" id="algorithm-scroll-wrapper">
-      <div class="horizontal-content-container">
-        <section class="content-section algorithm-slide">
-           <img src="alg1.jpg" alt="Algorithm Image" class="animated-image"/>
-          <p>Quantum algorithms can be roughly catogorized by the type of speedup achieved over corresponding classical algorithms. There doesn't exist any mathematical proof that a classical algorithm can't match the computing speed of a quantum algorithm but evidence shows that it is unlikely to happen.</p>
-        </section>
-        <section class="content-section algorithm-slide reverse">
-          <img src="alg2.jpg" alt="Algorithm image" class="animated-image" />
-          <p>Quantum algorithms include the aforementioned 'Shor's algorithm', which is a widely known quantum algorithm.</p>
-        </section>
-        <section class="content-section algorithm-slide">
-          <img src="alg3.jpg" alt="Algorithm Image" class="animated-image" />
-          <p>Shor's algorithm is a quantum algorithm for finding prime factors in an integer. It is one of the few known quantum algorithms with compelling potential applications and strong evidence of superpolynomial speedup compared to best known classical algorithms.</p>
-        </section>
-        <section class="content-section algorithm-slide reverse">
-          <img src="alg4.jpg" alt="Algorithm Image" class="animated-image" />
-          <p>The concerns for Shor's algorithm include that factoring numbers of practical significance require more qubits than available in the future. Another concern is that noise in quantum circuits may undermine results.</p>
-        </section>
-        <section class="content-section algorithm-slide">
-          <img src="alg5.jpg" alt="Algorithm Image" class="animated-image" />
-          <p>Shor proposed multiple similar algorithms for solving the factoring problem, discrete logarithm problem and the period-finding problem. 'Shor's algorithm' usually refers to the factoring problem, but it can actually be referring of the 3 mentioned. The discrete logarithm and factoring problem are instances of the period-finding problem. While all 3 of them are instances of the hidden subgroup problem.</p>
-        </section>
-        <section class="content-section algorithm-slide reverse">
-          <img src="alg6.jpg" alt="Algorithm Image" class="animated-image" />
-          <p>Hidden subgroup problem(HSP) is a framework that captures problems such as the factoring, discrete logarithm, graph isomorphism, and the shortest vector problem. That makes it essential in the theory of quantum computing.</p>
-        </section>
-      </div>
-    </div>
-
-    <section class="title-section" id="info-title">
-      <h2>INFO</h2>
-    </section>
-    <div class="horizontal-scroll-wrapper" id="info-scroll-wrapper">
-      <div class="horizontal-content-container">
-        <section class="content-section info-slide">
-          <img src="info1-removebg-preview.png" alt="Info Image" class="animated-image"/>
-          <p>Bit is the basic concept of classical information theory, while as a qubit is the fundamental unit of quantum information. A bit, by definition exists in two physical states. Which can be denoted to 0 and 1. A qubit is also described a state, often written as |0> and |1>. Those two serve as the quantum counterparts of the of the classical states of 0 and 1.</p>
-        </section>
-        <section class="content-section info-slide reverse">
-          <img src="info2__2_-removebg-preview.png" alt="Info Image" class="animated-image" />
-          <p>The quantum states |0> and |1> belong to a vector space. This means that they can be multiplied by constants and added together. Such a combination is known as a superposition of |0> and |1>. A 2-dimensional vector mathematically represents a qubit state. Physicists typically use Dirac's notation for linear algebra, writing |Ψ>. 'ket psi', for a vector labeled Ψ.</p>
-        </section>
-        <section class="content-section info-slide">
-          <img src="info3.png" alt="Info Image" class="animated-image" />
-          <p>A qubit is a 2-state system. Any qubit takes the form α|0> + ß|1> as its standard basis states. While α and ß are the probability amplitudes, which are in general complex numbers. If either α or ß is a zero, the qubit is essentially a classical bit. But when both are non-zero, the qubit is in superposition.</p>
-        </section>
-      </div>
-    </div>
-  </main>
-
-  <div class="popup-overlay" id="quizPopup">
-    <div class="popup-content">
-      <h3>Time for a Pop Quiz!</h3>
-      <p>Test your knowledge about Quantum Computing!</p>
-      <button id="startQuizButton">Start Quiz</button>
-      <button id="closeQuizButton">Not Now</button>
-    </div>
-  </div>
-
-  <div class="quiz-container" id="quizContainer" style="display: none;">
-    <div class="quiz-box">
-      <div id="quiz-question">Question?</div>
-      <div id="quiz-options"></div>
-      <button id="nextQuestionButton" style="display: none;">Next</button>
-      <div id="quiz-result" style="display: none;"></div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-  <script src="quiz.js"></script>
+    <script src="script.js"></script>
+    <script src="quiz.js"></script>
 </body>
 </html>
-
