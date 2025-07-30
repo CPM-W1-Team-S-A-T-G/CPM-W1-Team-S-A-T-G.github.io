@@ -9,13 +9,7 @@ body {
     color: #ffffff;
     font-family: 'Arial', sans-serif;
     overflow-x: hidden; /* Hide horizontal scrollbar */
-    /* scroll-behavior: smooth; -- GSAP handles this better */
-    /* scroll-snap-type: y mandatory; -- Removed, GSAP will manage */
 }
-
-/* section {
-    scroll-snap-align: start; -- Removed, GSAP will manage
-} */
 
 header {
     position: fixed;
@@ -122,7 +116,7 @@ main {
 
 .learn-more a:hover {
     background-color: white;
-    color: #0b0022; /* Changed to a visible color on hover */
+    color: #0b0022;
 }
 
 .title-section {
@@ -150,10 +144,17 @@ main {
 }
 
 .horizontal-content-container {
-    display: flex; /* Arrange children (content-sections) horizontally */
+    display: flex; /* Arrange children (content-sections) horizontally by default */
     height: 100%; /* Take full height of the wrapper */
-    width: max-content; /* Allow content to dictate total width */
+    width: max-content; /* Allow content to dictate total width for horizontal */
     will-change: transform; /* Optimize for animation */
+}
+
+/* Override for algorithm section to make it vertical */
+#algorithm-scroll-wrapper .horizontal-content-container {
+    display: block; /* Stack children vertically */
+    width: 100%; /* Take full width for vertical content */
+    height: max-content; /* Allow content to dictate total height for vertical */
 }
 
 .content-section {
@@ -163,20 +164,27 @@ main {
     justify-content: space-evenly; /* Distribute items with space */
     padding: 2rem;
     gap: 2rem;
-    flex-wrap: wrap; /* Allows image/paragraph to wrap on smaller screens within the 100vw slide */
+    flex-wrap: wrap; /* Allows image/paragraph to wrap on smaller screens within the 100vw/vh slide */
     text-align: center;
     background: #0b0022; /* Ensure consistent background */
 }
 
 /* Specific styles for individual slides within horizontal sections */
 .history-slide,
-.algorithm-slide,
 .info-slide {
     flex-shrink: 0; /* Prevent slides from shrinking */
-    width: 100vw; /* Each slide takes full viewport width */
+    width: 100vw; /* Each horizontal slide takes full viewport width */
     height: 100vh; /* Each slide takes full viewport height */
     /* Inherits display: flex and content alignment from .content-section */
 }
+
+/* Specific styles for individual slides within the vertical algorithm section */
+.algorithm-slide {
+    width: 100vw; /* Takes full viewport width for vertical stack */
+    height: 100vh; /* Each vertical slide takes full viewport height */
+    flex-shrink: 0; /* Prevent slides from shrinking */
+}
+
 
 .content-section.reverse {
     flex-direction: row-reverse;
@@ -318,3 +326,4 @@ main {
     .title-section h2 {
         font-size: 2.5rem;
     }
+}
