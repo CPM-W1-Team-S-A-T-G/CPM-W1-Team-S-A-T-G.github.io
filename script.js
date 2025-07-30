@@ -1,157 +1,95 @@
-document.addEventListener('DOMContentLoaded', () => {
-    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+slides.forEach((slide, i) => {
+    // Check if this is the first history slide for our test drive
+    const isFirstHistorySlide = slide.classList.contains('history-slide') && i === 0;
 
-    // Animate intro background
-    ScrollTrigger.create({
-        trigger: "#home",
-        start: "top center",
-        onEnter: animateIntroBG,
-        onEnterBack: animateIntroBG
+    const img = slide.querySelector('.animated-image'); // This will now select the first one found
+    const text = slide.querySelector('p'); // This will now select the first one found
+
+    // If implementing the new structure, you'd select the new elements:
+    const mainImageView = slide.querySelector('.slide-main-view');
+    const mainImage = slide.querySelector('.main-image');
+    const mainText = slide.querySelector('.main-text');
+
+    const detailView = slide.querySelector('.slide-detail-view');
+    const zoomOverlay = slide.querySelector('.zoom-reveal-overlay');
+    const detailImage = slide.querySelector('.detail-image');
+    const detailText = slide.querySelector('.detail-text');
+
+    // Initial state: Set all new elements to hidden/start state
+    gsap.set([detailView, zoomOverlay, detailImage, detailText], { opacity: 0 });
+    gsap.set(zoomOverlay, { scale: 0, xPercent: -50, yPercent: -50, transformOrigin: "center center" }); // For a center-out reveal
+
+    const slideContentTL = gsap.timeline({
+        scrollTrigger: {
+            trigger: slide,
+            containerAnimation: horizontalScrollTween,
+            start: "left 100%", // When the left edge of the slide enters the viewport
+            end: "right 0%",   // When the right edge of the slide leaves the viewport
+            scrub: true,
+            // markers: {startColor: "purple", endColor: "orange", indent: 200 * i}, // Keep for debugging!
+        }
     });
 
-    function animateIntroBG() {
-        gsap.fromTo(".intro-bg",
-            { scale: 0.5, opacity: 0 },
-            { scale: 1, opacity: 0.8, duration: 1.5, ease: "power2.out" }
+    // --- Animation Sequence for the First History Slide ---
+    if (isFirstHistorySlide) {
+        // Phase 1: Main image and text enter (similar to current, but now for the 'main-view')
+        slideContentTL.to(mainImageView, { opacity: 1, ease: 'power2.out' }, 0); // Fade in the whole main view
+        slideContentTL.fromTo(mainImage,
+            { scale: 0.8, opacity: 0.5 },
+            { scale: 1, opacity: 1, ease: 'power2.out' }, 0 // Scale in the main image slightly
         );
+        slideContentTL.fromTo(mainText,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, ease: 'power2.out' }, 0.1 // Fade in and slide up text shortly after
+        );
+
+        // Phase 2: Zoom into the main image and reveal detail view
+        // This will happen as the scroll progresses *through* this slide
+        // Adjust the numeric values (e.g., 0.3, 0.4, 0.5) to control timing relative to the slide's scroll progress
+        slideContentTL.to(mainImage, {
+            scale: 1.2, // Zoom into the image
+            // You might also need to adjust x, y, or use clipPath here if the zoom is to a specific point
+            ease: 'power1.inOut'
+        }, 0.3); // Start zoom at 30% of the slide's horizontal scroll journey
+
+        // Reveal the "black spot" overlay from the center
+        slideContentTL.to(zoomOverlay, {
+            opacity: 1,
+            scale: 1,
+            ease: 'power2.in',
+        }, 0.4); // Start reveal at 40%
+
+        // Hide the main view and show the detail view
+        slideContentTL.to(mainImageView, { opacity: 0, duration: 0.01 }, 0.45); // Immediately hide main view
+        slideContentTL.to(detailView, { opacity: 1, duration: 0.01 }, 0.45); // Immediately show detail view
+
+        // Fade out the "black spot" and fade in the detail image and text
+        slideContentTL.to(zoomOverlay, { opacity: 0, ease: 'power2.out' }, 0.5); // Fade out overlay at 50%
+        slideContentTL.fromTo(detailImage,
+            { scale: 0.9, opacity: 0 },
+            { scale: 1, opacity: 1, ease: 'power2.out' }, 0.5 // Detail image fades in
+        );
+        slideContentTL.fromTo(detailText,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, ease: 'power2.out' }, 0.6 // Detail text fades in shortly after
+        );
+
+        // Phase 3: All content for this slide fades out as it leaves the screen
+        slideContentTL.to([detailImage, detailText], {
+            opacity: 0,
+            ease: 'power2.out'
+        }, 0.9); // Start fading out towards the end of the slide's journey
+    } else {
+        // Keep the original animation for other slides for now
+        // Ensure initial state for elements that will animate
+        gsap.set([img, text], { opacity: 0 });
+
+        // Create a timeline for each slide's content to control its reveal and conceal
+        // This timeline will be controlled by the main horizontal scroll
+        slideContentTL.to(img, { opacity: 1, scale: 1, ease: 'power2.out' }, 0);
+        slideContentTL.to(text, { opacity: 1, y: 0, ease: 'power2.out' }, 0);
+
+        slideContentTL.to(img, { opacity: 0, scale: 0.8, ease: 'power2.out' }, 0.8);
+        slideContentTL.to(text, { opacity: 0, y: -20, ease: 'power2.out' }, 0.8);
     }
-
-    /**
-     * Sets up horizontal scrolling for a given section.
-     * @param {string} wrapperId - The ID of the horizontal-scroll-wrapper element.
-     * @param {string} slideClass - The class name of the individual slides within the container.
-     */
-    function setupHorizontalScroll(wrapperId, slideClass) {
-        const wrapper = document.getElementById(wrapperId);
-        if (!wrapper) return;
-
-        const container = wrapper.querySelector('.horizontal-content-container');
-        const slides = gsap.utils.toArray(`.${slideClass}`);
-
-        let totalSlidesWidth = 0;
-        slides.forEach(slide => {
-            totalSlidesWidth += slide.offsetWidth;
-        });
-
-        const scrollAmount = totalSlidesWidth - window.innerWidth;
-
-        if (scrollAmount <= 0) {
-            // If content fits within one viewport, no horizontal scroll needed
-            // Remove any pinning or horizontal movement for this section if it was previously applied
-            ScrollTrigger.getAll().forEach(st => {
-                if (st.trigger === wrapper) {
-                    st.kill();
-                }
-            });
-            return;
-        }
-
-        // Main horizontal scroll animation
-        const horizontalScrollTween = gsap.to(container, {
-            x: -scrollAmount,
-            ease: "none", // Linear movement for scrubbing
-            scrollTrigger: {
-                trigger: wrapper,
-                pin: true, // Pin the wrapper to keep it in view while scrolling horizontally
-                scrub: 1, // Smoothly link scroll progress to animation progress
-                start: "top top", // Start pinning when the top of the wrapper hits the top of the viewport
-                end: () => `+=${scrollAmount}`, // End when we've scrolled the full horizontal content width vertically
-                invalidateOnRefresh: true, // Recalculate on window resize for correct scrollAmount
-                // markers: true, // Uncomment for debugging main scroll trigger
-            }
-        });
-
-        // Animate image and text within each horizontal slide using containerAnimation
-        slides.forEach((slide, i) => {
-            const img = slide.querySelector('.animated-image');
-            const text = slide.querySelector('p');
-
-            // Ensure initial state for elements that will animate
-            gsap.set([img, text], { opacity: 0 });
-
-            const slideContentTL = gsap.timeline({
-                scrollTrigger: {
-                    trigger: slide, // Trigger for this specific slide
-                    containerAnimation: horizontalScrollTween, // Linked to the main horizontal scroll
-                    start: "left 100%", // Start animating when the left edge of the slide enters the viewport
-                    end: "right 0%",    // End animating when the right edge of the slide leaves the viewport
-                    scrub: true, // Smoothly animate based on scroll position
-                    // markers: {startColor: "purple", endColor: "orange", indent: 200 * i}, // Uncomment for debugging each slide's content trigger
-                }
-            });
-
-            // Original animation for all slides
-            slideContentTL.to(img, { opacity: 1, scale: 1, ease: 'power2.out' }, 0);
-            slideContentTL.to(text, { opacity: 1, y: 0, ease: 'power2.out' }, 0);
-
-            slideContentTL.to(img, { opacity: 0, scale: 0.8, ease: 'power2.out' }, 0.8);
-            slideContentTL.to(text, { opacity: 0, y: -20, ease: 'power2.out' }, 0.8);
-        });
-    }
-
-    // Setup horizontal scrolling for each relevant section
-    setupHorizontalScroll('history-scroll-wrapper', 'history-slide');
-    setupHorizontalScroll('algorithm-scroll-wrapper', 'algorithm-slide');
-    setupHorizontalScroll('info-scroll-wrapper', 'info-slide');
-
-    // Smooth scroll for navigation links using GSAP's ScrollToPlugin
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const section = document.querySelector(targetId);
-
-            if (section) {
-                gsap.to(window, {
-                    duration: 1,
-                    scrollTo: {
-                        y: section.offsetTop,
-                        autoKill: false
-                    },
-                    ease: "power2.inOut"
-                });
-            }
-        });
-    });
-
-    // Quiz popup functionality (kept as is)
-    const quizPopup = document.getElementById('quizPopup');
-    const startQuizButton = document.getElementById('startQuizButton');
-    const closeQuizButton = document.getElementById('closeQuizButton');
-    const quizContainer = document.getElementById('quizContainer');
-    let popupDismissed = false;
-
-    function showQuizPopup() {
-        if (!popupDismissed) {
-            quizPopup.style.display = 'flex';
-        }
-    }
-
-    function hideQuizPopup() {
-        quizPopup.style.display = 'none';
-    }
-
-    startQuizButton.addEventListener('click', () => {
-        hideQuizPopup();
-        quizContainer.style.display = 'flex';
-        if (typeof startQuiz === 'function') {
-            startQuiz();
-        } else {
-            console.warn("startQuiz() function not found. Make sure quiz.js is loaded correctly.");
-        }
-    });
-
-    closeQuizButton.addEventListener('click', () => {
-        popupDismissed = true;
-        hideQuizPopup();
-    });
-
-    // Trigger quiz popup when user finishes scrolling through the 'Info' horizontal section
-    ScrollTrigger.create({
-        trigger: "#info-scroll-wrapper",
-        start: "bottom bottom",
-        onEnter: showQuizPopup,
-        onLeaveBack: hideQuizPopup,
-        // markers: true,
-    });
 });
