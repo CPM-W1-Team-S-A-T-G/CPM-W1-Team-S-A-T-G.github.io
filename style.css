@@ -9,7 +9,13 @@ body {
     color: #ffffff;
     font-family: 'Arial', sans-serif;
     overflow-x: hidden; /* Hide horizontal scrollbar */
+    /* scroll-behavior: smooth; -- GSAP handles this better */
+    /* scroll-snap-type: y mandatory; -- Removed, GSAP will manage */
 }
+
+/* section {
+    scroll-snap-align: start; -- Removed, GSAP will manage
+} */
 
 header {
     position: fixed;
@@ -116,7 +122,7 @@ main {
 
 .learn-more a:hover {
     background-color: white;
-    color: #0b0022;
+    color: #0b0022; /* Changed to a visible color on hover */
 }
 
 .title-section {
@@ -135,38 +141,41 @@ main {
     letter-spacing: 3px;
 }
 
-/* Horizontal scrolling sections */
+/* New styles for horizontal scrolling sections */
 .horizontal-scroll-wrapper {
     height: 100vh;
-    overflow: hidden;
-    position: relative;
-    background: #0b0022;
+    overflow: hidden; /* Hide the native horizontal scrollbar */
+    position: relative; /* Needed for GSAP pinning */
+    background: #0b0022; /* Ensure consistent background */
 }
 
 .horizontal-content-container {
-    display: flex;
-    height: 100%;
-    width: max-content;
-    will-change: transform;
+    display: flex; /* Arrange children (content-sections) horizontally */
+    height: 100%; /* Take full height of the wrapper */
+    width: max-content; /* Allow content to dictate total width */
+    will-change: transform; /* Optimize for animation */
 }
 
 .content-section {
+    /* Common styles for all content sections, including those in horizontal scroll */
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-evenly; /* Distribute items with space */
     padding: 2rem;
     gap: 2rem;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Allows image/paragraph to wrap on smaller screens within the 100vw slide */
     text-align: center;
-    background: #0b0022;
+    background: #0b0022; /* Ensure consistent background */
 }
 
+/* Specific styles for individual slides within horizontal sections */
 .history-slide,
 .algorithm-slide,
 .info-slide {
-    flex-shrink: 0;
-    width: 100vw;
-    height: 100vh;
+    flex-shrink: 0; /* Prevent slides from shrinking */
+    width: 100vw; /* Each slide takes full viewport width */
+    height: 100vh; /* Each slide takes full viewport height */
+    /* Inherits display: flex and content alignment from .content-section */
 }
 
 .content-section.reverse {
@@ -178,11 +187,10 @@ main {
     font-size: 1.1em;
     line-height: 1.8;
     color: #e0e0e0;
-    flex: 1;
-    min-width: 300px;
+    flex: 1; /* Allow paragraph to take up available space */
+    min-width: 300px; /* Prevent text from becoming too narrow */
 }
 
-/* Base animated image style - will be overridden by more specific rules for complex slides */
 .content-section img {
     width: 350px;
     height: auto;
@@ -191,87 +199,11 @@ main {
     border-radius: 0;
     opacity: 0; /* Initial state for GSAP animation */
     transform: scale(0.8); /* Initial state for GSAP animation */
-    flex: 1;
-    min-width: 250px;
+    flex: 1; /* Allow image to take up available space */
+    min-width: 250px; /* Prevent image from becoming too small */
 }
 
-/* --- Styles for Complex Zoom-and-Reveal Slides --- */
-.slide-inner-content {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-.slide-main-view,
-.slide-detail-view {
-    position: absolute; /* Allows them to stack on top of each other */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex; /* Keep flex properties for content alignment */
-    align-items: center;
-    justify-content: space-evenly;
-    gap: 2rem;
-    flex-wrap: wrap;
-    opacity: 0; /* GSAP will control this */
-    pointer-events: none; /* Prevent interaction when hidden */
-    padding: 2rem; /* Match parent section padding */
-    box-sizing: border-box; /* Include padding in width/height */
-}
-
-.slide-main-view {
-    opacity: 1; /* Initially visible */
-    pointer-events: auto; /* Allow interaction with main view */
-}
-
-/* Ensure images and text within these new views are styled consistently */
-.slide-main-view .main-image,
-.slide-detail-view .detail-image {
-    width: 350px;
-    height: auto;
-    object-fit: contain;
-    flex: 1;
-    min-width: 250px;
-}
-
-.slide-main-view .main-text,
-.slide-detail-view .detail-text {
-    max-width: 600px;
-    font-size: 1.1em;
-    line-height: 1.8;
-    color: #e0e0e0;
-    flex: 1;
-    min-width: 300px;
-}
-
-/* Styling for the zoom-reveal-overlay (the "black spot") */
-.zoom-reveal-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 200px; /* Starting size, will scale up */
-    height: 200px; /* Starting size, will scale up */
-    background-color: rgba(0, 0, 0, 0.9); /* Almost black, slightly transparent */
-    border-radius: 50%; /* Make it circular */
-    z-index: 50; /* Above images/text but below any popups */
-    transform: translate(-50%, -50%) scale(0); /* Start hidden and scaled down */
-    pointer-events: none; /* No interaction */
-}
-
-/* Adjustments for reversed slides with new structure */
-.content-section.reverse .slide-main-view,
-.content-section.reverse .slide-detail-view {
-    flex-direction: row-reverse;
-}
-
-
-/* Popup and Quiz styles */
+/* Popup and Quiz styles (kept as is) */
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -386,86 +318,3 @@ main {
     .title-section h2 {
         font-size: 2.5rem;
     }
-
-    /* Make horizontal slides stack content vertically on mobile */
-    .content-section {
-        flex-direction: column !important;
-        padding: 3rem 1rem;
-        justify-content: center;
-    }
-
-    .content-section.reverse {
-        flex-direction: column-reverse !important;
-    }
-
-    /* Adjustments for images and text on mobile */
-    .content-section img,
-    .content-section p {
-        flex: none;
-        width: 90%;
-        max-width: none;
-        min-width: unset;
-    }
-
-    /* Media Queries adjustments for the new internal slide structure */
-    .slide-main-view,
-    .slide-detail-view {
-        flex-direction: column !important;
-        justify-content: center;
-        padding: 3rem 1rem;
-    }
-
-    .slide-main-view .main-image,
-    .slide-detail-view .detail-image,
-    .slide-main-view .main-text,
-    .slide-detail-view .detail-text {
-        flex: none;
-        width: 90%;
-        max-width: none;
-        min-width: unset;
-    }
-}
-
-.scroll-zoom-wrapper {
-  position: relative;
-}
-.zoom-frame {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  background: white;
-  z-index: 10;
-}
-.zoom-content {
-  position: relative;
-  text-align: center;
-}
-.zoom-img {
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  transition: transform 1s ease-out, clip-path 1s ease-out;
-  clip-path: circle(100% at center);
-  z-index: 1;
-}
-.zoom-heading {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 3rem;
-  color: black;
-  z-index: 2;
-}
-.zoom-frame.zoom .zoom-img {
-  transform: scale(1.5);
-  clip-path: circle(20% at center);
-}
-
-/* Optional: better background separation */
-.zoom-frame:nth-child(even) {
-  background: #e0e0e0;
-}
