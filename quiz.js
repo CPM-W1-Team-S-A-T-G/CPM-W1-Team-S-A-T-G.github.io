@@ -7,12 +7,10 @@ let wasAtBottom = false;
 
 function checkScrollForPopup() {
   const atBottom = (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 10);
-
   if (atBottom && allowPopup && !wasAtBottom) {
     quizPopup.style.display = 'flex';
     wasAtBottom = true;
   }
-
   if (!atBottom) {
     wasAtBottom = false;
     allowPopup = true;
@@ -32,7 +30,7 @@ startQuizBtn.addEventListener('click', () => {
   startQuiz();
 });
 
-// Quiz logic
+// ==================== QUIZ LOGIC ====================
 const questions = [
   {
     question: "What is a qubit?",
@@ -57,6 +55,7 @@ let score = 0;
 function startQuiz() {
   currentQuestion = 0;
   score = 0;
+  document.getElementById('quiz-result').style.display = 'none';
   showQuestion();
 }
 
@@ -66,13 +65,27 @@ function showQuestion() {
   const nextBtn = document.getElementById('nextQuestionButton');
   const resultEl = document.getElementById('quiz-result');
 
+  resultEl.innerHTML = '';
   resultEl.style.display = 'none';
   nextBtn.style.display = 'none';
   optionsEl.innerHTML = '';
 
   if (currentQuestion >= questions.length) {
     resultEl.style.display = 'block';
-    resultEl.innerHTML = `Quiz complete! Your score is ${score} out of ${questions.length}.`;
+    resultEl.innerHTML = `
+      <p>🎉 Quiz complete! Your score is ${score} out of ${questions.length}.</p>
+      <button id="retakeBtn">🔁 Retake Quiz</button>
+      <button id="homeBtn">🏠 Back to Home</button>
+    `;
+
+    document.getElementById('retakeBtn').addEventListener('click', () => {
+      startQuiz();
+    });
+
+    document.getElementById('homeBtn').addEventListener('click', () => {
+      document.getElementById('quizContainer').style.display = 'none';
+    });
+
     return;
   }
 
