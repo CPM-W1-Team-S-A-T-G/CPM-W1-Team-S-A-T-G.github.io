@@ -1,3 +1,4 @@
+// ===== Scroll Popup Logic =====
 const quizPopup = document.getElementById('quizPopup');
 const startQuizBtn = document.getElementById('startQuizButton');
 const closeQuizBtn = document.getElementById('closeQuizButton');
@@ -30,7 +31,7 @@ startQuizBtn.addEventListener('click', () => {
   startQuiz();
 });
 
-// ==================== QUIZ LOGIC ====================
+// ===== Quiz Logic =====
 const questions = [
   {
     question: "What is a qubit?",
@@ -62,13 +63,20 @@ function startQuiz() {
 function showQuestion() {
   const questionEl = document.getElementById('quiz-question');
   const optionsEl = document.getElementById('quiz-options');
-  const nextBtn = document.getElementById('nextQuestionButton');
   const resultEl = document.getElementById('quiz-result');
 
   resultEl.innerHTML = '';
   resultEl.style.display = 'none';
-  nextBtn.style.display = 'none';
   optionsEl.innerHTML = '';
+
+  const nextBtn = document.createElement('button');
+  nextBtn.id = 'nextBtn';
+  nextBtn.textContent = "Next Question";
+  nextBtn.style.display = 'none';
+  nextBtn.onclick = () => {
+    currentQuestion++;
+    showQuestion();
+  };
 
   if (currentQuestion >= questions.length) {
     resultEl.style.display = 'block';
@@ -78,14 +86,10 @@ function showQuestion() {
       <button id="homeBtn">🏠 Back to Home</button>
     `;
 
-    document.getElementById('retakeBtn').addEventListener('click', () => {
-      startQuiz();
-    });
-
+    document.getElementById('retakeBtn').addEventListener('click', startQuiz);
     document.getElementById('homeBtn').addEventListener('click', () => {
       document.getElementById('quizContainer').style.display = 'none';
     });
-
     return;
   }
 
@@ -95,12 +99,25 @@ function showQuestion() {
   q.options.forEach((opt, index) => {
     const btn = document.createElement('button');
     btn.textContent = opt;
+    btn.className = 'quiz-option';
     btn.onclick = () => {
-      if (index === q.answer) score++;
-      currentQuestion++;
-      showQuestion();
+      const allBtns = document.querySelectorAll('.quiz-option');
+      allBtns.forEach(b => b.disabled = true);
+
+      if (index === q.answer) {
+        btn.classList.add('correct');
+        resultEl.innerHTML = "<p class='feedback'>✅ Correct!</p>";
+        score++;
+      } else {
+        btn.classList.add('wrong');
+        resultEl.innerHTML = `<p class='feedback'>❌ Wrong! Correct answer: <strong>${q.options[q.answer]}</strong></p>`;
+        allBtns[q.answer].classList.add('correct');
+      }
+
+      resultEl.style.display = 'block';
+      optionsEl.appendChild(nextBtn);
+      nextBtn.style.display = 'inline-block';
     };
     optionsEl.appendChild(btn);
   });
 }
-
