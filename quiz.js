@@ -1,3 +1,46 @@
+const quizPopup = document.getElementById('quizPopup');
+const startQuizBtn = document.getElementById('startQuizButton');
+const closeQuizBtn = document.getElementById('closeQuizButton');
+
+let hasDismissed = false;
+let hasLeftBottom = true; // Start true so quiz can show the first time
+
+function isAtBottom() {
+  return window.innerHeight + window.scrollY >= document.body.offsetHeight - 5;
+}
+
+function checkScroll() {
+  const atBottom = isAtBottom();
+
+  // Show quiz if:
+  // - at bottom
+  // - user has left bottom previously
+  // - not dismissed during this bottom session
+  if (atBottom && hasLeftBottom && !hasDismissed) {
+    quizPopup.style.display = 'flex';
+    hasLeftBottom = false;
+  }
+
+  // Reset dismissal if user scrolls up
+  if (!atBottom) {
+    hasDismissed = false;
+    hasLeftBottom = true;
+  }
+}
+
+window.addEventListener('scroll', checkScroll);
+
+closeQuizBtn.addEventListener('click', () => {
+  quizPopup.style.display = 'none';
+  hasDismissed = true;
+});
+
+startQuizBtn.addEventListener('click', () => {
+  quizPopup.style.display = 'none';
+  document.getElementById('quizContainer').style.display = 'flex';
+  startQuiz();
+});
+ 
 const questions = [
   {
     question: "What is a qubit?",
@@ -58,29 +101,6 @@ function showQuestion() {
   });
 }
 
-const quizPopup = document.getElementById('quizPopup');
-const startQuizBtn = document.getElementById('startQuizButton');
-const closeQuizBtn = document.getElementById('closeQuizButton');
-
-let hasDismissed = false;
-let previouslyAtBottom = false;
-
-function isAtBottom() {
-  return window.innerHeight + window.scrollY >= document.body.offsetHeight - 5;
-}
-
-function checkScroll() {
-  const currentlyAtBottom = isAtBottom();
-
-  // If just arrived at bottom
-  if (currentlyAtBottom && !previouslyAtBottom && !hasDismissed) {
-    quizPopup.style.display = 'flex';
-  }
-
-  // If moved away from bottom, allow quiz to show again
-  if (!currentlyAtBottom && previouslyAtBottom) {
-    hasDismissed = false;
-  }
 
   // Update the previous state
   previouslyAtBottom = currentlyAtBottom;
