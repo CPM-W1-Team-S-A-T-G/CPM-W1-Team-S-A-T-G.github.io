@@ -32,3 +32,46 @@ document.addEventListener("DOMContentLoaded", function () {
     const animation = gsap.to(slides, {
       xPercent: isHorizontal ? -100 * (slides.length - 1) : 0,
       yPercent: !isHorizontal ? -100 * (slides.length - 1) : 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: container,
+        pin: true,
+        scrub: 1,
+        end: () =>
+          "+=" +
+          (isHorizontal
+            ? container.offsetWidth * slides.length
+            : container.offsetHeight * slides.length),
+        markers: false
+      }
+    });
+
+    // Animate image + text inside each slide
+    slides.forEach((slide) => {
+      const image = slide.querySelector(".image img");
+      const text = slide.querySelector(".text");
+
+      if (image && text) {
+        gsap.fromTo(
+          [image, text],
+          {
+            opacity: 0,
+            scale: 0.8
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 1,
+            scrollTrigger: {
+              trigger: slide,
+              containerAnimation: animation,
+              start: "left center",
+              toggleActions: "play none none reverse",
+              markers: false
+            }
+          }
+        );
+      }
+    });
+  });
+});
