@@ -58,4 +58,43 @@ function showQuestion() {
   });
 }
 
+const quizPopup = document.getElementById('quizPopup');
+const startQuizBtn = document.getElementById('startQuizButton');
+const closeQuizBtn = document.getElementById('closeQuizButton');
+
+let quizDismissed = false;
+let atBottom = false;
+
+function checkScrollPosition() {
+  const scrollY = window.scrollY;
+  const viewportHeight = window.innerHeight;
+  const fullHeight = document.body.scrollHeight;
+
+  // Check if at bottom (with tolerance for floating point issues)
+  const isBottom = scrollY + viewportHeight >= fullHeight - 10;
+
+  if (isBottom && !quizDismissed && !atBottom) {
+    quizPopup.style.display = 'flex';
+    atBottom = true;
+  }
+
+  // If user scrolls away from bottom, reset atBottom and quizDismissed
+  if (!isBottom && atBottom) {
+    atBottom = false;
+    quizDismissed = false; // Allow quiz to show again
+  }
+}
+
+window.addEventListener('scroll', checkScrollPosition);
+
+closeQuizBtn.addEventListener('click', () => {
+  quizPopup.style.display = 'none';
+  quizDismissed = true;
+});
+
+startQuizBtn.addEventListener('click', () => {
+  quizPopup.style.display = 'none';
+  document.getElementById('quizContainer').style.display = 'flex';
+  startQuiz();
+});
 
