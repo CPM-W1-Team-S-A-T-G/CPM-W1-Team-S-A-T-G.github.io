@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!wrapper) return;
 
         const container = wrapper.querySelector('.horizontal-content-container'); // Still using this class for content
-        const slides = gsap.utils.toArray(`.${slideClass}`);
+        const slides = gsap.utils.toArray(container.querySelectorAll(`.${slideClass}`));
 
         // Set container to flex column for vertical stacking
         gsap.set(container, { display: 'flex', flexDirection: 'column' }); // CRITICAL CHANGE HERE
