@@ -316,6 +316,38 @@ main {
   background-color: #8c4bff;
 }
 
+.quiz-option.correct {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.quiz-option.wrong {
+  background-color: #f44336;
+  color: white;
+}
+
+.feedback {
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+#nextBtn, #quiz-result button {
+  margin-top: 20px;
+  background-color: #6c5ce7;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+#nextBtn:hover, #quiz-result button:hover {
+  background-color: #5a4bdc;
+}
+
+
 
 /* Media Queries for responsiveness */
 @media (max-width: 768px) {
