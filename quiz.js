@@ -62,39 +62,27 @@ const quizPopup = document.getElementById('quizPopup');
 const startQuizBtn = document.getElementById('startQuizButton');
 const closeQuizBtn = document.getElementById('closeQuizButton');
 
-let quizDismissed = false;
-let atBottom = false;
+let hasDismissed = false;
+let previouslyAtBottom = false;
 
-function checkScrollPosition() {
-  const scrollY = window.scrollY;
-  const viewportHeight = window.innerHeight;
-  const fullHeight = document.body.scrollHeight;
-
-  // Check if at bottom (with tolerance for floating point issues)
-  const isBottom = scrollY + viewportHeight >= fullHeight - 10;
-
-  if (isBottom && !quizDismissed && !atBottom) {
-    quizPopup.style.display = 'flex';
-    atBottom = true;
-  }
-
-  // If user scrolls away from bottom, reset atBottom and quizDismissed
-  if (!isBottom && atBottom) {
-    atBottom = false;
-    quizDismissed = false; // Allow quiz to show again
-  }
+function isAtBottom() {
+  return window.innerHeight + window.scrollY >= document.body.offsetHeight - 5;
 }
 
-window.addEventListener('scroll', checkScrollPosition);
+function checkScroll() {
+  const currentlyAtBottom = isAtBottom();
 
-closeQuizBtn.addEventListener('click', () => {
-  quizPopup.style.display = 'none';
-  quizDismissed = true;
-});
+  // If just arrived at bottom
+  if (currentlyAtBottom && !previouslyAtBottom && !hasDismissed) {
+    quizPopup.style.display = 'flex';
+  }
 
-startQuizBtn.addEventListener('click', () => {
-  quizPopup.style.display = 'none';
-  document.getElementById('quizContainer').style.display = 'flex';
-  startQuiz();
-});
+  // If moved away from bottom, allow quiz to show again
+  if (!currentlyAtBottom && previouslyAtBottom) {
+    hasDismissed = false;
+  }
+
+  // Update the previous state
+  previouslyAtBottom = currentlyAtBottom;
+}
 
