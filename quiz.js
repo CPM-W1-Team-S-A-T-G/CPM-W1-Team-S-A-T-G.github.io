@@ -2,37 +2,28 @@ const quizPopup = document.getElementById('quizPopup');
 const startQuizBtn = document.getElementById('startQuizButton');
 const closeQuizBtn = document.getElementById('closeQuizButton');
 
-let hasDismissed = false;
-let hasLeftBottom = true; // Start true so quiz can show the first time
+let allowPopup = true;
+let wasAtBottom = false;
 
-function isAtBottom() {
-  return window.innerHeight + window.scrollY >= document.body.offsetHeight - 5;
-}
+function checkScrollForPopup() {
+  const atBottom = (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 10);
 
-function checkScroll() {
-  const atBottom = isAtBottom();
-
-  // Show quiz if:
-  // - at bottom
-  // - user has left bottom previously
-  // - not dismissed during this bottom session
-  if (atBottom && hasLeftBottom && !hasDismissed) {
+  if (atBottom && allowPopup && !wasAtBottom) {
     quizPopup.style.display = 'flex';
-    hasLeftBottom = false;
+    wasAtBottom = true;
   }
 
-  // Reset dismissal if user scrolls up
   if (!atBottom) {
-    hasDismissed = false;
-    hasLeftBottom = true;
+    wasAtBottom = false;
+    allowPopup = true;
   }
 }
 
-window.addEventListener('scroll', checkScroll);
+window.addEventListener('scroll', checkScrollForPopup);
 
 closeQuizBtn.addEventListener('click', () => {
   quizPopup.style.display = 'none';
-  hasDismissed = true;
+  allowPopup = false;
 });
 
 startQuizBtn.addEventListener('click', () => {
@@ -40,7 +31,8 @@ startQuizBtn.addEventListener('click', () => {
   document.getElementById('quizContainer').style.display = 'flex';
   startQuiz();
 });
- 
+
+// Quiz logic
 const questions = [
   {
     question: "What is a qubit?",
@@ -73,7 +65,7 @@ function showQuestion() {
   const optionsEl = document.getElementById('quiz-options');
   const nextBtn = document.getElementById('nextQuestionButton');
   const resultEl = document.getElementById('quiz-result');
-  
+
   resultEl.style.display = 'none';
   nextBtn.style.display = 'none';
   optionsEl.innerHTML = '';
@@ -91,18 +83,10 @@ function showQuestion() {
     const btn = document.createElement('button');
     btn.textContent = opt;
     btn.onclick = () => {
-      if (index === q.answer) {
-        score++;
-      }
+      if (index === q.answer) score++;
       currentQuestion++;
       showQuestion();
     };
     optionsEl.appendChild(btn);
   });
 }
-
-
-  // Update the previous state
-  previouslyAtBottom = currentlyAtBottom;
-}
-
