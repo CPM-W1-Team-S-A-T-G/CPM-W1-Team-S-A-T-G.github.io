@@ -144,73 +144,17 @@ main {
 }
 
 .horizontal-content-container {
+    /* Default for horizontal sections (History, Info) */
     display: flex; /* Arrange children (content-sections) horizontally by default */
     height: 100%; /* Take full height of the wrapper */
     width: max-content; /* Allow content to dictate total width for horizontal */
     will-change: transform; /* Optimize for animation */
 }
 
-/* In style.css */
-
-/* Keep the common .horizontal-scroll-wrapper and .horizontal-content-container for base */
-.horizontal-scroll-wrapper {
-    height: 100vh;
-    overflow: hidden;
-    position: relative;
-    background: #0b0022;
-}
-
-.horizontal-content-container {
-    /* Default for horizontal sections (History, Info) */
-    display: flex;
-    height: 100%;
-    width: max-content;
-    will-change: transform;
-}
-
-/* Specific override for the Algorithm section to make it vertical */
+/* Override for algorithm section to make it vertical */
 #algorithm-scroll-wrapper .horizontal-content-container {
     display: flex; /* Use flexbox for stacking */
     flex-direction: column; /* Stack items vertically */
-    width: 100%; /* Take full width */
-    height: max-content; /* Allow content to dictate total height */
-}
-
-/* Common slide styles */
-.content-section {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 2rem;
-    gap: 2rem;
-    flex-wrap: wrap;
-    text-align: center;
-    background: #0b0022;
-}
-
-/* Horizontal slides (History, Info) */
-.history-slide,
-.info-slide {
-    flex-shrink: 0;
-    width: 100vw; /* Each horizontal slide takes full viewport width */
-    height: 100vh; /* Each slide takes full viewport height */
-}
-
-/* Vertical slides (Algorithm) */
-.algorithm-slide {
-    flex-shrink: 0;
-    width: 100vw; /* Each vertical slide takes full viewport width */
-    height: 100vh; /* Each vertical slide takes full viewport height */
-    /* Ensure content within is centered or laid out as desired */
-    display: flex; /* Maintain flex for content alignment within the slide */
-    flex-direction: column; /* Stack image and text vertically within slide if needed, or keep row for side-by-side */
-    justify-content: center;
-    align-items: center;
-}
-
-/* Override for algorithm section to make it vertical */
-#algorithm-scroll-wrapper .horizontal-content-container {
-    display: block; /* Stack children vertically */
     width: 100%; /* Take full width for vertical content */
     height: max-content; /* Allow content to dictate total height for vertical */
 }
@@ -241,6 +185,9 @@ main {
     width: 100vw; /* Takes full viewport width for vertical stack */
     height: 100vh; /* Each vertical slide takes full viewport height */
     flex-shrink: 0; /* Prevent slides from shrinking */
+    display: flex; /* Keep flex for content alignment inside slide */
+    justify-content: center;
+    align-items: center;
 }
 
 
