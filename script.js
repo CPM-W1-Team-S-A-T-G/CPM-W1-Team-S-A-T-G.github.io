@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * @param {string} slideClass - The class name of the individual slides within the container.
      * @param {string} direction - 'left' or 'right' for horizontal scroll direction.
      */
-    function setupHorizontalScroll(wrapperId, slideClass, direction = 'left') { // Default to 'left' for existing behavior
+    function setupHorizontalScroll(wrapperId, slideClass, direction = 'left') {
         const wrapper = document.getElementById(wrapperId);
         if (!wrapper) return;
 
@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const scrollAmount = totalSlidesWidth - window.innerWidth;
 
         if (scrollAmount <= 0) {
-            // If content fits within one viewport, no horizontal scroll needed
             ScrollTrigger.getAll().forEach(st => {
                 if (st.trigger === wrapper) {
                     st.kill();
@@ -107,22 +106,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = wrapper.querySelector('.horizontal-content-container'); // Still using this class for content
         const slides = gsap.utils.toArray(`.${slideClass}`);
 
-        // Set container to block layout for vertical stacking
-        gsap.set(container, { display: 'block' });
+        // Set container to flex column for vertical stacking
+        gsap.set(container, { display: 'flex', flexDirection: 'column' }); // CRITICAL CHANGE HERE
 
         // Calculate total height to scroll
         let totalSlidesHeight = 0;
-        slides.forEach(slide => {
-            totalSlidesHeight += slide.offsetHeight;
+        slides.forEach((slide, index) => {
+            const slideHeight = slide.offsetHeight;
+            console.log(`Slide ${index} (${slideClass}) offsetHeight:`, slideHeight); // Debugging line
+            totalSlidesHeight += slideHeight;
         });
+        console.log(`Total Slides Height for ${wrapperId}:`, totalSlidesHeight); // Debugging line
+
 
         // Adjust scroll amount for vertical pinning
-        // The vertical space needed is the sum of all slide heights minus one viewport height,
-        // because the first slide fills the viewport and then subsequent slides scroll up.
         const scrollAmount = totalSlidesHeight - window.innerHeight;
+        console.log(`Scroll Amount for ${wrapperId}:`, scrollAmount); // Debugging line
 
         if (scrollAmount <= 0) {
-            // If content fits within one viewport, no vertical scroll needed
             ScrollTrigger.getAll().forEach(st => {
                 if (st.trigger === wrapper) {
                     st.kill();
