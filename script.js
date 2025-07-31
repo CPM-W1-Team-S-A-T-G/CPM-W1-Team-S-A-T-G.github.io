@@ -27,11 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!wrapper) return;
 
         const container = wrapper.querySelector('.horizontal-content-container');
-        const slides = gsap.utils.toArray(`.${slideClass}`);
+        const slides = gsap.utils.toArray(container.querySelectorAll(`.${slideClass}`));
 
         let totalSlidesWidth = 0;
         slides.forEach(slide => {
             totalSlidesWidth += slide.offsetWidth;
+
+        console.log(`Setting up scroll for ${wrapperId}`);
+        console.log('Found slides:', slides);
         });
 
         const scrollAmount = totalSlidesWidth - window.innerWidth;
@@ -115,6 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const slideHeight = slide.offsetHeight;
             console.log(`Slide ${index} (${slideClass}) offsetHeight:`, slideHeight); // Debugging line
             totalSlidesHeight += slideHeight;
+            console.log(`Setting up scroll for ${wrapperId}`);
+            console.log('Found slides:', slides);
         });
         console.log(`Total Slides Height for ${wrapperId}:`, totalSlidesHeight); // Debugging line
 
