@@ -147,7 +147,6 @@ main {
     overflow: hidden; /* Hide the native horizontal scrollbar */
     position: relative; /* Needed for GSAP pinning */
     background: #0b0022; /* Ensure consistent background */
-    display: flex;
 }
 
 .horizontal-content-container {
@@ -175,8 +174,7 @@ main {
 .info-slide {
     flex-shrink: 0; /* Prevent slides from shrinking */
     width: 100vw; /* Each slide takes full viewport width */
-    height: 100vh;
-    position: relative;/* Each slide takes full viewport height */
+    height: 100vh; /* Each slide takes full viewport height */
     /* Inherits display: flex and content alignment from .content-section */
 }
 
@@ -321,9 +319,3 @@ main {
         font-size: 2.5rem;
     }
 
-.image img,
-.text {
-  opacity: 1;
-  transform: scale(1);
-  transition: all 0.5s ease;
-}
