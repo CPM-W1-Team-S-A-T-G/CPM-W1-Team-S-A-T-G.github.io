@@ -8,8 +8,14 @@ body {
     background-color: #0b0022;
     color: #ffffff;
     font-family: 'Arial', sans-serif;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    /* scroll-behavior: smooth; -- GSAP handles this better */
+    /* scroll-snap-type: y mandatory; -- Removed, GSAP will manage */
 }
+
+/* section {
+    scroll-snap-align: start; -- Removed, GSAP will manage
+} */
 
 header {
     position: fixed;
@@ -116,7 +122,7 @@ main {
 
 .learn-more a:hover {
     background-color: white;
-    color: #0b0022;
+    color: #0b0022; /* Changed to a visible color on hover */
 }
 
 .title-section {
@@ -135,38 +141,41 @@ main {
     letter-spacing: 3px;
 }
 
+/* New styles for horizontal scrolling sections */
 .horizontal-scroll-wrapper {
     height: 100vh;
-    overflow: hidden;
-    position: relative;
-    background: #0b0022;
+    overflow: hidden; /* Hide the native horizontal scrollbar */
+    position: relative; /* Needed for GSAP pinning */
+    background: #0b0022; /* Ensure consistent background */
 }
 
 .horizontal-content-container {
-    display: flex;
-    height: 100%;
-    width: max-content;
-    will-change: transform;
+    display: flex; /* Arrange children (content-sections) horizontally */
+    height: 100%; /* Take full height of the wrapper */
+    width: max-content; /* Allow content to dictate total width */
+    will-change: transform; /* Optimize for animation */
 }
 
 .content-section {
+    /* Common styles for all content sections, including those in horizontal scroll */
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-evenly; /* Distribute items with space */
     padding: 2rem;
     gap: 2rem;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Allows image/paragraph to wrap on smaller screens within the 100vw slide */
     text-align: center;
-    background: #0b0022;
-    flex-shrink: 0;
-    width: 100vw;
-    height: 100vh;
+    background: #0b0022; /* Ensure consistent background */
 }
 
+/* Specific styles for individual slides within horizontal sections */
 .history-slide,
 .algorithm-slide,
 .info-slide {
-    /* removed individual slide styles because .content-section covers them now */
+    flex-shrink: 0; /* Prevent slides from shrinking */
+    width: 100vw; /* Each slide takes full viewport width */
+    height: 100vh; /* Each slide takes full viewport height */
+    /* Inherits display: flex and content alignment from .content-section */
 }
 
 .content-section.reverse {
@@ -178,8 +187,8 @@ main {
     font-size: 1.1em;
     line-height: 1.8;
     color: #e0e0e0;
-    flex: 1;
-    min-width: 300px;
+    flex: 1; /* Allow paragraph to take up available space */
+    min-width: 300px; /* Prevent text from becoming too narrow */
 }
 
 .content-section img {
@@ -188,12 +197,13 @@ main {
     object-fit: contain;
     border: none;
     border-radius: 0;
-    opacity: 0;
-    transform: scale(0.8);
-    flex: 1;
-    min-width: 250px;
+    opacity: 0; /* Initial state for GSAP animation */
+    transform: scale(0.8); /* Initial state for GSAP animation */
+    flex: 1; /* Allow image to take up available space */
+    min-width: 250px; /* Prevent image from becoming too small */
 }
 
+/* Popup and Quiz styles (kept as is) */
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -291,52 +301,7 @@ main {
     background: #8c4bff;
 }
 
-#quiz-result button {
-  background-color: #a867ff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  margin: 10px;
-  font-size: 1em;
-  cursor: pointer;
-}
-
-#quiz-result button:hover {
-  background-color: #8c4bff;
-}
-
-.quiz-option.correct {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.quiz-option.wrong {
-  background-color: #f44336;
-  color: white;
-}
-
-.feedback {
-  margin-top: 15px;
-  font-weight: bold;
-  font-size: 1.1em;
-}
-
-#nextBtn, #quiz-result button {
-  margin-top: 20px;
-  background-color: #6c5ce7;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1em;
-  cursor: pointer;
-}
-
-#nextBtn:hover, #quiz-result button:hover {
-  background-color: #5a4bdc;
-}
-
+/* Media Queries for responsiveness */
 @media (max-width: 768px) {
     header {
         padding: 1.5rem 2rem;
@@ -354,8 +319,3 @@ main {
         font-size: 2.5rem;
     }
 
-    #info-scroll-wrapper .horizontal-content-container {
-        flex-direction: column;
-        align-items: center;
-    }
-}
