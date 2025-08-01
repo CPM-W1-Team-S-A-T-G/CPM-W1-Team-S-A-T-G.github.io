@@ -1,56 +1,98 @@
-document.addEventListener("DOMContentLoaded", () => {
-  gsap.registerPlugin(ScrollTrigger);
+document.addEventListener('DOMContentLoaded', () => {
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-  function setupScrollSection(wrapperId, slideClass, direction = 'right') {
-    const wrapper = document.getElementById(wrapperId);
-    const slides = wrapper.querySelectorAll(`.${slideClass}`);
-    const isHorizontal = direction === 'right' || direction === 'left';
-    const isVertical = direction === 'up' || direction === 'down';
-
-    let scrollLength = isHorizontal
-      ? wrapper.scrollWidth - window.innerWidth
-      : wrapper.scrollHeight - window.innerHeight;
-
-    gsap.to(wrapper.querySelector('.horizontal-content-container'), {
-      x: direction === 'right' ? -scrollLength : (direction === 'left' ? scrollLength : 0),
-      y: direction === 'up' ? -scrollLength : 0,
-      ease: "none",
-      scrollTrigger: {
-        trigger: wrapper,
-        start: "top top",
-        end: () => `+=${scrollLength}`,
-        scrub: true,
-        pin: true,
-        anticipatePin: 1,
-      }
+    // Animate intro background
+    ScrollTrigger.create({
+        trigger: "#home",
+        start: "top center",
+        onEnter: animateIntroBG,
+        onEnterBack: animateIntroBG
     });
 
-    slides.forEach(slide => {
-      const elements = slide.querySelectorAll("img, p");
+    function animateIntroBG() {
+        gsap.fromTo(".intro-bg",
+            { scale: 0.5, opacity: 0 },
+            { scale: 1, opacity: 0.8, duration: 1.5, ease: "power2.out" }
+        );
+    }
 
-      gsap.fromTo(elements, {
-        opacity: 0,
-        scale: 0.8,
-        y: 20
-      }, {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        scrollTrigger: {
-          trigger: slide,
-          containerAnimation: ScrollTrigger.getById(wrapperId),
-          start: "left center",
-          toggleActions: "play none none reverse"
+    /**
+     * Sets up horizontal scrolling for a given section.
+     * @param {string} wrapperId - The ID of the horizontal-scroll-wrapper element.
+     * @param {string} slideClass - The class name of the individual slides within the container.
+     */
+    function setupHorizontalScroll(wrapperId, slideClass) {
+        const wrapper = document.getElementById(wrapperId);
+        if (!wrapper) return;
+
+        const container = wrapper.querySelector('.horizontal-content-container');
+        const slides = gsap.utils.toArray(`.${slideClass}`);
+
+        let totalSlidesWidth = 0;
+        slides.forEach(slide => {
+            totalSlidesWidth += slide.offsetWidth;
+        });
+
+        const scrollAmount = totalSlidesWidth - window.innerWidth;
+
+        if (scrollAmount <= 0) {
+            // If content fits within one viewport, no horizontal scroll needed
+            // Remove any pinning or horizontal movement for this section if it was previously applied
+            ScrollTrigger.getAll().forEach(st => {
+                if (st.trigger === wrapper) {
+                    st.kill();
+                }
+            });
+            return;
         }
-      });
-    });
-  }
 
-  setupScrollSection('history-scroll-wrapper', 'history-slide', 'right');
-  setupScrollSection('algorithm-scroll-wrapper', 'algorithm-slide', 'left');
-  setupScrollSection('info-scroll-wrapper', 'info-slide', 'up');
-});
+        // Main horizontal scroll animation
+        const horizontalScrollTween = gsap.to(container, {
+            x: -scrollAmount,
+            ease: "none", // Linear movement for scrubbing
+            scrollTrigger: {
+                trigger: wrapper,
+                pin: true, // Pin the wrapper to keep it in view while scrolling horizontally
+                scrub: 1, // Smoothly link scroll progress to animation progress
+                start: "top top", // Start pinning when the top of the wrapper hits the top of the viewport
+                end: () => `+=${scrollAmount}`, // End when we've scrolled the full horizontal content width vertically
+                invalidateOnRefresh: true, // Recalculate on window resize for correct scrollAmount
+                // markers: true, // Uncomment for debugging main scroll trigger
+            }
+        });
 
+        // Animate image and text within each horizontal slide using containerAnimation
+        slides.forEach((slide, i) => {
+            const img = slide.querySelector('.animated-image');
+            const text = slide.querySelector('p');
+
+            // Ensure initial state for elements that will animate
+            gsap.set([img, text], { opacity: 0 });
+
+            const slideContentTL = gsap.timeline({
+                scrollTrigger: {
+                    trigger: slide, // Trigger for this specific slide
+                    containerAnimation: horizontalScrollTween, // Linked to the main horizontal scroll
+                    start: "left 100%", // Start animating when the left edge of the slide enters the viewport
+                    end: "right 0%",    // End animating when the right edge of the slide leaves the viewport
+                    scrub: true, // Smoothly animate based on scroll position
+                    // markers: {startColor: "purple", endColor: "orange", indent: 200 * i}, // Uncomment for debugging each slide's content trigger
+                }
+            });
+
+            // Original animation for all slides
+            slideContentTL.to(img, { opacity: 1, scale: 1, ease: 'power2.out' }, 0);
+            slideContentTL.to(text, { opacity: 1, y: 0, ease: 'power2.out' }, 0);
+
+            slideContentTL.to(img, { opacity: 0, scale: 0.8, ease: 'power2.out' }, 0.8);
+            slideContentTL.to(text, { opacity: 0, y: -20, ease: 'power2.out' }, 0.8);
+        });
+    }
+
+    // Setup horizontal scrolling for each relevant section
+    setupHorizontalScroll('history-scroll-wrapper', 'history-slide');
+    setupHorizontalScroll('algorithm-scroll-wrapper', 'algorithm-slide');
+    setupHorizontalScroll('info-scroll-wrapper', 'info-slide');
 
     // Smooth scroll for navigation links using GSAP's ScrollToPlugin
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
