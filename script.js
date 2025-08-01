@@ -1,106 +1,55 @@
-document.addEventListener('DOMContentLoaded', () => {
-    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+document.addEventListener("DOMContentLoaded", () => {
+  gsap.registerPlugin(ScrollTrigger);
 
-    // Animate intro background
-    ScrollTrigger.create({
-        trigger: "#home",
-        start: "top center",
-        onEnter: animateIntroBG,
-        onEnterBack: animateIntroBG
-    });
-
-    function animateIntroBG() {
-        gsap.fromTo(".intro-bg",
-            { scale: 0.5, opacity: 0 },
-            { scale: 1, opacity: 0.8, duration: 1.5, ease: "power2.out" }
-        );
-    }
-
-function setupScrollSection(wrapperId, slideClass, direction = "right") {
+  function setupScrollSection(wrapperId, slideClass, direction = 'right') {
     const wrapper = document.getElementById(wrapperId);
-    if (!wrapper) return;
+    const slides = wrapper.querySelectorAll(`.${slideClass}`);
+    const isHorizontal = direction === 'right' || direction === 'left';
+    const isVertical = direction === 'up' || direction === 'down';
 
-    const container = wrapper.querySelector('.horizontal-content-container');
-    const slides = gsap.utils.toArray(`.${slideClass}`);
+    let scrollLength = isHorizontal
+      ? wrapper.scrollWidth - window.innerWidth
+      : wrapper.scrollHeight - window.innerHeight;
 
-    ScrollTrigger.addEventListener("refreshInit", () => gsap.set(container, { x: 0, y: 0 }));
+    gsap.to(wrapper.querySelector('.horizontal-content-container'), {
+      x: direction === 'right' ? -scrollLength : (direction === 'left' ? scrollLength : 0),
+      y: direction === 'up' ? -scrollLength : 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: wrapper,
+        start: "top top",
+        end: () => `+=${scrollLength}`,
+        scrub: true,
+        pin: true,
+        anticipatePin: 1,
+      }
+    });
 
-    let totalSlidesWidth = 0;
     slides.forEach(slide => {
-        totalSlidesWidth += slide.offsetWidth;
-    });
+      const elements = slide.querySelectorAll("img, p");
 
-    const scrollAmount = totalSlidesWidth - window.innerWidth;
-
-    if (direction === "up") {
-        // Vertical scroll – no pinning
-        slides.forEach((slide, i) => {
-            const img = slide.querySelector('.animated-image');
-            const text = slide.querySelector('p');
-
-            gsap.set([img, text], { opacity: 0, y: 20 });
-
-            gsap.timeline({
-                scrollTrigger: {
-                    trigger: slide,
-                    start: "top 80%",
-                    end: "bottom 60%",
-                    scrub: true,
-                    // markers: true,
-                }
-            })
-            .to(img, { opacity: 1, scale: 1, ease: 'power2.out' }, 0)
-            .to(text, { opacity: 1, y: 0, ease: 'power2.out' }, 0);
-        });
-
-        return; // Skip pinning logic
-    }
-
-    // Horizontal scroll (right or left)
-    const xDistance = direction === "right" ? -scrollAmount : scrollAmount;
-
-    const horizontalTween = gsap.to(container, {
-        x: xDistance,
-        ease: "none",
+      gsap.fromTo(elements, {
+        opacity: 0,
+        scale: 0.8,
+        y: 20
+      }, {
+        opacity: 1,
+        scale: 1,
+        y: 0,
         scrollTrigger: {
-            trigger: wrapper,
-            pin: true,
-            scrub: 1,
-            start: "top top",
-            end: () => `+=${scrollAmount}`,
-            invalidateOnRefresh: true,
-            // markers: true,
+          trigger: slide,
+          containerAnimation: ScrollTrigger.getById(wrapperId),
+          start: "left center",
+          toggleActions: "play none none reverse"
         }
+      });
     });
+  }
 
-    slides.forEach((slide, i) => {
-        const img = slide.querySelector('.animated-image');
-        const text = slide.querySelector('p');
-
-        gsap.set([img, text], { opacity: 0 });
-
-        const slideContentTL = gsap.timeline({
-            scrollTrigger: {
-                trigger: slide,
-                containerAnimation: horizontalTween,
-                start: "left 100%",
-                end: "right 0%",
-                scrub: true,
-                // markers: true,
-            }
-        });
-
-        slideContentTL.to(img, { opacity: 1, scale: 1, ease: 'power2.out' }, 0);
-        slideContentTL.to(text, { opacity: 1, y: 0, ease: 'power2.out' }, 0);
-        slideContentTL.to(img, { opacity: 0, scale: 0.8, ease: 'power2.out' }, 0.8);
-        slideContentTL.to(text, { opacity: 0, y: -20, ease: 'power2.out' }, 0.8);
-    });
-}
-
-
-setupScrollSection('history-scroll-wrapper', 'history-slide', 'right');
-setupScrollSection('algorithm-scroll-wrapper', 'algorithm-slide', 'left');
-setupScrollSection('info-scroll-wrapper', 'info-slide', 'up');
+  setupScrollSection('history-scroll-wrapper', 'history-slide', 'right');
+  setupScrollSection('algorithm-scroll-wrapper', 'algorithm-slide', 'left');
+  setupScrollSection('info-scroll-wrapper', 'info-slide', 'up');
+});
 
 
     // Smooth scroll for navigation links using GSAP's ScrollToPlugin
