@@ -8,14 +8,8 @@ body {
     background-color: #0b0022;
     color: #ffffff;
     font-family: 'Arial', sans-serif;
-    overflow-x: hidden; /* Hide horizontal scrollbar */
-    /* scroll-behavior: smooth; -- GSAP handles this better */
-    /* scroll-snap-type: y mandatory; -- Removed, GSAP will manage */
+    overflow-x: hidden;
 }
-
-/* section {
-    scroll-snap-align: start; -- Removed, GSAP will manage
-} */
 
 header {
     position: fixed;
@@ -122,7 +116,7 @@ main {
 
 .learn-more a:hover {
     background-color: white;
-    color: #0b0022; /* Changed to a visible color on hover */
+    color: #0b0022;
 }
 
 .title-section {
@@ -141,41 +135,38 @@ main {
     letter-spacing: 3px;
 }
 
-/* New styles for horizontal scrolling sections */
 .horizontal-scroll-wrapper {
     height: 100vh;
-    overflow: hidden; /* Hide the native horizontal scrollbar */
-    position: relative; /* Needed for GSAP pinning */
-    background: #0b0022; /* Ensure consistent background */
+    overflow: hidden;
+    position: relative;
+    background: #0b0022;
 }
 
 .horizontal-content-container {
-    display: flex; /* Arrange children (content-sections) horizontally */
-    height: 100%; /* Take full height of the wrapper */
-    width: max-content; /* Allow content to dictate total width */
-    will-change: transform; /* Optimize for animation */
+    display: flex;
+    height: 100%;
+    width: max-content;
+    will-change: transform;
 }
 
 .content-section {
-    /* Common styles for all content sections, including those in horizontal scroll */
     display: flex;
     align-items: center;
-    justify-content: space-evenly; /* Distribute items with space */
+    justify-content: space-evenly;
     padding: 2rem;
     gap: 2rem;
-    flex-wrap: wrap; /* Allows image/paragraph to wrap on smaller screens within the 100vw slide */
+    flex-wrap: wrap;
     text-align: center;
-    background: #0b0022; /* Ensure consistent background */
+    background: #0b0022;
+    flex-shrink: 0;
+    width: 100vw;
+    height: 100vh;
 }
 
-/* Specific styles for individual slides within horizontal sections */
 .history-slide,
 .algorithm-slide,
 .info-slide {
-    flex-shrink: 0; /* Prevent slides from shrinking */
-    width: 100vw; /* Each slide takes full viewport width */
-    height: 100vh; /* Each slide takes full viewport height */
-    /* Inherits display: flex and content alignment from .content-section */
+    /* removed individual slide styles because .content-section covers them now */
 }
 
 .content-section.reverse {
@@ -187,8 +178,8 @@ main {
     font-size: 1.1em;
     line-height: 1.8;
     color: #e0e0e0;
-    flex: 1; /* Allow paragraph to take up available space */
-    min-width: 300px; /* Prevent text from becoming too narrow */
+    flex: 1;
+    min-width: 300px;
 }
 
 .content-section img {
@@ -197,13 +188,12 @@ main {
     object-fit: contain;
     border: none;
     border-radius: 0;
-    opacity: 0; /* Initial state for GSAP animation */
-    transform: scale(0.8); /* Initial state for GSAP animation */
-    flex: 1; /* Allow image to take up available space */
-    min-width: 250px; /* Prevent image from becoming too small */
+    opacity: 0;
+    transform: scale(0.8);
+    flex: 1;
+    min-width: 250px;
 }
 
-/* Popup and Quiz styles (kept as is) */
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -347,9 +337,6 @@ main {
   background-color: #5a4bdc;
 }
 
-
-
-/* Media Queries for responsiveness */
 @media (max-width: 768px) {
     header {
         padding: 1.5rem 2rem;
@@ -367,8 +354,8 @@ main {
         font-size: 2.5rem;
     }
 
-#info-scroll-wrapper .horizontal-content-container {
-    flex-direction: column;
-    align-items: center;
+    #info-scroll-wrapper .horizontal-content-container {
+        flex-direction: column;
+        align-items: center;
+    }
 }
-
