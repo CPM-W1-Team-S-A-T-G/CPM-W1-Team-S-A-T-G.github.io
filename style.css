@@ -367,3 +367,8 @@ main {
         font-size: 2.5rem;
     }
 
+#info-scroll-wrapper .horizontal-content-container {
+    flex-direction: column;
+    align-items: center;
+}
+
