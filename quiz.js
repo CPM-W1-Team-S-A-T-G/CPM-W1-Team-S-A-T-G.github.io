@@ -34,20 +34,46 @@ startQuizBtn.addEventListener('click', () => {
 // ===== Quiz Logic =====
 const questions = [
   {
-    question: "What is a qubit?",
-    options: ["A classical bit", "A 4-state system", "A quantum version of a bit", "A binary digit"],
+    question: "What is a quantum computer?",
+    options: ["A computer that has the capabilities of quantuming.", "A computer that can process quantum physics.", "A computer that takes advantage of quantum mechanical phenomena.", "A computer that does not use circuits but instead has physicists that carry out calculations at light speed."],
+    answer: 3
+  },
+  {
+    question: "What is the Quantum Turing Machine used for?",
+    options: ["It is used to turn a machine quantum.", "It is used for traversal.", "It is used to skip the time intervals for machines.", "It is used to describe a simple computer using quantum theory."],
+    answer: 4
+  },
+  {
+    question: "When is a qubit in superposition?",
+    options: ["When you are looking at it.", "When both α and ß are non-zero.", "When both α and ß are zero or below zero.", "When it is 4d."],
     answer: 2
   },
   {
-    question: "Who introduced the Quantum Turing Machine?",
-    options: ["Peter Shor", "Paul Benioff", "David Deutsch", "Richard Feynman"],
+    question: "Which companies had achieved quantum supremacy during 2019?",
+    options: ["Google AI and NASA.", "Tesla and Microsoft AI.", "Apple and Amazon.", "Nvidia and Meta."],
     answer: 1
   },
   {
-    question: "What does Shor's algorithm solve?",
-    options: ["Graph problems", "Sorting", "Factoring large integers", "Machine learning"],
+    question: "Shor's algorithm is used to...",
+    options: ["find prime factors in an integer.", "find the expansion of an integer.", "deduct the amount of errors in a sequence of coded instructions.", "find different integers in an equation."],
+    answer: 1
+  },
+  {
+    question: "What is the Hidden Subgroup Problem(HSP).",
+    options: ["It is used for graph theory, where the goal is to find hidden nodes within a network by analyzing the shortest path between nodes.", "It is a cryptographic encryption algorithm used to secure communication between two parties by hiding their public keys in a group structure.", "It is a machine learning classification problem used to find hidden subgroups in a dataset.", "It is a framework used to capture problems such as factorising and graph isomorphism."],
+    answer: 4
+  },
+  {
+    question: "When did quantum computing become popular?",
+    options: ["The 2000s", "The 1980s", "The 1920s", "The 1960s"],
+    answer: 2
+  },
+  {
+    question: "What can be used to represent the qubit state?",
+    options: ["The binary code", "A 2-dimensional vector.", "A light switch.", "A coin flip."],
     answer: 2
   }
+  
 ];
 
 let currentQuestion = 0;
