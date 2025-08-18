@@ -129,7 +129,7 @@
     <section id="intro" class="section">
         <!-- The 'animated-spin-once' class has been removed as the rotation is now scroll-driven -->
         <!-- Using a placeholder image for the background image to ensure it renders correctly -->
-        <img src="bg.jpg" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
+        <img src="https://placehold.co/400x400/2a2a2a/ffffff?text=Quantum+Core" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
         <div class="parallax-layer base flex flex-col items-center">
             <h1 class="text-6xl md:text-8xl font-bold mb-4 tracking-tighter text-glow">Quantum Computing</h1>
             <h2 class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter text-center text-glow">The Quantum Leap</h2>
@@ -229,44 +229,48 @@
           * @param {WheelEvent} event The wheel event object.
           */
         function handleWheel(event) {
+            // Check if the user is scrolling down.
+            const isScrollingDown = event.deltaY > 0;
+            
             // Prevent the browser's default scrolling behavior only when the
             // virtual scroll is within the rotation zone.
-            if (virtualScroll <= maxVirtualScroll) {
-                 event.preventDefault();
+            if (virtualScroll < maxVirtualScroll || !isScrollingDown) {
+                event.preventDefault();
             }
-            
-            // The virtual scroll should only increase, never decrease, to ensure a one-way animation.
-            // This prevents the anti-clockwise rotation.
-            if (event.deltaY > 0) {
-              virtualScroll += event.deltaY;
+
+            // Update the virtual scroll based on the direction.
+            // When scrolling down, increase the virtual scroll.
+            if (isScrollingDown) {
+                virtualScroll += event.deltaY;
+            } else {
+                // When scrolling up, decrease the virtual scroll.
+                // This allows the user to "undo" the rotation.
+                virtualScroll += event.deltaY;
+            }
+
+            // Ensure the virtual scroll never goes below zero.
+            if (virtualScroll < 0) {
+                virtualScroll = 0;
             }
 
             // Calculate the rotation angle based on the virtual scroll position.
-            // The result is clamped between 0 and 360 degrees to ensure a full
-            // 360-degree rotation. The `Math.min()` call prevents the rotation
-            // from exceeding 360, while still allowing the virtualScroll
-            // variable to grow beyond `maxVirtualScroll` for page unlocking.
+            // The result is clamped between 0 and 360 degrees.
             const rotation = Math.min((virtualScroll / maxVirtualScroll) * 360, 360);
             
             // Apply the rotation and parallax effect using CSS transform.
-            // The `translate(-50%, -50%)` keeps the image perfectly centered.
-            // `rotateY` is the key to the scroll-driven rotation.
             introBgImg.style.transform = `translate(-50%, -50%) rotateY(${rotation}deg)`;
             
-            // Check if the virtual scroll has exceeded the rotation threshold.
-            // This is the condition that determines if the full page is unlocked.
-            if (virtualScroll >= maxVirtualScroll) {
+            // Check if the rotation threshold has been met.
+            if (rotation >= 360) {
                 // If the threshold is met, enable normal vertical scrolling on the body.
                 body.style.overflowY = 'scroll';
             } else {
-                // If the user scrolls back up and is within the rotation zone,
-                // disable normal scrolling again.
+                // Otherwise, keep normal scrolling disabled.
                 body.style.overflowY = 'hidden';
             }
         }
-
-        // Add the initial wheel event listener to the window to start the process.
-        // The `{ passive: false }` is crucial for `event.preventDefault()` to work.
+        
+        // Add the initial wheel event listener to the window.
         window.addEventListener('wheel', handleWheel, { passive: false });
 
         // This function will automatically scroll the page to the top on load.
