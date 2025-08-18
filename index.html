@@ -158,13 +158,18 @@
         </nav>
     </header>
 
+    <!-- Main Title Added Here -->
+    <div class="pt-24 text-center">
+        <h1 class="text-6xl md:text-8xl font-bold mb-4 tracking-tighter text-glow">Quantum Computing</h1>
+    </div>
+
     <!-- Parallax Sections -->
     <div id="parallax-container" class="parallax-container">
         
         <!-- Introduction Section -->
         <section id="intro" class="section">
             <div class="parallax-layer base flex flex-col items-center">
-                <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter text-center text-glow">The Quantum Leap</h1>
+                <h2 class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter text-center text-glow">The Quantum Leap</h2>
                 <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl text-center">Unlocking the next frontier of computation with the power of the subatomic world.</p>
                 <a href="#history" class="bg-white text-black px-8 py-3 rounded-full font-bold shadow-lg hover:bg-gray-300 transition-colors duration-300">Explore</a>
             </div>
@@ -250,21 +255,16 @@
     <script>
         // Get the elements for the parallax effect
         const introBg = document.getElementById('intro-bg');
-        const introTitle = document.querySelector('#intro h1');
-        const introText = document.querySelector('#intro p');
         
-        // Listen for scroll events on the window
-        window.addEventListener('scroll', () => {
+        // Listen for scroll events on the parallax container
+        const parallaxContainer = document.getElementById('parallax-container');
+        parallaxContainer.addEventListener('scroll', () => {
             // Get the current vertical scroll position
-            const scrollPos = window.pageYOffset;
+            const scrollPos = parallaxContainer.scrollTop;
 
-            // Apply a transform to the background and foreground elements
+            // Apply a transform to the background element
             // The background moves at 50% speed, creating the parallax illusion
-            introBg.style.transform = translateY(${scrollPos * 0.5}px);
-            
-            // The text elements can move at a slightly faster rate for an added effect
-            introTitle.style.transform = translateY(${scrollPos * 0.7}px);
-            introText.style.transform = translateY(${scrollPos * 0.8}px);
+            introBg.style.transform = `translateZ(-1px) translateY(${scrollPos * 0.5}px)`;
         });
     </script>
 </body>
