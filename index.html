@@ -17,7 +17,7 @@
             background: linear-gradient(180deg, #1A0033 0%, #08081a 100%);
             color: #fff;
             overflow-x: hidden; /* Prevents horizontal scrollbar from the parallax effect */
-            overflow-y: hidden; /* Initially disable vertical scrolling */
+            overflow-y: hidden; /* Initially disable vertical scrolling, to be enabled by JS */
         }
 
         .section {
@@ -29,8 +29,6 @@
             position: relative;
             overflow: hidden; /* Hide any overflow from the parallax image */
         }
-        
-        /* The main parallax container is no longer needed, using individual sections */
         
         /* Hero section specific styles */
         #intro {
@@ -106,15 +104,7 @@
             transition: transform 0.3s ease-in-out;
         }
         
-        /* Animation for a subtle spin effect that runs once */
-        .animated-spin-once {
-            animation: spin-once 2s forwards; /* 'forwards' keeps the final state */
-        }
-        
-        @keyframes spin-once {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
+        /* The automatic spin-once animation has been removed as it is now controlled by scroll */
     </style>
 </head>
 <body class="bg-black text-white">
@@ -136,7 +126,8 @@
         
     <!-- Introduction Section -->
     <section id="intro" class="section">
-        <img src="bg.jpg" alt="A glowing abstract quantum ring" class="intro-bg-img animated-spin-once" id="intro-bg-img">
+        <!-- The 'animated-spin-once' class has been removed as the rotation is now scroll-driven -->
+        <img src="bg.jpg" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
         <div class="parallax-layer base flex flex-col items-center">
             <h1 class="text-6xl md:text-8xl font-bold mb-4 tracking-tighter text-glow">Quantum Computing</h1>
             <h2 class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter text-center text-glow">The Quantum Leap</h2>
@@ -217,27 +208,51 @@
         </div>
     </section>
 
-    <!-- JavaScript for Parallax Effect -->
+    <!-- JavaScript for Scroll-Driven Animation -->
     <script>
         // Get the body and the element for the parallax image
         const body = document.body;
         const introBgImg = document.getElementById('intro-bg-img');
         
-        // Listen for the end of the spin animation
-        introBgImg.addEventListener('animationend', () => {
-            // Re-enable scrolling on the body
-            body.style.overflowY = 'scroll';
-            
-            // Add the scroll event listener for the parallax effect
-            window.addEventListener('scroll', () => {
-                // Get the current vertical scroll position
-                const scrollPos = window.pageYOffset;
+        // The maximum scroll position (in pixels) for the full 360-degree rotation.
+        // This is set to the height of the first section to ensure the rotation
+        // is complete before the user can move to the next section.
+        const maxScrollForRotation = window.innerHeight * 1.2;
 
-                // Apply a transform to the background image
-                // It moves slower and rotates on the Y-axis for a 3D effect
-                introBgImg.style.transform = `translate(-50%, -50%) translateZ(-1px) translateY(${scrollPos * 0.5}px) rotateY(${scrollPos * 0.1}deg)`;
-            });
-        }, { once: true }); // The { once: true } option makes sure this listener is removed after it runs once
+        /**
+         * The scroll handler function that controls the image rotation and scrolling.
+         * The function is a named function so it can be easily removed.
+         */
+        function handleScroll() {
+            // Get the current vertical scroll position
+            const scrollPos = window.pageYOffset;
+
+            // Check if the scroll position is within the rotation zone.
+            // This prevents the rotation from continuing after the user has scrolled past the first section.
+            if (scrollPos <= maxScrollForRotation) {
+                // Calculate the rotation angle based on the scroll position.
+                // The ratio of `scrollPos / maxScrollForRotation` gives a value from 0 to 1,
+                // which is then multiplied by 360 to get a full rotation.
+                const rotation = (scrollPos / maxScrollForRotation) * 360;
+                
+                // Apply the rotation and parallax effect using CSS transform.
+                // The `translate(-50%, -50%)` keeps the image perfectly centered.
+                // `translateZ(-1px)` and `translateY` create the parallax depth and movement.
+                // `rotateY` is the key to the scroll-driven rotation.
+                introBgImg.style.transform = `translate(-50%, -50%) translateZ(-1px) translateY(${scrollPos * 0.5}px) rotateY(${rotation}deg)`;
+
+            } else {
+                // Once the scroll position exceeds the rotation zone, re-enable scrolling.
+                // This allows the user to scroll down to the other sections.
+                body.style.overflowY = 'scroll';
+                
+                // Remove this event listener to prevent it from running unnecessarily.
+                window.removeEventListener('scroll', handleScroll);
+            }
+        }
+
+        // Add the initial event listener to the window to start the process.
+        window.addEventListener('scroll', handleScroll);
     </script>
 </body>
 </html>
