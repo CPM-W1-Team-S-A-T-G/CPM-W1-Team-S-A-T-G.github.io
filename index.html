@@ -17,8 +17,8 @@
             /* Updated the background with a beautiful purple-blue-gold gradient */
             background: linear-gradient(180deg, #0d0c1f 0%, #2a043c 30%, #4A007F 70%, #0d0c1f 100%);
             color: #fff;
-            overflow-x: hidden; /* Prevents horizontal scrollbar from the parallax effect */
-            overflow-y: hidden; /* Initially disable vertical scrolling, to be enabled by JS */
+            /* Removed overflow-y: hidden to allow natural vertical scrolling */
+            overflow-x: hidden;
         }
 
         .section {
@@ -30,7 +30,7 @@
             position: relative;
             overflow: hidden; /* Hide any overflow from the parallax image */
         }
-
+        
         /* Hero section specific styles */
         #intro {
             background-color: transparent;
@@ -38,7 +38,7 @@
             position: relative;
             z-index: 10;
         }
-
+        
         /* The background for the hero section, now an img tag */
         .intro-bg-img {
             position: absolute;
@@ -53,7 +53,7 @@
             /* Centering and initial parallax transform */
             transform: translate(-50%, -50%) translateZ(-1px); 
         }
-
+        
         /* Text glow effect for headings, with a golden hue */
         .text-glow {
             text-shadow: 0 0 10px #FFD700;
@@ -74,9 +74,9 @@
                 transform: translateY(-10px);
             }
         }
-
+        
         /* --- Image Animations --- */
-
+        
         /* Animation for a subtle pulse effect */
         .animated-pulse {
             animation: pulse 2s infinite;
@@ -98,22 +98,31 @@
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0); }
         }
-
+        
         /* Animation for a subtle scaling effect on hover */
         .animated-scale-on-hover:hover {
             transform: scale(1.05);
             transition: transform 0.3s ease-in-out;
         }
-
+        
         /* The automatic spin-once animation has been removed as it is now controlled by scroll */
-
+        
         /* Styles for the new horizontally scrolling history section */
+        #history-wrapper {
+            height: 300vh; /* This creates the vertical space for the horizontal scroll animation */
+            position: relative;
+        }
+        
         #history {
-            display: block; /* Make the section a block-level element for overflow to work */
-            height: 100vh; /* Set height to full viewport height for horizontal scrolling */
+            height: 100vh;
             width: 100%;
+            position: sticky; /* Keeps the section in place while scrolling through it */
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 0;
-            overflow-x: hidden; /* Prevents the horizontal scrollbar from showing on the main page */
+            overflow: hidden;
         }
 
         /* This is the container that will be scrolled horizontally */
@@ -122,9 +131,8 @@
             flex-direction: row;
             width: 300%; /* A large width to accommodate all "pages" */
             height: 100%;
-            overflow-x: scroll; /* Allow horizontal scrolling */
-            scroll-snap-type: x mandatory; /* Snap to each page */
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            /* Removed overflow-x: scroll because we're using JS for the animation */
+            transform: translateX(0); /* Initial state */
         }
         
         /* Styles for each individual history "page" or article */
@@ -132,7 +140,6 @@
             width: 100vw; /* Each page takes up the full viewport width */
             height: 100vh;
             flex-shrink: 0; /* Prevents items from shrinking */
-            scroll-snap-align: center; /* Snap to the center of the viewport */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -163,7 +170,7 @@
     <section id="intro" class="section">
         <!-- The 'animated-spin-once' class has been removed as the rotation is now scroll-driven -->
         <!-- Using a placeholder image for the background image to ensure it renders correctly -->
-        <img src="bg.jpg" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
+        <img src="https://placehold.co/400x400/2a2a2a/ffffff?text=Quantum+Core" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
         <div class="parallax-layer base flex flex-col items-center">
             <h1 class="text-6xl md:text-8xl font-bold mb-4 tracking-tighter text-glow">Quantum Computing</h1>
             <h2 class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter text-center text-glow">The Quantum Leap</h2>
@@ -179,40 +186,43 @@
     </section>
     
     <!-- Quantum History Section with multiple horizontal pages -->
-    <section id="history">
-        <!-- This container handles the horizontal scrolling and snapping -->
-        <div class="history-container">
-            <!-- First Page of History -->
-            <div class="history-page">
-                <div class="max-w-4xl">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">A Brief History</h2>
-                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                        The concept of a quantum computer was first proposed in the early 1980s by physicists like *Paul Benioff* and *Richard Feynman*. Feynman noted that simulating quantum systems was impossible on classical computers, suggesting a new type of computer based on quantum mechanics was needed.
-                    </p>
-                    <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Feynman" alt="A placeholder image of Richard Feynman" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+    <!-- This wrapper provides the vertical scroll space -->
+    <section id="history-wrapper">
+        <section id="history">
+            <!-- This container handles the horizontal scrolling and snapping -->
+            <div class="history-container">
+                <!-- First Page of History -->
+                <div class="history-page">
+                    <div class="max-w-4xl">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">A Brief History</h2>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                            The concept of a quantum computer was first proposed in the early 1980s by physicists like *Paul Benioff* and *Richard Feynman*. Feynman noted that simulating quantum systems was impossible on classical computers, suggesting a new type of computer based on quantum mechanics was needed.
+                        </p>
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Feynman" alt="A placeholder image of Richard Feynman" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                    </div>
+                </div>
+                <!-- Second Page of History -->
+                <div class="history-page">
+                    <div class="max-w-4xl">
+                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">The Theory Takes Shape</h3>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                            Following Feynman's ideas, in 1985, physicist David Deutsch at Oxford University described the first universal quantum computer. His work outlined how a quantum computer could, in theory, simulate any other physical system, giving a solid foundation to the theoretical field.
+                        </p>
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=David+Deutsch" alt="A placeholder image of David Deutsch" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                    </div>
+                </div>
+                <!-- Third Page of History -->
+                <div class="history-page">
+                    <div class="max-w-4xl">
+                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Breakthrough Algorithms</h3>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                            In the 1990s, the field gained significant momentum with the discovery of key algorithms. In 1994, Peter Shor's algorithm proved that quantum computers could efficiently factor large numbers, a task that is nearly impossible for classical computers. This highlighted their potential for breaking modern cryptography.
+                        </p>
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Peter+Shor" alt="A placeholder image of Peter Shor" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                    </div>
                 </div>
             </div>
-            <!-- Second Page of History -->
-            <div class="history-page">
-                <div class="max-w-4xl">
-                    <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">The Theory Takes Shape</h3>
-                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                        Following Feynman's ideas, in 1985, physicist David Deutsch at Oxford University described the first universal quantum computer. His work outlined how a quantum computer could, in theory, simulate any other physical system, giving a solid foundation to the theoretical field.
-                    </p>
-                    <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=David+Deutsch" alt="A placeholder image of David Deutsch" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
-                </div>
-            </div>
-            <!-- Third Page of History -->
-            <div class="history-page">
-                <div class="max-w-4xl">
-                    <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Breakthrough Algorithms</h3>
-                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                        In the 1990s, the field gained significant momentum with the discovery of key algorithms. In 1994, Peter Shor's algorithm proved that quantum computers could efficiently factor large numbers, a task that is nearly impossible for classical computers. This highlighted their potential for breaking modern cryptography.
-                    </p>
-                    <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Peter+Shor" alt="A placeholder image of Peter Shor" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
-                </div>
-            </div>
-        </div>
+        </section>
     </section>
 
     <!-- Quantum Principles Section with Image and Animation -->
@@ -275,68 +285,46 @@
         // Get the body and the element for the parallax image
         const body = document.body;
         const introBgImg = document.getElementById('intro-bg-img');
-        
-        // Use a variable to track the "virtual" scroll progress.
-        // It's initialized to 0.
-        let virtualScroll = 0;
-        
-        // The maximum virtual scroll value for a full 360-degree rotation.
-        const maxVirtualScroll = 1000;
-
-        /**
-          * This function handles the mouse wheel event to control the animation.
-          * It will now be a persistent listener.
-          * @param {WheelEvent} event The wheel event object.
-          */
-        function handleWheel(event) {
-            // Check if the user is scrolling down.
-            const isScrollingDown = event.deltaY > 0;
-            
-            // Prevent the browser's default scrolling behavior only when the
-            // virtual scroll is within the rotation zone.
-            if (virtualScroll < maxVirtualScroll || !isScrollingDown) {
-                event.preventDefault();
-            }
-
-            // Update the virtual scroll based on the direction.
-            // When scrolling down, increase the virtual scroll.
-            if (isScrollingDown) {
-                virtualScroll += event.deltaY;
-            } else {
-                // When scrolling up, decrease the virtual scroll.
-                // This allows the user to "undo" the rotation.
-                virtualScroll += event.deltaY;
-            }
-
-            // Ensure the virtual scroll never goes below zero.
-            if (virtualScroll < 0) {
-                virtualScroll = 0;
-            }
-
-            // Calculate the rotation angle based on the virtual scroll position.
-            // The result is clamped between 0 and 360 degrees.
-            const rotation = Math.min((virtualScroll / maxVirtualScroll) * 360, 360);
-            
-            // Apply the rotation and parallax effect using CSS transform.
-            introBgImg.style.transform = `translate(-50%, -50%) rotateY(${rotation}deg)`;
-            
-            // Check if the rotation threshold has been met.
-            if (rotation >= 360) {
-                // If the threshold is met, enable normal vertical scrolling on the body.
-                body.style.overflowY = 'scroll';
-            } else {
-                // Otherwise, keep normal scrolling disabled.
-                body.style.overflowY = 'hidden';
-            }
-        }
-        
-        // Add the initial wheel event listener to the window.
-        window.addEventListener('wheel', handleWheel, { passive: false });
+        const historyContainer = document.querySelector('.history-container');
+        const historyWrapper = document.getElementById('history-wrapper');
 
         // This function will automatically scroll the page to the top on load.
         window.onload = function() {
             window.scrollTo(0, 0);
         };
+        
+        // This single event listener handles all scroll-based animations.
+        window.addEventListener('scroll', () => {
+            // Get the current vertical scroll position.
+            const scrollY = window.scrollY;
+            
+            // --- Intro Section Animation ---
+            // Get the height of the intro section to base the rotation on.
+            const introHeight = document.getElementById('intro').offsetHeight;
+            // Calculate the rotation angle, clamping it between 0 and 360 degrees.
+            const rotation = Math.min((scrollY / introHeight) * 360, 360);
+            
+            // Apply the rotation to the background image.
+            introBgImg.style.transform = `translate(-50%, -50%) rotateY(${rotation}deg)`;
+            
+            // --- History Section Horizontal Scroll Animation ---
+            // Get the position of the history section wrapper.
+            const historyTop = historyWrapper.offsetTop;
+            // Get the total horizontal width to scroll.
+            const totalHorizontalScroll = historyContainer.scrollWidth - historyContainer.offsetWidth;
+            
+            // Check if the user is scrolling within the history section's vertical space.
+            if (scrollY >= historyTop && scrollY <= historyTop + historyWrapper.offsetHeight) {
+                // Calculate the scroll progress within this section.
+                const scrollProgress = scrollY - historyTop;
+                
+                // Calculate the horizontal position based on the scroll progress.
+                const horizontalPosition = (scrollProgress / historyWrapper.offsetHeight) * totalHorizontalScroll;
+                
+                // Apply the horizontal translation. Use a negative value to slide the content to the left.
+                historyContainer.style.transform = `translateX(-${horizontalPosition}px)`;
+            }
+        });
     </script>
 </body>
 </html>
