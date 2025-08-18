@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupHorizontalScroll('algorithm-scroll-wrapper', 'algorithm-slide', 'left');
 
      // Info → vertical scroll up instead of sideways
-    setupVerticalScroll('info-scroll-wrapper', 'info-slide');
+    setupVerticalScroll('info-scroll-wrapper', 'info-slide', 'right');
 
 
     // Smooth scroll for navigation links using GSAP's ScrollToPlugin
