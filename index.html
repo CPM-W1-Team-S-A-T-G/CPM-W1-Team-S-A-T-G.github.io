@@ -214,62 +214,63 @@
         const body = document.body;
         const introBgImg = document.getElementById('intro-bg-img');
         
-        // Use a variable to track the "virtual" scroll progress
+        // Use a variable to track the "virtual" scroll progress.
+        // It's initialized to 0.
         let virtualScroll = 0;
         
         // The maximum virtual scroll value for a full 360-degree rotation.
-        // The value is arbitrary, but should be large enough to require a deliberate
-        // scroll action from the user to complete the animation.
+        // This value is set arbitrarily to require a certain amount of scrolling
+        // before the full page is unlocked.
         const maxVirtualScroll = 1000;
 
         /**
          * This function handles the mouse wheel event to control the animation.
+         * It will now be a persistent listener.
          * @param {WheelEvent} event The wheel event object.
          */
         function handleWheel(event) {
-            // Prevent the browser's default scrolling behavior
-            event.preventDefault();
+            // Prevent the browser's default scrolling behavior only when the
+            // virtual scroll is within the rotation zone.
+            if (virtualScroll <= maxVirtualScroll) {
+                 event.preventDefault();
+            }
             
-            // Increment the virtual scroll position based on the wheel delta
+            // Increment/decrement the virtual scroll position based on the wheel delta.
+            // A negative delta indicates scrolling up, a positive delta indicates down.
             virtualScroll += event.deltaY;
 
-            // Clamp the virtual scroll position to a minimum of 0
+            // Clamp the virtual scroll position to a minimum of 0.
+            // This prevents the rotation from going into negative degrees.
             if (virtualScroll < 0) {
                 virtualScroll = 0;
             }
 
-            // Check if the virtual scroll is within the rotation zone
-            if (virtualScroll <= maxVirtualScroll) {
-                // Calculate the rotation angle based on the virtual scroll position.
-                // This creates a smooth 360-degree rotation tied to the user's scroll.
-                const rotation = (virtualScroll / maxVirtualScroll) * 360;
-                
-                // Apply the rotation and parallax effect using CSS transform.
-                // The `translate(-50%, -50%)` keeps the image perfectly centered.
-                // `rotateY` is the key to the scroll-driven rotation.
-                introBgImg.style.transform = `translate(-50%, -50%) rotateY(${rotation}deg)`;
-            } else {
-                // Once the virtual scroll exceeds the rotation zone, re-enable scrolling.
+            // Calculate the rotation angle based on the virtual scroll position.
+            // The result is clamped between 0 and 360 degrees to ensure a full
+            // 360-degree rotation. The `Math.min()` call prevents the rotation
+            // from exceeding 360, while still allowing the virtualScroll
+            // variable to grow beyond `maxVirtualScroll` for page unlocking.
+            const rotation = Math.min((virtualScroll / maxVirtualScroll) * 360, 360);
+            
+            // Apply the rotation and parallax effect using CSS transform.
+            // The `translate(-50%, -50%)` keeps the image perfectly centered.
+            // `rotateY` is the key to the scroll-driven rotation.
+            introBgImg.style.transform = `translate(-50%, -50%) rotateY(${rotation}deg)`;
+            
+            // Check if the virtual scroll has exceeded the rotation threshold.
+            // This is the condition that determines if the full page is unlocked.
+            if (virtualScroll >= maxVirtualScroll) {
+                // If the threshold is met, enable normal vertical scrolling on the body.
                 body.style.overflowY = 'scroll';
-                
-                // Remove the wheel event listener, as the animation is complete
-                window.removeEventListener('wheel', handleWheel);
-
-                // Re-add a regular scroll listener to handle the rest of the page, if needed.
-                // This makes sure other parallax effects or scroll-based animations can work.
-                window.addEventListener('scroll', handleParallax);
+            } else {
+                // If the user scrolls back up and is within the rotation zone,
+                // disable normal scrolling again.
+                body.style.overflowY = 'hidden';
             }
         }
         
-        /**
-         * This function handles the general parallax effect for the rest of the page.
-         */
-        function handleParallax() {
-             // This can be used for any other scroll-based effects after the intro animation.
-             // For now, it's just a placeholder.
-        }
-
         // Add the initial wheel event listener to the window to start the process.
+        // The `{ passive: false }` is crucial for `event.preventDefault()` to work.
         window.addEventListener('wheel', handleWheel, { passive: false });
     </script>
 </body>
