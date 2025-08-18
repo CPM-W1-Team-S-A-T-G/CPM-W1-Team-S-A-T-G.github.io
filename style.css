@@ -65,6 +65,16 @@ main {
     padding-top: 6rem;
 }
 
+.content {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 1;
+    padding: 2rem;
+}
 
 .intro-bg {
     position: absolute;
@@ -78,6 +88,19 @@ main {
     z-index: -1;
 }
 
+.content h1 {
+    font-size: 4rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #ffffff;
+    z-index: 5;
+    position: relative;
+}
+
+.content h1 span {
+    font-weight: 300;
+    color: #cdbfff;
+}
 
 .learn-more {
     position: fixed;
@@ -127,6 +150,24 @@ main {
     background: #0b0022; /* Ensure consistent background */
 }
 
+.horizontal-content-container {
+    display: flex; /* Arrange children (content-sections) horizontally */
+    height: 100%; /* Take full height of the wrapper */
+    width: max-content; /* Allow content to dictate total width */
+    will-change: transform; /* Optimize for animation */
+}
+
+.content-section {
+    /* Common styles for all content sections, including those in horizontal scroll */
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly; /* Distribute items with space */
+    padding: 2rem;
+    gap: 2rem;
+    flex-wrap: wrap; /* Allows image/paragraph to wrap on smaller screens within the 100vw slide */
+    text-align: center;
+    background: #0b0022; /* Ensure consistent background */
+}
 
 /* Specific styles for individual slides within horizontal sections */
 .history-slide,
@@ -138,34 +179,30 @@ main {
     /* Inherits display: flex and content alignment from .content-section */
 }
 
-
-/* History images */
-.history-slide img {
-    width: 250px;
-    height: auto;
-    object-fit: contain;
-    margin: 0 auto;
-    flex-shrink: 0;
+.content-section.reverse {
+    flex-direction: row-reverse;
 }
 
-/* Algorithm images (slightly bigger) */
-.algorithm-slide img {
-    width: 300px;
-    height: auto;
-    object-fit: contain;
-    margin: 0 auto;
-    flex-shrink: 0;
+.content-section p {
+    max-width: 600px;
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #e0e0e0;
+    flex: 1; /* Allow paragraph to take up available space */
+    min-width: 300px; /* Prevent text from becoming too narrow */
 }
 
-/* Info images (same as algorithm) */
-.info-slide img {
-    width: 300px;
+.content-section img {
+    width: 350px;
     height: auto;
     object-fit: contain;
-    margin: 0 auto;
-    flex-shrink: 0;
+    border: none;
+    border-radius: 0;
+    opacity: 0; /* Initial state for GSAP animation */
+    transform: scale(0.8); /* Initial state for GSAP animation */
+    flex: 1; /* Allow image to take up available space */
+    min-width: 250px; /* Prevent image from becoming too small */
 }
-
 
 /* Popup and Quiz styles (kept as is) */
 .popup-overlay {
@@ -182,6 +219,45 @@ main {
     backdrop-filter: blur(5px);
 }
 
+.popup-content {
+    background: #0b0022;
+    color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    border: 1px solid #a867ff;
+}
+
+.popup-content h3 {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    color: #cdbfff;
+}
+
+.popup-content p {
+    color: #e0e0e0;
+    margin-bottom: 25px;
+}
+
+.popup-content button {
+    background-color: #a867ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin: 0 10px;
+}
+
+.popup-content button:hover {
+    background-color: #8c4bff;
+}
 
 .quiz-container {
     position: fixed;
@@ -243,4 +319,3 @@ main {
     .title-section h2 {
         font-size: 2.5rem;
     }
-
