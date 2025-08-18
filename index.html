@@ -17,7 +17,7 @@
             background: linear-gradient(180deg, #1A0033 0%, #08081a 100%);
             color: #fff;
             overflow-x: hidden; /* Prevents horizontal scrollbar from the parallax effect */
-            overflow-y: scroll; /* Ensure smooth scrolling for the body */
+            overflow-y: hidden; /* Initially disable vertical scrolling */
         }
 
         .section {
@@ -51,7 +51,8 @@
             object-fit: contain; /* Changed to contain to make sure the entire image is visible */
             opacity: 0.7;
             filter: brightness(100%);
-            transform: translate(-50%, -50%) translateZ(-1px); /* Centering and initial parallax transform */
+            /* Centering and initial parallax transform */
+            transform: translate(-50%, -50%) translateZ(-1px); 
         }
         
         /* Text glow effect for headings */
@@ -105,14 +106,14 @@
             transition: transform 0.3s ease-in-out;
         }
         
-        /* Animation for a subtle spin effect */
-        .animated-spin {
-            animation: spin 6s linear infinite;
+        /* Animation for a subtle spin effect that runs once */
+        .animated-spin-once {
+            animation: spin-once 2s forwards; /* 'forwards' keeps the final state */
         }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes spin-once {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
     </style>
 </head>
@@ -135,7 +136,7 @@
         
     <!-- Introduction Section -->
     <section id="intro" class="section">
-        <img src="bg.jpg" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
+        <img src="bg.jpg" alt="A glowing abstract quantum ring" class="intro-bg-img animated-spin-once" id="intro-bg-img">
         <div class="parallax-layer base flex flex-col items-center">
             <h1 class="text-6xl md:text-8xl font-bold mb-4 tracking-tighter text-glow">Quantum Computing</h1>
             <h2 class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter text-center text-glow">The Quantum Leap</h2>
@@ -218,18 +219,25 @@
 
     <!-- JavaScript for Parallax Effect -->
     <script>
-        // Get the element for the parallax image
+        // Get the body and the element for the parallax image
+        const body = document.body;
         const introBgImg = document.getElementById('intro-bg-img');
         
-        // Listen for scroll events on the window
-        window.addEventListener('scroll', () => {
-            // Get the current vertical scroll position
-            const scrollPos = window.pageYOffset;
+        // Listen for the end of the spin animation
+        introBgImg.addEventListener('animationend', () => {
+            // Re-enable scrolling on the body
+            body.style.overflowY = 'scroll';
+            
+            // Add the scroll event listener for the parallax effect
+            window.addEventListener('scroll', () => {
+                // Get the current vertical scroll position
+                const scrollPos = window.pageYOffset;
 
-            // Apply a transform to the background image
-            // It moves slower and rotates on the Y-axis for a 3D effect
-            introBgImg.style.transform = `translate(-50%, -50%) translateZ(-1px) translateY(${scrollPos * 0.5}px) rotateY(${scrollPos * 0.1}deg)`;
-        });
+                // Apply a transform to the background image
+                // It moves slower and rotates on the Y-axis for a 3D effect
+                introBgImg.style.transform = `translate(-50%, -50%) translateZ(-1px) translateY(${scrollPos * 0.5}px) rotateY(${scrollPos * 0.1}deg)`;
+            });
+        }, { once: true }); // The { once: true } option makes sure this listener is removed after it runs once
     </script>
 </body>
 </html>
