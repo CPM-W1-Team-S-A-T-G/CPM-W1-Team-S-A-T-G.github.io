@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -171,10 +171,10 @@
     <section id="intro" class="section">
         <!-- The 'animated-spin-once' class has been removed as the rotation is now scroll-driven -->
         <!-- Using a placeholder image for the background image to ensure it renders correctly -->
-        <img src="bg.jpg" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
+        <img src="https://placehold.co/400x400/2a2a2a/ffffff?text=Quantum+Core" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
         <div class="parallax-layer base flex flex-col items-center">
             <h1 class="text-6xl md:text-8xl font-bold mb-4 tracking-tighter text-glow">Quantum Computing</h1>
-            <h2 class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter text-center text-glow">Team S.A.T.G</h2>
+            <h2 class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter text-center text-glow">The Quantum Leap</h2>
             <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl text-center">Unlocking the next frontier of computation with the power of the subatomic world.</p>
             <a href="#history" class="bg-white text-black px-8 py-3 rounded-full font-bold shadow-lg hover:bg-gray-300 transition-colors duration-300">Explore</a>
         </div>
@@ -188,7 +188,7 @@
     
     <!-- Quantum History Section with multiple horizontal pages -->
     <!-- This wrapper provides the vertical scroll space -->
-    <section id="history-wrapper">
+ <section id="history-wrapper">
         <section id="history">
             <!-- This container handles the horizontal scrolling and snapping -->
             <div class="history-container">
@@ -247,7 +247,7 @@
             <div class="text-center md:text-left md:w-1/2">
                 <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Core Principles</h2>
                 <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
-                    Quantum computing is built on three pillars: superposition, **entanglement, and **quantum tunneling. Superposition allows a quantum bit (qubit) to be in multiple states simultaneously. Entanglement links the states of multiple qubits, regardless of distance, leading to massive parallelism.
+                    Quantum computing is built on three pillars: *superposition, **entanglement, and **quantum tunneling*. Superposition allows a quantum bit (qubit) to be in multiple states simultaneously. Entanglement links the states of multiple qubits, regardless of distance, leading to massive parallelism.
                 </p>
             </div>
             <div class="w-full md:w-1/2 flex justify-center">
@@ -265,7 +265,7 @@
             <div class="text-center md:text-left md:w-1/2">
                 <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Key Algorithms</h2>
                 <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
-                    Two of the most famous quantum algorithms are Shor's algorithm and Grover's algorithm. Shor's algorithm can find the prime factors of a large number exponentially faster than classical computers, which poses a threat to current encryption methods. Grover's algorithm can search an unstructured database much faster than its classical counterparts.
+                    Two of the most famous quantum algorithms are *Shor's algorithm* and *Grover's algorithm*. Shor's algorithm can find the prime factors of a large number exponentially faster than classical computers, which poses a threat to current encryption methods. Grover's algorithm can search an unstructured database much faster than its classical counterparts.
                 </p>
             </div>
         </div>
@@ -276,7 +276,7 @@
         <div class="max-w-4xl text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Real-World Applications</h2>
             <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
-                The potential of quantum computing is vast. It can revolutionize fields like drug discovery by simulating complex molecular interactions, optimize intricate financial models, and enable breakthroughs in **materials science by designing new, more efficient materials.
+                The potential of quantum computing is vast. It can revolutionize fields like *drug discovery* by simulating complex molecular interactions, optimize intricate *financial models, and enable breakthroughs in **materials science* by designing new, more efficient materials.
             </p>
             <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Quantum+Applications" alt="A placeholder image for quantum applications" class="rounded-xl shadow-lg animated-float w-full h-auto mx-auto max-w-lg">
         </div>
@@ -321,7 +321,7 @@
             const rotation = Math.min((scrollY / introHeight) * 360, 360);
             
             // Apply the rotation to the background image.
-            introBgImg.style.transform = translate(-50%, -50%) rotateY(${rotation}deg);
+            introBgImg.style.transform = `translate(-50%, -50%) rotateY(${rotation}deg)`;
             
             // --- History Section Horizontal Scroll Animation ---
             // Get the position of the history section wrapper.
@@ -341,7 +341,7 @@
                 const horizontalPosition = progressNormalized * totalHorizontalDistance;
                 
                 // Apply the horizontal translation. Use a negative value to slide the content to the left.
-                historyContainer.style.transform = translateX(-${horizontalPosition}px);
+                historyContainer.style.transform = `translateX(-${horizontalPosition}px)`;
             }
         });
     </script>
