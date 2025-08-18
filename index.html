@@ -1,349 +1,373 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Computing</title>
-    <!-- Tailwind CSS CDN for styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for Inter font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* Custom styles to handle the parallax effect and overflow issues */
-        body {
-            font-family: 'Inter', sans-serif;
-            /* Updated the background with a beautiful purple-blue-gold gradient */
-            background: linear-gradient(180deg, #0d0c1f 0%, #2a043c 30%, #4A007F 70%, #0d0c1f 100%);
-            color: #fff;
-            /* Removed overflow-y: hidden to allow natural vertical scrolling */
-            overflow-x: hidden;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Computing</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to handle the parallax effect and overflow issues */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Updated the background with a beautiful purple-blue-gold gradient */
+            background: linear-gradient(180deg, #0d0c1f 0%, #2a043c 30%, #4A007F 70%, #0d0c1f 100%);
+            color: #fff;
+            /* Removed overflow-y: hidden to allow natural vertical scrolling */
+            overflow-x: hidden;
+        }
 
-        .section {
-            height: 120vh; /* Increased height to add more space between sections */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden; /* Hide any overflow from the parallax image */
-        }
-        
-        /* Hero section specific styles */
-        #intro {
-            background-color: transparent;
-            text-align: center;
-            position: relative;
-            z-index: 10;
-        }
-        
-        /* The background for the hero section, now an img tag */
-        .intro-bg-img {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 40%; /* Made the width even smaller */
-            height: auto; /* Maintain aspect ratio */
-            z-index: -1;
-            object-fit: contain; /* Changed to contain to make sure the entire image is visible */
-            opacity: 0.7;
-            filter: brightness(100%);
-            /* Centering and initial parallax transform */
-            transform: translate(-50%, -50%) translateZ(-1px); 
-        }
-        
-        /* Text glow effect for headings, with a golden hue */
-        .text-glow {
-            text-shadow: 0 0 10px #FFD700;
-        }
+        .section {
+            height: 120vh; /* Increased height to add more space between sections */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden; /* Hide any overflow from the parallax image */
+        }
+        
+        /* Hero section specific styles */
+        #intro {
+            background-color: transparent;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* The background for the hero section, now an img tag */
+        .intro-bg-img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40%; /* Made the width even smaller */
+            height: auto; /* Maintain aspect ratio */
+            z-index: -1;
+            object-fit: contain; /* Changed to contain to make sure the entire image is visible */
+            opacity: 0.7;
+            filter: brightness(100%);
+            /* Centering and initial parallax transform */
+            transform: translate(-50%, -50%) translateZ(-1px); 
+        }
+        
+        /* Text glow effect for headings, with a golden hue */
+        .text-glow {
+            text-shadow: 0 0 10px #FFD700;
+        }
 
-        /* Scroll indicator animation */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 3rem;
-            animation: bounce 1s infinite;
-        }
+        /* Scroll indicator animation */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            animation: bounce 1s infinite;
+        }
 
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-        
-        /* --- Image Animations --- */
-        
-        /* Animation for a subtle pulse effect */
-        .animated-pulse {
-            animation: pulse 2s infinite;
-        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        /* --- Image Animations --- */
+        
+        /* Animation for a subtle pulse effect */
+        .animated-pulse {
+            animation: pulse 2s infinite;
+        }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
 
-        /* Animation for a gentle floating effect */
-        .animated-float {
-            animation: float 3s ease-in-out infinite;
-        }
+        /* Animation for a gentle floating effect */
+        .animated-float {
+            animation: float 3s ease-in-out infinite;
+        }
 
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0); }
-        }
-        
-        /* Animation for a subtle scaling effect on hover */
-        .animated-scale-on-hover:hover {
-            transform: scale(1.05);
-            transition: transform 0.3s ease-in-out;
-        }
-        
-        /* The automatic spin-once animation has been removed as it is now controlled by scroll */
-        
-        /* Styles for the new horizontally scrolling history section */
-        #history-wrapper {
-            height: 300vh; /* This creates the vertical space for the horizontal scroll animation */
-            position: relative;
-        }
-        
-        #history {
-            height: 100vh;
-            width: 100%;
-            position: sticky; /* Keeps the section in place while scrolling through it */
-            top: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-            overflow: hidden;
-        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        
+        /* Animation for a subtle scaling effect on hover */
+        .animated-scale-on-hover:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        /* The automatic spin-once animation has been removed as it is now controlled by scroll */
+        
+        /* Styles for the new horizontally scrolling history section */
+        #history-wrapper, #principles-wrapper {
+            height: 300vh; /* This creates the vertical space for the horizontal scroll animation */
+            position: relative;
+        }
+        
+        #history, #principles {
+            height: 100vh;
+            width: 100%;
+            position: sticky; /* Keeps the section in place while scrolling through it */
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            overflow: hidden;
+        }
 
-        /* This is the container that will be scrolled horizontally */
-        .history-container {
-            display: flex;
-            flex-direction: row;
-            width: 300%; /* A large width to accommodate all "pages" */
-            height: 100%;
-            /* Added a transition for a smoother slide effect */
-            transition: transform 0.1s ease-out;
-            transform: translateX(0); /* Initial state */
-        }
-        
-        /* Styles for each individual history "page" or article */
-        .history-page {
-            width: 100vw; /* Each page takes up the full viewport width */
-            height: 100vh;
-            flex-shrink: 0; /* Prevents items from shrinking */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            text-align: center;
-        }
-    </style>
+        /* This is the container that will be scrolled horizontally */
+        .history-container, .principles-container {
+            display: flex;
+            flex-direction: row;
+            width: 300%; /* A large width to accommodate all "pages" */
+            height: 100%;
+            /* Added a transition for a smoother slide effect */
+            transition: transform 0.1s ease-out;
+            transform: translateX(0); /* Initial state */
+        }
+        
+        /* Styles for each individual history "page" or article */
+        .history-page, .principles-page {
+            width: 100vw; /* Each page takes up the full viewport width */
+            height: 100vh;
+            flex-shrink: 0; /* Prevents items from shrinking */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+    </style>
 </head>
 <body class="bg-black text-white">
 
-    <!-- Fixed Header Navigation -->
-    <header class="fixed top-0 left-0 w-full z-50 bg-black/50 backdrop-blur-lg rounded-b-xl px-8 py-4 transition-all duration-300">
-        <nav class="container mx-auto flex justify-between items-center">
-            <a href="#intro" class="text-2xl font-bold text-white tracking-widest">Quantum</a>
-            <div class="space-x-8 hidden md:flex">
-                <a href="#history" class="hover:text-gray-400 transition-colors duration-300">History</a>
-                <a href="#principles" class="hover:text-gray-400 transition-colors duration-300">Principles</a>
-                <a href="#algorithms" class="hover:text-gray-400 transition-colors duration-300">Algorithms</a>
-            </div>
-            <a href="#" class="bg-white text-black px-6 py-2 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-300 hidden md:block">Get Started</a>
-        </nav>
-    </header>
+        <header class="fixed top-0 left-0 w-full z-50 bg-black/50 backdrop-blur-lg rounded-b-xl px-8 py-4 transition-all duration-300">
+        <nav class="container mx-auto flex justify-between items-center">
+            <a href="#intro" class="text-2xl font-bold text-white tracking-widest">Quantum</a>
+            <div class="space-x-8 hidden md:flex">
+                <a href="#history-wrapper" class="hover:text-gray-400 transition-colors duration-300">History</a>
+                <a href="#principles-wrapper" class="hover:text-gray-400 transition-colors duration-300">Principles</a>
+                <a href="#algorithms" class="hover:text-gray-400 transition-colors duration-300">Algorithms</a>
+            </div>
+            <a href="#" class="bg-white text-black px-6 py-2 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-300 hidden md:block">Get Started</a>
+        </nav>
+    </header>
 
-    <!-- The body itself will handle the scroll, no need for a parallax container div -->
-        
-    <!-- Introduction Section -->
-    <section id="intro" class="section">
-        <!-- The 'animated-spin-once' class has been removed as the rotation is now scroll-driven -->
-        <!-- Using a placeholder image for the background image to ensure it renders correctly -->
-        <img src="bg.jpg" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
-        <div class="parallax-layer base flex flex-col items-center">
-            <h1 class="text-6xl md:text-8xl font-bold mb-4 tracking-tighter text-glow">Quantum Computing</h1>
-            <h2 class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter text-center text-glow">Team S.A.T.G</h2>
-            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl text-center">Unlocking the next frontier of computation with the power of the subatomic world.</p>
-            <a href="#history" class="bg-white text-black px-8 py-3 rounded-full font-bold shadow-lg hover:bg-gray-300 transition-colors duration-300">Explore</a>
-        </div>
-        <!-- Scroll down indicator -->
-        <div class="scroll-indicator absolute bottom-12">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-        </div>
-    </section>
-    
-    <!-- Quantum History Section with multiple horizontal pages -->
-    <!-- This wrapper provides the vertical scroll space -->
-    <section id="history-wrapper">
-        <section id="history">
-            <!-- This container handles the horizontal scrolling and snapping -->
-            <div class="history-container">
-                <!-- First Page of History -->
-                <div class="history-page">
-                    <div class="max-w-4xl">
-                        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">A Brief History</h2>
-                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                    </div>
-                </div>
-                <!-- Second Page of History -->
-                <div class="history-page">
-                    <div class="max-w-4xl">
-                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">The Quantum Leap</h3>
-                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                            Quantum theory, born in the 1920s, introduced the concept of wave-particle duality, which became the basis for digital computers. These machines replaced human computers, who were previously tasked with complex, tedious calculations. This shift highlights how foundational scientific discoveries can lead to major societal transformations.
-                        </p>
-                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=David+Deutsch" alt="A placeholder image of David Deutsch" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
-                    </div>
-                </div>
-                <!-- Third Page of History -->
-                <div class="history-page">
-                    <div class="max-w-4xl">
-                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">From Bits to Breakthroughs</h3>
-                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                            Quantum computing began by replacing bits with qubits, leading to the creation of the first theoretical quantum computer in 1980. The field gained global attention with Shor's algorithm, which demonstrated the power of quantum computing by solving complex encryption problems.
-                        </p>
-                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Peter+Shor" alt="A placeholder image of Peter Shor" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
-                    </div>
-                </div>
-                <!-- Fourth Page of History -->
-              <div class="history-page">
-                    <div class="max-w-4xl">
-                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Quantum Supremacy Claim</h3>
-                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                            In 2019, Google AI and NASA claimed to have achieved quantum supremacy using a 54-qubit machine, performing a calculation that no traditional computer could. The claim's validity, however, is still under review.
-                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=David+Deutsch" alt="A placeholder image of David Deutsch" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
-                    </div>
-                </div>
-                <!-- Fifth Page of History -->
-              <div class="history-page">
-                    <div class="max-w-4xl">
-                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Harvard's Quantum Leap</h3>
-                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                            In December 2023, scientists from Harvard University successfully created "quantum circuits" that correct errors more efficiently than alternative methods, which may remove a major obstacle to practical quantum computers.
-                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=David+Deutsch" alt="A placeholder image of David Deutsch" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
-                    </div>
-                </div>              
-            </div>
-        </section>
-    </section>
+            
+        <section id="intro" class="section">
+                        <img src="bg.jpg" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
+        <div class="parallax-layer base flex flex-col items-center">
+            <h1 class="text-6xl md:text-8xl font-bold mb-4 tracking-tighter text-glow">Quantum Computing</h1>
+            <h2 class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter text-center text-glow">Team S.A.T.G</h2>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl text-center">Unlocking the next frontier of computation with the power of the subatomic world.</p>
+            <a href="#history-wrapper" class="bg-white text-black px-8 py-3 rounded-full font-bold shadow-lg hover:bg-gray-300 transition-colors duration-300">Explore</a>
+        </div>
+                <div class="scroll-indicator absolute bottom-12">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+        </div>
+    </section>
+    
+            <section id="history-wrapper">
+        <section id="history">
+                        <div class="history-container">
+                                <div class="history-page">
+                    <div class="max-w-4xl">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">A Brief History</h2>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                    </div>
+                </div>
+                                <div class="history-page">
+                    <div class="max-w-4xl">
+                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">The Quantum Leap</h3>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                            Quantum theory, born in the 1920s, introduced the concept of wave-particle duality, which became the basis for digital computers. These machines replaced human computers, who were previously tasked with complex, tedious calculations. This shift highlights how foundational scientific discoveries can lead to major societal transformations.
+                        </p>
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=David+Deutsch" alt="A placeholder image of David Deutsch" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                    </div>
+                </div>
+                                <div class="history-page">
+                    <div class="max-w-4xl">
+                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">From Bits to Breakthroughs</h3>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                            Quantum computing began by replacing bits with qubits, leading to the creation of the first theoretical quantum computer in 1980. The field gained global attention with Shor's algorithm, which demonstrated the power of quantum computing by solving complex encryption problems.
+                        </p>
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Peter+Shor" alt="A placeholder image of Peter Shor" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                    </div>
+                </div>
+                              <div class="history-page">
+                    <div class="max-w-4xl">
+                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Quantum Supremacy Claim</h3>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                            In 2019, Google AI and NASA claimed to have achieved quantum supremacy using a 54-qubit machine, performing a calculation that no traditional computer could. The claim's validity, however, is still under review.
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=David+Deutsch" alt="A placeholder image of David Deutsch" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                    </div>
+                </div>
+                              <div class="history-page">
+                    <div class="max-w-4xl">
+                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Harvard's Quantum Leap</h3>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                            In December 2023, scientists from Harvard University successfully created "quantum circuits" that correct errors more efficiently than alternative methods, which may remove a major obstacle to practical quantum computers.
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=David+Deutsch" alt="A placeholder image of David Deutsch" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                    </div>
+                </div>              
+            </div>
+        </section>
+    </section>
+    
+        <section id="principles-wrapper">
+        <section id="principles">
+            <div class="principles-container">
+                                <div class="principles-page">
+                    <div class="max-w-4xl flex flex-col md:flex-row items-center gap-8">
+                        <div class="text-center md:text-left md:w-1/2">
+                            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Core Principles</h2>
+                            <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+                                Quantum computing is built on three pillars: **superposition**, **entanglement**, and **quantum tunneling**. Superposition allows a quantum bit (qubit) to be in multiple states simultaneously. Entanglement links the states of multiple qubits, regardless of distance, leading to massive parallelism.
+                            </p>
+                        </div>
+                        <div class="w-full md:w-1/2 flex justify-center">
+                            <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Qubit+%7C+Superposition" alt="Abstract representation of a qubit" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto">
+                        </div>
+                    </div>
+                </div>
+                                <div class="principles-page">
+                    <div class="max-w-4xl flex flex-col md:flex-row items-center gap-8">
+                        <div class="w-full md:w-1/2 flex justify-center">
+                            <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Superposition" alt="Diagram showing a qubit in a superposition of 0 and 1" class="rounded-xl shadow-lg animated-float w-full max-w-sm h-auto">
+                        </div>
+                        <div class="text-center md:text-left md:w-1/2">
+                            <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Superposition</h3>
+                            <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+                                Unlike a classical bit, which is either a **0** or a **1**, a qubit can be both at the same time. This state is called **superposition**. It can be thought of as a spinning coin that is simultaneously heads and tails until it's measured. This allows a quantum computer to perform many calculations at once, offering immense processing power.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                                <div class="principles-page">
+                    <div class="max-w-4xl flex flex-col md:flex-row items-center gap-8">
+                        <div class="text-center md:text-left md:w-1/2">
+                            <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Entanglement</h3>
+                            <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+                                **Entanglement** describes a unique connection between two or more qubits. When entangled, their fates are intertwined. The state of one qubit is instantly correlated with the state of the other, no matter the physical distance between them. This allows for complex computational states that are impossible with classical computers.
+                            </p>
+                        </div>
+                        <div class="w-full md:w-1/2 flex justify-center">
+                            <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Entangled+Qubits" alt="Diagram showing two entangled qubits" class="rounded-xl shadow-lg animated-scale-on-hover w-full max-w-sm h-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+        <section id="algorithms" class="section">
+        <div class="max-w-6xl flex flex-col-reverse md:flex-row items-center gap-8">
+            <div class="w-full md:w-1/2 flex justify-center">
+                <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Quantum+Algorithms" alt="Abstract representation of machine learning algorithms" class="rounded-xl shadow-lg animated-spin w-full max-w-sm h-auto">
+            </div>
+            <div class="text-center md:text-left md:w-1/2">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Key Algorithms</h2>
+                <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+                    Two of the most famous quantum algorithms are *Shor's algorithm* and *Grover's algorithm*. Shor's algorithm can find the prime factors of a large number exponentially faster than classical computers, which poses a threat to current encryption methods. Grover's algorithm can search an unstructured database much faster than its classical counterparts.
+                </p>
+            </div>
+        </div>
+    </section>
 
-    <!-- Quantum Principles Section with Image and Animation -->
-    <section id="principles" class="section">
-        <div class="max-w-4xl flex flex-col md:flex-row items-center gap-8">
-            <div class="text-center md:text-left md:w-1/2">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Core Principles</h2>
-                <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
-                    Quantum computing is built on three pillars: *superposition, **entanglement, and **quantum tunneling*. Superposition allows a quantum bit (qubit) to be in multiple states simultaneously. Entanglement links the states of multiple qubits, regardless of distance, leading to massive parallelism.
-                </p>
-            </div>
-            <div class="w-full md:w-1/2 flex justify-center">
-                <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Qubit+%7C+Superposition" alt="Abstract representation of a qubit" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto">
-            </div>
-        </div>
-    </section>
-    
-    <!-- Quantum Algorithms Section with Image and Animation -->
-    <section id="algorithms" class="section">
-        <div class="max-w-6xl flex flex-col-reverse md:flex-row items-center gap-8">
-            <div class="w-full md:w-1/2 flex justify-center">
-                <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Quantum+Algorithms" alt="Abstract representation of machine learning algorithms" class="rounded-xl shadow-lg animated-spin w-full max-w-sm h-auto">
-            </div>
-            <div class="text-center md:text-left md:w-1/2">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Key Algorithms</h2>
-                <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
-                    Two of the most famous quantum algorithms are *Shor's algorithm* and *Grover's algorithm*. Shor's algorithm can find the prime factors of a large number exponentially faster than classical computers, which poses a threat to current encryption methods. Grover's algorithm can search an unstructured database much faster than its classical counterparts.
-                </p>
-            </div>
-        </div>
-    </section>
+        <section id="applications" class="section">
+        <div class="max-w-4xl text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Real-World Applications</h2>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+                The potential of quantum computing is vast. It can revolutionize fields like *drug discovery* by simulating complex molecular interactions, optimize intricate *financial models, and enable breakthroughs in **materials science* by designing new, more efficient materials.
+            </p>
+            <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Quantum+Applications" alt="A placeholder image for quantum applications" class="rounded-xl shadow-lg animated-float w-full h-auto mx-auto max-w-lg">
+        </div>
+    </section>
 
-    <!-- Applications Section with Image and Animation -->
-    <section id="applications" class="section">
-        <div class="max-w-4xl text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Real-World Applications</h2>
-            <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
-                The potential of quantum computing is vast. It can revolutionize fields like *drug discovery* by simulating complex molecular interactions, optimize intricate *financial models, and enable breakthroughs in **materials science* by designing new, more efficient materials.
-            </p>
-            <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Quantum+Applications" alt="A placeholder image for quantum applications" class="rounded-xl shadow-lg animated-float w-full h-auto mx-auto max-w-lg">
-        </div>
-    </section>
+        <section id="contact" class="section">
+        <div class="max-w-2xl w-full text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Contact Us</h2>
+            <p class="text-lg text-gray-300 mb-8">
+                Get in touch to learn more about quantum computing or explore potential collaborations.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
+                <a href="mailto:contact@quantum.com" class="bg-[#FFD700] text-black px-8 py-3 rounded-full font-bold hover:bg-gray-300 transition-colors duration-300">Email Us</a>
+                <a href="#" class="bg-[#FFD700] text-black px-8 py-3 rounded-full font-bold hover:bg-gray-300 transition-colors duration-300">LinkedIn</a>
+            </div>
+        </div>
+    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="max-w-2xl w-full text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Contact Us</h2>
-            <p class="text-lg text-gray-300 mb-8">
-                Get in touch to learn more about quantum computing or explore potential collaborations.
-            </p>
-            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
-                <a href="mailto:contact@quantum.com" class="bg-[#FFD700] text-black px-8 py-3 rounded-full font-bold hover:bg-gray-300 transition-colors duration-300">Email Us</a>
-                <a href="#" class="bg-[#FFD700] text-black px-8 py-3 rounded-full font-bold hover:bg-gray-300 transition-colors duration-300">LinkedIn</a>
-            </div>
-        </div>
-    </section>
+        <script>
+        // Get the body and the element for the parallax image
+        const body = document.body;
+        const introBgImg = document.getElementById('intro-bg-img');
+        const historyContainer = document.querySelector('.history-container');
+        const historyWrapper = document.getElementById('history-wrapper');
+        const principlesContainer = document.querySelector('.principles-container');
+        const principlesWrapper = document.getElementById('principles-wrapper');
 
-    <!-- JavaScript for Scroll-Driven Animation -->
-    <script>
-        // Get the body and the element for the parallax image
-        const body = document.body;
-        const introBgImg = document.getElementById('intro-bg-img');
-        const historyContainer = document.querySelector('.history-container');
-        const historyWrapper = document.getElementById('history-wrapper');
+        // This function will automatically scroll the page to the top on load.
+        window.onload = function() {
+            window.scrollTo(0, 0);
+        };
+        
+        // This single event listener handles all scroll-based animations.
+        window.addEventListener('scroll', () => {
+            // Get the current vertical scroll position.
+            const scrollY = window.scrollY;
+            
+            // --- Intro Section Animation ---
+            // Get the height of the intro section to base the rotation on.
+            const introHeight = document.getElementById('intro').offsetHeight;
+            // Calculate the rotation angle, clamping it between 0 and 360 degrees.
+            const rotation = Math.min((scrollY / introHeight) * 360, 360);
+            
+            // Apply the rotation to the background image.
+            introBgImg.style.transform = `translate(-50%, -50%) rotateY(${rotation}deg)`;
+            
+            // --- History Section Horizontal Scroll Animation ---
+            // Get the position of the history section wrapper.
+            const historyTop = historyWrapper.offsetTop;
+            // Get the total horizontal distance to scroll, which is the total width of all pages minus one viewport width.
+            const totalHorizontalDistanceHistory = (historyContainer.children.length - 1) * window.innerWidth;
+            
+            // Check if the user is scrolling within the history section's vertical space.
+            if (scrollY >= historyTop && scrollY <= historyTop + historyWrapper.offsetHeight) {
+                // Calculate the scroll progress within this section, from 0 to historyWrapper.offsetHeight.
+                const scrollProgress = scrollY - historyTop;
+                
+                // Calculate a normalized progress value from 0 to 1.
+                const progressNormalized = scrollProgress / historyWrapper.offsetHeight;
+                
+                // Calculate the horizontal position based on the normalized progress.
+                const horizontalPosition = progressNormalized * totalHorizontalDistanceHistory;
+                
+                // Apply the horizontal translation. Use a negative value to slide the content to the left.
+                historyContainer.style.transform = `translateX(-${horizontalPosition}px)`;
+            }
+            
+            // --- Principles Section Horizontal Scroll Animation ---
+            const principlesTop = principlesWrapper.offsetTop;
+            const totalHorizontalDistancePrinciples = (principlesContainer.children.length - 1) * window.innerWidth;
 
-        // This function will automatically scroll the page to the top on load.
-        window.onload = function() {
-            window.scrollTo(0, 0);
-        };
-        
-        // This single event listener handles all scroll-based animations.
-        window.addEventListener('scroll', () => {
-            // Get the current vertical scroll position.
-            const scrollY = window.scrollY;
-            
-            // --- Intro Section Animation ---
-            // Get the height of the intro section to base the rotation on.
-            const introHeight = document.getElementById('intro').offsetHeight;
-            // Calculate the rotation angle, clamping it between 0 and 360 degrees.
-            const rotation = Math.min((scrollY / introHeight) * 360, 360);
-            
-            // Apply the rotation to the background image.
-            introBgImg.style.transform = `translate(-50%, -50%) rotateY(${rotation}deg)`;
-            
-            // --- History Section Horizontal Scroll Animation ---
-            // Get the position of the history section wrapper.
-            const historyTop = historyWrapper.offsetTop;
-            // Get the total horizontal distance to scroll, which is the total width of all pages minus one viewport width.
-            const totalHorizontalDistance = (historyContainer.children.length - 1) * window.innerWidth;
-            
-            // Check if the user is scrolling within the history section's vertical space.
-            if (scrollY >= historyTop && scrollY <= historyTop + historyWrapper.offsetHeight) {
-                // Calculate the scroll progress within this section, from 0 to historyWrapper.offsetHeight.
-                const scrollProgress = scrollY - historyTop;
-                
-                // Calculate a normalized progress value from 0 to 1.
-                const progressNormalized = scrollProgress / historyWrapper.offsetHeight;
-                
-                // Calculate the horizontal position based on the normalized progress.
-                const horizontalPosition = progressNormalized * totalHorizontalDistance;
-                
-                // Apply the horizontal translation. Use a negative value to slide the content to the left.
-                historyContainer.style.transform = `translateX(-${horizontalPosition}px)`;
-            }
-        });
-    </script>
+            if (scrollY >= principlesTop && scrollY <= principlesTop + principlesWrapper.offsetHeight) {
+                const scrollProgress = scrollY - principlesTop;
+                const progressNormalized = scrollProgress / principlesWrapper.offsetHeight;
+                const horizontalPosition = progressNormalized * totalHorizontalDistancePrinciples;
+                principlesContainer.style.transform = `translateX(-${horizontalPosition}px)`;
+            }
+        });
+    </script>
 </body>
 </html>
