@@ -131,7 +131,8 @@
             flex-direction: row;
             width: 300%; /* A large width to accommodate all "pages" */
             height: 100%;
-            /* Removed overflow-x: scroll because we're using JS for the animation */
+            /* Added a transition for a smoother slide effect */
+            transition: transform 0.1s ease-out;
             transform: translateX(0); /* Initial state */
         }
         
@@ -310,16 +311,19 @@
             // --- History Section Horizontal Scroll Animation ---
             // Get the position of the history section wrapper.
             const historyTop = historyWrapper.offsetTop;
-            // Get the total horizontal width to scroll.
-            const totalHorizontalScroll = historyContainer.scrollWidth - historyContainer.offsetWidth;
+            // Get the total horizontal distance to scroll, which is the total width of all pages minus one viewport width.
+            const totalHorizontalDistance = (historyContainer.children.length - 1) * window.innerWidth;
             
             // Check if the user is scrolling within the history section's vertical space.
             if (scrollY >= historyTop && scrollY <= historyTop + historyWrapper.offsetHeight) {
-                // Calculate the scroll progress within this section.
+                // Calculate the scroll progress within this section, from 0 to historyWrapper.offsetHeight.
                 const scrollProgress = scrollY - historyTop;
                 
-                // Calculate the horizontal position based on the scroll progress.
-                const horizontalPosition = (scrollProgress / historyWrapper.offsetHeight) * totalHorizontalScroll;
+                // Calculate a normalized progress value from 0 to 1.
+                const progressNormalized = scrollProgress / historyWrapper.offsetHeight;
+                
+                // Calculate the horizontal position based on the normalized progress.
+                const horizontalPosition = progressNormalized * totalHorizontalDistance;
                 
                 // Apply the horizontal translation. Use a negative value to slide the content to the left.
                 historyContainer.style.transform = `translateX(-${horizontalPosition}px)`;
