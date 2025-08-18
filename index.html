@@ -14,7 +14,8 @@
         /* Custom styles to handle the parallax effect and overflow issues */
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(180deg, #1A0033 0%, #08081a 100%);
+            /* Updated the background with a beautiful purple-blue-gold gradient */
+            background: linear-gradient(180deg, #0d0c1f 0%, #2a043c 30%, #4A007F 70%, #0d0c1f 100%);
             color: #fff;
             overflow-x: hidden; /* Prevents horizontal scrollbar from the parallax effect */
             overflow-y: hidden; /* Initially disable vertical scrolling, to be enabled by JS */
@@ -53,9 +54,9 @@
             transform: translate(-50%, -50%) translateZ(-1px); 
         }
         
-        /* Text glow effect for headings */
+        /* Text glow effect for headings, with a golden hue */
         .text-glow {
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            text-shadow: 0 0 10px #FFD700;
         }
 
         /* Scroll indicator animation */
@@ -127,7 +128,8 @@
     <!-- Introduction Section -->
     <section id="intro" class="section">
         <!-- The 'animated-spin-once' class has been removed as the rotation is now scroll-driven -->
-        <img src="bg.jpg" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
+        <!-- Using an inline SVG for the background image for a dynamic effect without external URLs -->
+        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><defs><radialGradient id='g1' cx='50' cy='50' r='50'><stop offset='0%' style='stop-color:%23FFD700;stop-opacity:0.8' /><stop offset='100%' style='stop-color:transparent;stop-opacity:0' /></radialGradient></defs><circle cx='50' cy='50' r='50' fill='url(%23g1)' /></svg>" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
         <div class="parallax-layer base flex flex-col items-center">
             <h1 class="text-6xl md:text-8xl font-bold mb-4 tracking-tighter text-glow">Quantum Computing</h1>
             <h2 class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter text-center text-glow">The Quantum Leap</h2>
@@ -163,7 +165,7 @@
                 </p>
             </div>
             <div class="w-full md:w-1/2 flex justify-center">
-                <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Qubit+|+Superposition" alt="Abstract representation of a qubit" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto">
+                <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Qubit+%7C+Superposition" alt="Abstract representation of a qubit" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto">
             </div>
         </div>
     </section>
@@ -224,10 +226,10 @@
         const maxVirtualScroll = 1000;
 
         /**
-         * This function handles the mouse wheel event to control the animation.
-         * It will now be a persistent listener.
-         * @param {WheelEvent} event The wheel event object.
-         */
+          * This function handles the mouse wheel event to control the animation.
+          * It will now be a persistent listener.
+          * @param {WheelEvent} event The wheel event object.
+          */
         function handleWheel(event) {
             // Prevent the browser's default scrolling behavior only when the
             // virtual scroll is within the rotation zone.
