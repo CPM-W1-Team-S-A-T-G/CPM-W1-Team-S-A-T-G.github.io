@@ -43,13 +43,12 @@
         /* The background for the hero section, now an img tag */
         .intro-bg-img {
             position: absolute;
-            top: 50%; /* Adjusted top position to center the image */
-            left: 50%;
-            transform: translate(-50%, -50%); /* Centering both horizontally and vertically */
-            width: 50%; /* Made the width even smaller */
-            height: auto; /* Maintain aspect ratio */
+            top: 0; /* Changed back to top: 0 */
+            left: 0; /* Changed back to left: 0 */
+            width: 100%; /* Made the width normal again */
+            height: 100%; /* Made the height normal again */
             z-index: -1;
-            object-fit: contain; /* Changed to contain to make sure the entire image is visible */
+            object-fit: cover; /* Changed back to cover to fill the section */
             opacity: 0.7;
             filter: brightness(100%);
             /* Initial transform for the parallax effect is handled by JS */
@@ -229,7 +228,7 @@
 
             // Apply a transform to the background image
             // It moves slower and rotates on the Y-axis for a 3D effect
-            introBgImg.style.transform = `translateZ(-1px) translateY(${scrollPos * 0.5}px) rotateY(${scrollPos * 0.1}deg) scale(0.5)`;
+            introBgImg.style.transform = `translateZ(-1px) translateY(${scrollPos * 0.5}px) rotateY(${scrollPos * 0.1}deg)`;
         });
     </script>
 </body>
