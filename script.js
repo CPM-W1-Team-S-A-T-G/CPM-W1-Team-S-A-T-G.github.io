@@ -90,15 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Setup horizontal scrolling for each relevant section
-    // History → keep as is (scroll right)
-    setupHorizontalScroll('history-scroll-wrapper', 'history-slide', 'right');
-
-     // Algorithm → scroll left, bigger images
-    setupHorizontalScroll('algorithm-scroll-wrapper', 'algorithm-slide', 'left');
-
-     // Info → vertical scroll up instead of sideways
-    setupVerticalScroll('info-scroll-wrapper', 'info-slide', 'right');
-
+    setupHorizontalScroll('history-scroll-wrapper', 'history-slide');
+    setupHorizontalScroll('algorithm-scroll-wrapper', 'algorithm-slide');
+    setupHorizontalScroll('info-scroll-wrapper', 'info-slide');
 
     // Smooth scroll for navigation links using GSAP's ScrollToPlugin
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
