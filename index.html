@@ -17,6 +17,7 @@
             background: linear-gradient(180deg, #1A0033 0%, #08081a 100%);
             color: #fff;
             overflow-x: hidden; /* Prevents horizontal scrollbar from the parallax effect */
+            overflow-y: scroll; /* Ensure smooth scrolling for the body */
         }
 
         .section {
@@ -26,37 +27,11 @@
             justify-content: center;
             padding: 2rem;
             position: relative;
+            overflow: hidden; /* Hide any overflow from the parallax image */
         }
         
-        /* The main parallax container */
-        .parallax-container {
-            perspective: 1px; /* Required for the 3D parallax effect */
-            height: 100vh;
-            overflow-x: hidden;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        /* The parallax layer that moves at a different speed */
-        .parallax-layer {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            transform-style: preserve-3d;
-        }
+        /* The main parallax container is no longer needed, using individual sections */
         
-        /* The base layer, which is closer to the user */
-        .parallax-layer.base {
-            transform: translateZ(0);
-        }
-
-        /* The back layer, which moves slower */
-        .parallax-layer.back {
-            transform: translateZ(-1px);
-        }
-
         /* Hero section specific styles */
         #intro {
             background-color: transparent;
@@ -65,19 +40,18 @@
             z-index: 10;
         }
         
-        /* The background for the hero section */
-        #intro-bg {
-            background-image: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
-            background-size: cover;
-            background-position: center;
-            opacity: 0.4;
+        /* The background for the hero section, now an img tag */
+        .intro-bg-img {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
+            object-fit: cover;
+            opacity: 0.7;
             filter: brightness(100%);
+            transform: translateZ(-1px); /* Initial transform for the parallax effect */
         }
         
         /* Text glow effect for headings */
@@ -152,7 +126,6 @@
                 <a href="#history" class="hover:text-gray-400 transition-colors duration-300">History</a>
                 <a href="#principles" class="hover:text-gray-400 transition-colors duration-300">Principles</a>
                 <a href="#algorithms" class="hover:text-gray-400 transition-colors duration-300">Algorithms</a>
-                <a href="#applications" class="hover:text-gray-400 transition-colors duration-300">Applications</a>
             </div>
             <a href="#" class="bg-white text-black px-6 py-2 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-300 hidden md:block">Get Started</a>
         </nav>
@@ -163,108 +136,103 @@
         <h1 class="text-6xl md:text-8xl font-bold mb-4 tracking-tighter text-glow">Quantum Computing</h1>
     </div>
 
-    <!-- Parallax Sections -->
-    <div id="parallax-container" class="parallax-container">
+    <!-- The body itself will handle the scroll, no need for a parallax container div -->
         
-        <!-- Introduction Section -->
-        <section id="intro" class="section">
-            <div class="parallax-layer base flex flex-col items-center">
-                <h2 class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter text-center text-glow">The Quantum Leap</h2>
-                <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl text-center">Unlocking the next frontier of computation with the power of the subatomic world.</p>
-                <a href="#history" class="bg-white text-black px-8 py-3 rounded-full font-bold shadow-lg hover:bg-gray-300 transition-colors duration-300">Explore</a>
-            </div>
-            <!-- Parallax background layer with a subtle gold glow -->
-            <div id="intro-bg" class="parallax-layer back"></div>
-            <!-- Scroll down indicator -->
-            <div class="scroll-indicator absolute bottom-12">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
-            </div>
-        </section>
-        
-        <!-- Quantum History Section -->
-        <section id="history" class="section">
-            <div class="max-w-4xl text-center">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">A Brief History</h2>
-                <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                    The concept of a quantum computer was first proposed in the early 1980s by physicists like *Paul Benioff* and *Richard Feynman*. Feynman noted that simulating quantum systems was impossible on classical computers, suggesting a new type of computer based on quantum mechanics was needed. This laid the theoretical groundwork for the field we know today.
-                </p>
-                <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=History+of+Quantum+Computing" alt="A placeholder image depicting the history of quantum computing" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
-            </div>
-        </section>
+    <!-- Introduction Section -->
+    <section id="intro" class="section">
+        <img src="bg.jpg" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
+        <div class="parallax-layer base flex flex-col items-center">
+            <h2 class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter text-center text-glow">The Quantum Leap</h2>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl text-center">Unlocking the next frontier of computation with the power of the subatomic world.</p>
+            <a href="#history" class="bg-white text-black px-8 py-3 rounded-full font-bold shadow-lg hover:bg-gray-300 transition-colors duration-300">Explore</a>
+        </div>
+        <!-- Scroll down indicator -->
+        <div class="scroll-indicator absolute bottom-12">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+        </div>
+    </section>
+    
+    <!-- Quantum History Section -->
+    <section id="history" class="section">
+        <div class="max-w-4xl text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">A Brief History</h2>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                The concept of a quantum computer was first proposed in the early 1980s by physicists like *Paul Benioff* and *Richard Feynman*. Feynman noted that simulating quantum systems was impossible on classical computers, suggesting a new type of computer based on quantum mechanics was needed. This laid the theoretical groundwork for the field we know today.
+            </p>
+            <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=History+of+Quantum+Computing" alt="A placeholder image depicting the history of quantum computing" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+        </div>
+    </section>
 
-        <!-- Quantum Principles Section with Image and Animation -->
-        <section id="principles" class="section">
-            <div class="max-w-4xl flex flex-col md:flex-row items-center gap-8">
-                <div class="text-center md:text-left md:w-1/2">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Core Principles</h2>
-                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
-                        Quantum computing is built on three pillars: *superposition, **entanglement, and **quantum tunneling*. Superposition allows a quantum bit (qubit) to be in multiple states simultaneously. Entanglement links the states of multiple qubits, regardless of distance, leading to massive parallelism.
-                    </p>
-                </div>
-                <div class="w-full md:w-1/2 flex justify-center">
-                    <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Qubit+|+Superposition" alt="Abstract representation of a qubit" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto">
-                </div>
-            </div>
-        </section>
-        
-        <!-- Quantum Algorithms Section with Image and Animation -->
-        <section id="algorithms" class="section">
-            <div class="max-w-6xl flex flex-col-reverse md:flex-row items-center gap-8">
-                <div class="w-full md:w-1/2 flex justify-center">
-                    <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Quantum+Algorithms" alt="Abstract representation of machine learning algorithms" class="rounded-xl shadow-lg animated-spin w-full max-w-sm h-auto">
-                </div>
-                <div class="text-center md:text-left md:w-1/2">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Key Algorithms</h2>
-                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
-                        Two of the most famous quantum algorithms are *Shor's algorithm* and *Grover's algorithm*. Shor's algorithm can find the prime factors of a large number exponentially faster than classical computers, which poses a threat to current encryption methods. Grover's algorithm can search an unstructured database much faster than its classical counterparts.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Applications Section with Image and Animation -->
-        <section id="applications" class="section">
-            <div class="max-w-4xl text-center">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Real-World Applications</h2>
+    <!-- Quantum Principles Section with Image and Animation -->
+    <section id="principles" class="section">
+        <div class="max-w-4xl flex flex-col md:flex-row items-center gap-8">
+            <div class="text-center md:text-left md:w-1/2">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Core Principles</h2>
                 <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
-                    The potential of quantum computing is vast. It can revolutionize fields like *drug discovery* by simulating complex molecular interactions, optimize intricate *financial models, and enable breakthroughs in **materials science* by designing new, more efficient materials.
+                    Quantum computing is built on three pillars: *superposition, **entanglement, and **quantum tunneling*. Superposition allows a quantum bit (qubit) to be in multiple states simultaneously. Entanglement links the states of multiple qubits, regardless of distance, leading to massive parallelism.
                 </p>
-                <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Quantum+Applications" alt="A placeholder image for quantum applications" class="rounded-xl shadow-lg animated-float w-full h-auto mx-auto max-w-lg">
             </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section">
-            <div class="max-w-2xl w-full text-center">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Contact Us</h2>
-                <p class="text-lg text-gray-300 mb-8">
-                    Get in touch to learn more about quantum computing or explore potential collaborations.
+            <div class="w-full md:w-1/2 flex justify-center">
+                <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Qubit+|+Superposition" alt="Abstract representation of a qubit" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Quantum Algorithms Section with Image and Animation -->
+    <section id="algorithms" class="section">
+        <div class="max-w-6xl flex flex-col-reverse md:flex-row items-center gap-8">
+            <div class="w-full md:w-1/2 flex justify-center">
+                <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Quantum+Algorithms" alt="Abstract representation of machine learning algorithms" class="rounded-xl shadow-lg animated-spin w-full max-w-sm h-auto">
+            </div>
+            <div class="text-center md:text-left md:w-1/2">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Key Algorithms</h2>
+                <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+                    Two of the most famous quantum algorithms are *Shor's algorithm* and *Grover's algorithm*. Shor's algorithm can find the prime factors of a large number exponentially faster than classical computers, which poses a threat to current encryption methods. Grover's algorithm can search an unstructured database much faster than its classical counterparts.
                 </p>
-                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
-                    <a href="mailto:contact@quantum.com" class="bg-[#FFD700] text-black px-8 py-3 rounded-full font-bold hover:bg-gray-300 transition-colors duration-300">Email Us</a>
-                    <a href="#" class="bg-[#FFD700] text-black px-8 py-3 rounded-full font-bold hover:bg-gray-300 transition-colors duration-300">LinkedIn</a>
-                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </div>
+    <!-- Applications Section with Image and Animation -->
+    <section id="applications" class="section">
+        <div class="max-w-4xl text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Real-World Applications</h2>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+                The potential of quantum computing is vast. It can revolutionize fields like *drug discovery* by simulating complex molecular interactions, optimize intricate *financial models, and enable breakthroughs in **materials science* by designing new, more efficient materials.
+            </p>
+            <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Quantum+Applications" alt="A placeholder image for quantum applications" class="rounded-xl shadow-lg animated-float w-full h-auto mx-auto max-w-lg">
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="max-w-2xl w-full text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Contact Us</h2>
+            <p class="text-lg text-gray-300 mb-8">
+                Get in touch to learn more about quantum computing or explore potential collaborations.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
+                <a href="mailto:contact@quantum.com" class="bg-[#FFD700] text-black px-8 py-3 rounded-full font-bold hover:bg-gray-300 transition-colors duration-300">Email Us</a>
+                <a href="#" class="bg-[#FFD700] text-black px-8 py-3 rounded-full font-bold hover:bg-gray-300 transition-colors duration-300">LinkedIn</a>
+            </div>
+        </div>
+    </section>
 
     <!-- JavaScript for Parallax Effect -->
     <script>
-        // Get the elements for the parallax effect
-        const introBg = document.getElementById('intro-bg');
+        // Get the element for the parallax image
+        const introBgImg = document.getElementById('intro-bg-img');
         
-        // Listen for scroll events on the parallax container
-        const parallaxContainer = document.getElementById('parallax-container');
-        parallaxContainer.addEventListener('scroll', () => {
+        // Listen for scroll events on the window
+        window.addEventListener('scroll', () => {
             // Get the current vertical scroll position
-            const scrollPos = parallaxContainer.scrollTop;
+            const scrollPos = window.pageYOffset;
 
-            // Apply a transform to the background element
-            // The background moves at 50% speed, creating the parallax illusion
-            introBg.style.transform = `translateZ(-1px) translateY(${scrollPos * 0.5}px)`;
+            // Apply a transform to the background image
+            // It moves slower and rotates on the Y-axis for a 3D effect
+            introBgImg.style.transform = `translateZ(-1px) translateY(${scrollPos * 0.5}px) rotateY(${scrollPos * 0.1}deg)`;
         });
     </script>
 </body>
