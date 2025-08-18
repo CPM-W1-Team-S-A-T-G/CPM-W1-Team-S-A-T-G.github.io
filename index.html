@@ -43,10 +43,10 @@
         /* The background for the hero section, now an img tag */
         .intro-bg-img {
             position: absolute;
-            top: 20%; /* Adjusted top position to center the smaller image */
+            top: 50%; /* Adjusted top position to center the image */
             left: 50%;
-            transform: translate(-50%, -50%); /* Center the image */
-            width: 70%; /* Made the width smaller */
+            transform: translate(-50%, -50%); /* Centering both horizontally and vertically */
+            width: 50%; /* Made the width even smaller */
             height: auto; /* Maintain aspect ratio */
             z-index: -1;
             object-fit: contain; /* Changed to contain to make sure the entire image is visible */
@@ -229,7 +229,7 @@
 
             // Apply a transform to the background image
             // It moves slower and rotates on the Y-axis for a 3D effect
-            introBgImg.style.transform = `translateZ(-1px) translateY(${scrollPos * 0.5}px) rotateY(${scrollPos * 0.1}deg) scale(0.7)`;
+            introBgImg.style.transform = `translateZ(-1px) translateY(${scrollPos * 0.5}px) rotateY(${scrollPos * 0.1}deg) scale(0.5)`;
         });
     </script>
 </body>
