@@ -221,8 +221,6 @@
         let virtualScroll = 0;
         
         // The maximum virtual scroll value for a full 360-degree rotation.
-        // This value is set arbitrarily to require a certain amount of scrolling
-        // before the full page is unlocked.
         const maxVirtualScroll = 1000;
 
         /**
@@ -237,15 +235,10 @@
                  event.preventDefault();
             }
             
-            // We now only increment the virtual scroll if the user is scrolling down.
+            // The virtual scroll should only increase, never decrease, to ensure a one-way animation.
+            // This prevents the anti-clockwise rotation.
             if (event.deltaY > 0) {
               virtualScroll += event.deltaY;
-            }
-
-            // Clamp the virtual scroll position to a minimum of 0.
-            // This prevents the rotation from going into negative degrees.
-            if (virtualScroll < 0) {
-                virtualScroll = 0;
             }
 
             // Calculate the rotation angle based on the virtual scroll position.
@@ -271,10 +264,15 @@
                 body.style.overflowY = 'hidden';
             }
         }
-        
+
         // Add the initial wheel event listener to the window to start the process.
         // The `{ passive: false }` is crucial for `event.preventDefault()` to work.
         window.addEventListener('wheel', handleWheel, { passive: false });
+
+        // This function will automatically scroll the page to the top on load.
+        window.onload = function() {
+            window.scrollTo(0, 0);
+        };
     </script>
 </body>
 </html>
