@@ -199,7 +199,7 @@ main {
     border-radius: 0;
     opacity: 0; /* Initial state for GSAP animation */
     transform: scale(0.8); /* Initial state for GSAP animation */
-    flex: 1; /* Allow image to take up available space */
+    flex: 0; /* Allow image to take up available space */
     min-width: 250px; /* Prevent image from becoming too small */
 }
 
