@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quantum Computing</title>
-    <!-- Tailwind CSS CDN for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for Inter font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -187,12 +185,23 @@
             justify-content: center;
             backface-visibility: hidden; /* Hide the back side of the element to prevent flickering */
         }
-
+        
+        /* Position and rotate the individual pages to create the 3D stack effect */
+        .principles-page:nth-child(1) {
+            transform: rotateY(0deg) translateZ(200px); /* Front page */
+        }
+        
+        .principles-page:nth-child(2) {
+            transform: rotateY(120deg) translateZ(200px); /* Back page */
+        }
+        
+        .principles-page:nth-child(3) {
+            transform: rotateY(240deg) translateZ(200px); /* Back page */
+        }
     </style>
 </head>
 <body class="bg-black text-white">
 
-    <!-- Fixed Header Navigation -->
     <header class="fixed top-0 left-0 w-full z-50 bg-black/50 backdrop-blur-lg rounded-b-xl px-8 py-4 transition-all duration-300">
         <nav class="container mx-auto flex justify-between items-center">
             <a href="#intro" class="text-2xl font-bold text-white tracking-widest">Quantum</a>
@@ -205,12 +214,7 @@
         </nav>
     </header>
 
-    <!-- The body itself will handle the scroll, no need for a parallax container div -->
-        
-    <!-- Introduction Section -->
     <section id="intro" class="section">
-        <!-- The 'animated-spin-once' class has been removed as the rotation is now scroll-driven -->
-        <!-- Using a placeholder image for the background image to ensure it renders correctly -->
         <img src="bg.jpg" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
         <div class="parallax-layer base flex flex-col items-center">
             <h1 class="text-6xl md:text-8xl font-bold mb-4 tracking-tighter text-glow">Quantum Computing</h1>
@@ -218,7 +222,6 @@
             <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl text-center">Unlocking the next frontier of computation with the power of the subatomic world.</p>
             <a href="#history" class="bg-white text-black px-8 py-3 rounded-full font-bold shadow-lg hover:bg-gray-300 transition-colors duration-300">Explore</a>
         </div>
-        <!-- Scroll down indicator -->
         <div class="scroll-indicator absolute bottom-12">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
@@ -226,13 +229,9 @@
         </div>
     </section>
     
-    <!-- Quantum History Section with multiple horizontal pages -->
-    <!-- This wrapper provides the vertical scroll space -->
     <section id="history-wrapper">
         <section id="history">
-            <!-- This container handles the horizontal scrolling and snapping -->
             <div class="history-container">
-                <!-- First Page of History -->
                 <div class="history-page">
                     <div class="max-w-4xl">
                         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">A Brief History</h2>
@@ -242,7 +241,6 @@
                         <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Richard+Feynman" alt="A placeholder image of Richard Feynman" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
                 </div>
-                <!-- Second Page of History -->
                 <div class="history-page">
                     <div class="max-w-4xl">
                         <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">The First Theoretical Model</h3>
@@ -252,7 +250,6 @@
                         <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=David+Deutsch" alt="A placeholder image of David Deutsch" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
                 </div>
-                <!-- Third Page of History -->
                 <div class="history-page">
                     <div class="max-w-4xl">
                         <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">From Bits to Breakthroughs</h3>
@@ -266,12 +263,9 @@
         </section>
     </section>
 
-    <!-- Quantum Principles Section with 3D animation -->
     <section id="principles-wrapper">
         <section id="principles">
-            <!-- This container will be rotated on the Y-axis by the script -->
             <div class="principles-container">
-                <!-- Page 1: Superposition -->
                 <div class="principles-page">
                     <div class="max-w-4xl text-center">
                         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Superposition</h2>
@@ -282,7 +276,6 @@
                     </div>
                 </div>
 
-                <!-- Page 2: Entanglement -->
                 <div class="principles-page">
                     <div class="max-w-4xl text-center">
                         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Entanglement</h2>
@@ -293,7 +286,6 @@
                     </div>
                 </div>
 
-                <!-- Page 3: Quantum Tunneling -->
                 <div class="principles-page">
                     <div class="max-w-4xl text-center">
                         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Quantum Tunneling</h2>
@@ -307,7 +299,6 @@
         </section>
     </section>
     
-    <!-- Quantum Algorithms Section with Image and Animation -->
     <section id="algorithms" class="section">
         <div class="max-w-6xl flex flex-col-reverse md:flex-row items-center gap-8">
             <div class="w-full md:w-1/2 flex justify-center">
@@ -322,7 +313,6 @@
         </div>
     </section>
 
-    <!-- Applications Section with Image and Animation -->
     <section id="applications" class="section">
         <div class="max-w-4xl text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Real-World Applications</h2>
@@ -333,7 +323,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="section">
         <div class="max-w-2xl w-full text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Contact Us</h2>
@@ -347,7 +336,6 @@
         </div>
     </section>
 
-    <!-- JavaScript for Scroll-Driven Animation -->
     <script>
         // Get the body and the elements for the parallax and scroll animations
         const body = document.body;
@@ -409,10 +397,10 @@
                 // Normalize the progress from 0 to 1.
                 const progressNormalized = scrollProgress / (principlesWrapper.offsetHeight - window.innerHeight);
 
-                // Calculate the rotation angle for the 3 pages. We'll rotate a total of -240deg to show each page in turn.
-                // -80deg per page transition, which looks like a smooth 3D flip.
+                // Calculate the rotation angle for the 3 pages.
+                // We rotate from 0deg to -120deg to flip from page 1 to 2, then to -240deg for the last page.
                 const rotationAngle = Math.min(progressNormalized * -240, 0);
-
+                
                 // Apply the rotation to the principles container.
                 principlesContainer.style.transform = `rotateY(${rotationAngle}deg)`;
             }
