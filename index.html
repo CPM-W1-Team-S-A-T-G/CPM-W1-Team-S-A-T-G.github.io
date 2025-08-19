@@ -321,10 +321,11 @@
                         </p>
                         <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Harvard+Quantum+Circuits" alt="A placeholder image of quantum circuits" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
-                </div>             
+                </div>              
             </div>
         </section>
     </section>
+
 
     <section id="principles-wrapper">
         <section id="principles">
@@ -529,9 +530,8 @@
                 // Calculate the horizontal position. The `totalHorizontalDistance` is already a positive value.
                 const horizontalPosition = progressNormalized * totalAlgorithmsHorizontalDistance;
 
-                // Apply the horizontal translation. Use a negative value to slide the content to the left.
-                // The issue was here: it was previously applying a positive value, which hid the content.
-                algorithmsContainer.style.transform = `translateX(-${horizontalPosition}px)`;
+                // Apply the horizontal translation. Use a positive value to slide the content to the right.
+                algorithmsContainer.style.transform = `translateX(${horizontalPosition}px)`;
             }
         });
     </script>
