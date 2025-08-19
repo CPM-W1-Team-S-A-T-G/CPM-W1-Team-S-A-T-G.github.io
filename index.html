@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,8 +17,9 @@
             /* Updated the background with a beautiful purple-blue-gold gradient */
             background: linear-gradient(180deg, #0d0c1f 0%, #2a043c 30%, #4A007F 70%, #0d0c1f 100%);
             color: #fff;
-            /* Removed overflow-y: hidden to allow natural vertical scrolling */
             overflow-x: hidden;
+            /* Added perspective for the 3D rotation effect */
+            perspective: 1000px;
         }
 
         .section {
@@ -105,9 +106,7 @@
             transition: transform 0.3s ease-in-out;
         }
         
-        /* The automatic spin-once animation has been removed as it is now controlled by scroll */
-        
-        /* Styles for the new horizontally scrolling history section */
+        /* --- History Section Styles --- */
         #history-wrapper {
             height: 300vh; /* This creates the vertical space for the horizontal scroll animation */
             position: relative;
@@ -131,7 +130,6 @@
             flex-direction: row;
             width: 300%; /* A large width to accommodate all "pages" */
             height: 100%;
-            /* Added a transition for a smoother slide effect */
             transition: transform 0.1s ease-out;
             transform: translateX(0); /* Initial state */
         }
@@ -148,6 +146,48 @@
             padding: 2rem;
             text-align: center;
         }
+
+        /* --- Principles Section Styles (New) --- */
+        /* This wrapper provides the vertical scroll space for the 3D animation */
+        #principles-wrapper {
+            height: 300vh; /* 3 pages of content, each takes up 100vh of vertical scroll */
+            position: relative;
+        }
+
+        #principles {
+            height: 100vh;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        /* The container for the 3D-rotating pages */
+        .principles-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d; /* This is crucial for the 3D effect */
+            transition: transform 0.1s ease-out; /* Smooth transition for the rotation */
+        }
+
+        /* The individual pages for the 3D effect */
+        .principles-page {
+            position: absolute; /* Stack the pages on top of each other */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backface-visibility: hidden; /* Hide the back side of the element to prevent flickering */
+        }
+
     </style>
 </head>
 <body class="bg-black text-white">
@@ -171,7 +211,7 @@
     <section id="intro" class="section">
         <!-- The 'animated-spin-once' class has been removed as the rotation is now scroll-driven -->
         <!-- Using a placeholder image for the background image to ensure it renders correctly -->
-        <img src="bg.jpg" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
+        <img src="https://placehold.co/600x600/2a2a2a/ffffff?text=Quantum+Ring" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
         <div class="parallax-layer base flex flex-col items-center">
             <h1 class="text-6xl md:text-8xl font-bold mb-4 tracking-tighter text-glow">Quantum Computing</h1>
             <h2 class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter text-center text-glow">The Quantum Leap</h2>
@@ -188,7 +228,7 @@
     
     <!-- Quantum History Section with multiple horizontal pages -->
     <!-- This wrapper provides the vertical scroll space -->
- <section id="history-wrapper">
+    <section id="history-wrapper">
         <section id="history">
             <!-- This container handles the horizontal scrolling and snapping -->
             <div class="history-container">
@@ -197,14 +237,17 @@
                     <div class="max-w-4xl">
                         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">A Brief History</h2>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                            The foundations of quantum computing were laid in the early 1980s by visionaries who recognized the potential of using quantum mechanics to build a new type of computer.
+                        </p>
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Richard+Feynman" alt="A placeholder image of Richard Feynman" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
                 </div>
                 <!-- Second Page of History -->
                 <div class="history-page">
                     <div class="max-w-4xl">
-                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">The Quantum Leap</h3>
+                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">The First Theoretical Model</h3>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                            Quantum theory, born in the 1920s, introduced the concept of wave-particle duality, which became the basis for digital computers. These machines replaced human computers, who were previously tasked with complex, tedious calculations. This shift highlights how foundational scientific discoveries can lead to major societal transformations.
+                            In 1985, David Deutsch from Oxford University described the first universal quantum computer. His work demonstrated how a quantum computer could be more powerful than a classical one by leveraging quantum parallelism.
                         </p>
                         <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=David+Deutsch" alt="A placeholder image of David Deutsch" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
@@ -214,58 +257,66 @@
                     <div class="max-w-4xl">
                         <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">From Bits to Breakthroughs</h3>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                            Quantum computing began by replacing bits with qubits, leading to the creation of the first theoretical quantum computer in 1980. The field gained global attention with Shor's algorithm, which demonstrated the power of quantum computing by solving complex encryption problems.
+                            The field gained global attention with Shor's algorithm, which demonstrated the power of quantum computing by solving complex encryption problems.
                         </p>
                         <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Peter+Shor" alt="A placeholder image of Peter Shor" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
                 </div>
-                <!-- Fourth Page of History -->
-              <div class="history-page">
-                    <div class="max-w-4xl">
-                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Quantum Supremacy Claim</h3>
-                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                            In 2019, Google AI and NASA claimed to have achieved quantum supremacy using a 54-qubit machine, performing a calculation that no traditional computer could. The claim's validity, however, is still under review.
-                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=David+Deutsch" alt="A placeholder image of David Deutsch" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
-                    </div>
-                </div>
-                <!-- Fifth Page of History -->
-              <div class="history-page">
-                    <div class="max-w-4xl">
-                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Harvard's Quantum Leap</h3>
-                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                            In December 2023, scientists from Harvard University successfully created "quantum circuits" that correct errors more efficiently than alternative methods, which may remove a major obstacle to practical quantum computers.
-                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=David+Deutsch" alt="A placeholder image of David Deutsch" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
-                    </div>
-                </div>              
             </div>
         </section>
     </section>
 
-    <!-- Quantum Principles Section with Image and Animation -->
-    <section id="principles" class="section">
-        <div class="max-w-4xl flex flex-col md:flex-row items-center gap-8">
-            <div class="text-center md:text-left md:w-1/2">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Core Principles</h2>
-                <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
-                    Quantum computing is built on three pillars: *superposition, **entanglement, and **quantum tunneling*. Superposition allows a quantum bit (qubit) to be in multiple states simultaneously. Entanglement links the states of multiple qubits, regardless of distance, leading to massive parallelism.
-                </p>
+    <!-- Quantum Principles Section with 3D animation -->
+    <section id="principles-wrapper">
+        <section id="principles">
+            <!-- This container will be rotated on the Y-axis by the script -->
+            <div class="principles-container">
+                <!-- Page 1: Superposition -->
+                <div class="principles-page">
+                    <div class="max-w-4xl text-center">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Superposition</h2>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                            Unlike a classical bit which is either a 0 or a 1, a qubit can be in a **superposition** of both states at the same time. This is like a spinning coin that is both heads and tails until it's measured.
+                        </p>
+                        <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Superposition+of+States" alt="Abstract representation of a qubit in superposition" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto mx-auto">
+                    </div>
+                </div>
+
+                <!-- Page 2: Entanglement -->
+                <div class="principles-page">
+                    <div class="max-w-4xl text-center">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Entanglement</h2>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                            **Entanglement** is a phenomenon where two or more qubits are linked in such a way that the state of one instantly influences the state of the other, no matter the distance between them.
+                        </p>
+                        <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Entangled+Qubits" alt="Abstract representation of two entangled qubits" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto mx-auto">
+                    </div>
+                </div>
+
+                <!-- Page 3: Quantum Tunneling -->
+                <div class="principles-page">
+                    <div class="max-w-4xl text-center">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Quantum Tunneling</h2>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                            **Quantum tunneling** is the ability of a particle to pass through a barrier that it classically could not overcome. This principle allows quantum computers to solve optimization problems by finding the most efficient path.
+                        </p>
+                        <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Quantum+Tunneling" alt="Abstract representation of a particle tunneling" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto mx-auto">
+                    </div>
+                </div>
             </div>
-            <div class="w-full md:w-1/2 flex justify-center">
-                <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Qubit+%7C+Superposition" alt="Abstract representation of a qubit" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto">
-            </div>
-        </div>
+        </section>
     </section>
     
     <!-- Quantum Algorithms Section with Image and Animation -->
     <section id="algorithms" class="section">
         <div class="max-w-6xl flex flex-col-reverse md:flex-row items-center gap-8">
             <div class="w-full md:w-1/2 flex justify-center">
-                <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Quantum+Algorithms" alt="Abstract representation of machine learning algorithms" class="rounded-xl shadow-lg animated-spin w-full max-w-sm h-auto">
+                <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Quantum+Algorithms" alt="Abstract representation of machine learning algorithms" class="rounded-xl shadow-lg animated-float w-full max-w-sm h-auto">
             </div>
             <div class="text-center md:text-left md:w-1/2">
                 <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Key Algorithms</h2>
                 <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
-                    Two of the most famous quantum algorithms are *Shor's algorithm* and *Grover's algorithm*. Shor's algorithm can find the prime factors of a large number exponentially faster than classical computers, which poses a threat to current encryption methods. Grover's algorithm can search an unstructured database much faster than its classical counterparts.
+                    Two of the most famous quantum algorithms are **Shor's algorithm** and **Grover's algorithm**. Shor's algorithm can find the prime factors of a large number exponentially faster than classical computers, which poses a threat to current encryption methods. Grover's algorithm can search an unstructured database much faster than its classical counterparts.
                 </p>
             </div>
         </div>
@@ -276,7 +327,7 @@
         <div class="max-w-4xl text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Real-World Applications</h2>
             <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
-                The potential of quantum computing is vast. It can revolutionize fields like *drug discovery* by simulating complex molecular interactions, optimize intricate *financial models, and enable breakthroughs in **materials science* by designing new, more efficient materials.
+                The potential of quantum computing is vast. It can revolutionize fields like **drug discovery** by simulating complex molecular interactions, optimize intricate **financial models**, and enable breakthroughs in **materials science** by designing new, more efficient materials.
             </p>
             <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Quantum+Applications" alt="A placeholder image for quantum applications" class="rounded-xl shadow-lg animated-float w-full h-auto mx-auto max-w-lg">
         </div>
@@ -298,11 +349,13 @@
 
     <!-- JavaScript for Scroll-Driven Animation -->
     <script>
-        // Get the body and the element for the parallax image
+        // Get the body and the elements for the parallax and scroll animations
         const body = document.body;
         const introBgImg = document.getElementById('intro-bg-img');
         const historyContainer = document.querySelector('.history-container');
         const historyWrapper = document.getElementById('history-wrapper');
+        const principlesContainer = document.querySelector('.principles-container');
+        const principlesWrapper = document.getElementById('principles-wrapper');
 
         // This function will automatically scroll the page to the top on load.
         window.onload = function() {
@@ -335,13 +388,33 @@
                 const scrollProgress = scrollY - historyTop;
                 
                 // Calculate a normalized progress value from 0 to 1.
-                const progressNormalized = scrollProgress / historyWrapper.offsetHeight;
+                const progressNormalized = scrollProgress / (historyWrapper.offsetHeight - window.innerHeight);
                 
                 // Calculate the horizontal position based on the normalized progress.
                 const horizontalPosition = progressNormalized * totalHorizontalDistance;
                 
                 // Apply the horizontal translation. Use a negative value to slide the content to the left.
                 historyContainer.style.transform = `translateX(-${horizontalPosition}px)`;
+            }
+
+            // --- Principles Section 3D Rotation Animation ---
+            // Get the position of the principles section wrapper.
+            const principlesTop = principlesWrapper.offsetTop;
+
+            // Check if the user is scrolling within the principles section's vertical space.
+            if (scrollY >= principlesTop && scrollY <= principlesTop + principlesWrapper.offsetHeight) {
+                // Calculate the scroll progress within this section.
+                const scrollProgress = scrollY - principlesTop;
+
+                // Normalize the progress from 0 to 1.
+                const progressNormalized = scrollProgress / (principlesWrapper.offsetHeight - window.innerHeight);
+
+                // Calculate the rotation angle for the 3 pages. We'll rotate a total of -240deg to show each page in turn.
+                // -80deg per page transition, which looks like a smooth 3D flip.
+                const rotationAngle = Math.min(progressNormalized * -240, 0);
+
+                // Apply the rotation to the principles container.
+                principlesContainer.style.transform = `rotateY(${rotationAngle}deg)`;
             }
         });
     </script>
