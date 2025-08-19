@@ -460,7 +460,7 @@
             const rotation = Math.min((scrollY / introHeight) * 360, 360);
             
             // Apply the rotation to the background image.
-            introBgImg.style.transform = `translate(-50%, -50%) rotateY(${rotation}deg)`;
+            introBgImg.style.transform = translate(-50%, -50%) rotateY(${rotation}deg);
             
             // --- History Section Horizontal Scroll Animation (Leftward) ---
             // Get the position of the history section wrapper.
@@ -480,7 +480,7 @@
                 const horizontalPosition = progressNormalized * totalHorizontalDistance;
                 
                 // Apply the horizontal translation to slide the content to the left.
-                historyContainer.style.transform = `translateX(-${horizontalPosition}px)`;
+                historyContainer.style.transform = translateX(-${horizontalPosition}px);
             }
 
             // --- Principles Section 3D Rotation Animation ---
@@ -501,7 +501,7 @@
                 const rotationAngle = Math.min(progressNormalized * -240, 0);
                 
                 // Apply the rotation to the principles container.
-                principlesContainer.style.transform = `rotateY(${rotationAngle}deg)`;
+                principlesContainer.style.transform = rotateY(${rotationAngle}deg);
             }
 
             // --- Algorithms Section Horizontal Scroll Animation (Rightward) ---
@@ -524,7 +524,7 @@
                 
                 // Apply a negative translation to show the first page, and move it towards zero to slide right.
                 // The container is 500% wide, so we start at -400vw and move to 0vw.
-                algorithmsContainer.style.transform = `translateX(-${totalHorizontalDistance - horizontalPosition}px)`;
+                algorithmsContainer.style.transform = translateX(-${totalHorizontalDistance - horizontalPosition}px);
             }
         });
     </script>
