@@ -106,7 +106,7 @@
         
         /* --- History Section Styles --- */
         #history-wrapper {
-            height: 300vh; /* This creates the vertical space for the horizontal scroll animation */
+            height: 400vh; /* Increased vertical space for 5 pages */
             position: relative;
         }
         
@@ -126,7 +126,7 @@
         .history-container {
             display: flex;
             flex-direction: row;
-            width: 300%; /* A large width to accommodate all "pages" */
+            width: 500%; /* A large width to accommodate all "pages" */
             height: 100%;
             transition: transform 0.1s ease-out;
             transform: translateX(0); /* Initial state */
@@ -198,6 +198,45 @@
         .principles-page:nth-child(3) {
             transform: rotateY(240deg) translateZ(200px); /* Back page */
         }
+
+        /* --- Algorithms Section Styles (New) --- */
+        #algorithms-wrapper {
+            height: 500vh; /* Increased vertical space for 5 pages */
+            position: relative;
+        }
+
+        #algorithms {
+            height: 100vh;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .algorithms-container {
+            display: flex;
+            flex-direction: row;
+            width: 500%; /* A large width for 5 pages */
+            height: 100%;
+            transition: transform 0.1s ease-out;
+            transform: translateX(0);
+        }
+
+        .algorithms-page {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
     </style>
 </head>
 <body class="bg-black text-white">
@@ -208,14 +247,15 @@
             <div class="space-x-8 hidden md:flex">
                 <a href="#history" class="hover:text-gray-400 transition-colors duration-300">History</a>
                 <a href="#principles" class="hover:text-gray-400 transition-colors duration-300">Principles</a>
-                <a href="#algorithms" class="hover:text-gray-400 transition-colors duration-300">Algorithms</a>
+                <a href="#algorithms-wrapper" class="hover:text-gray-400 transition-colors duration-300">Algorithms</a>
+                <a href="#applications" class="hover:text-gray-400 transition-colors duration-300">Applications</a>
             </div>
             <a href="#" class="bg-white text-black px-6 py-2 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-300 hidden md:block">Team S.A.T.G</a>
         </nav>
     </header>
 
     <section id="intro" class="section">
-        <img src="bg.jpg" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
+        <img src="https://placehold.co/800x800/2a043c/ffffff?text=Quantum+Ring" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
         <div class="parallax-layer base flex flex-col items-center">
             <h1 class="text-6xl md:text-8xl font-bold mb-4 tracking-tighter text-glow">Quantum Computing</h1>
             <h2 class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter text-center text-glow">The Quantum Leap</h2>
@@ -229,7 +269,7 @@
         </div>
     </section>
     
- <section id="history-wrapper">
+    <section id="history-wrapper">
         <section id="history">
             <!-- This container handles the horizontal scrolling and snapping -->
             <div class="history-container">
@@ -238,6 +278,8 @@
                     <div class="max-w-4xl">
                         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">A Brief History</h2>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                            The history of quantum computing is rooted in the early 20th-century development of quantum mechanics and its later intersection with computer science. It's a journey from theoretical curiosity to practical, though still nascent, technology.
+                        </p>
                     </div>
                 </div>
                 <!-- Second Page of History -->
@@ -261,21 +303,23 @@
                     </div>
                 </div>
                 <!-- Fourth Page of History -->
-              <div class="history-page">
+                <div class="history-page">
                     <div class="max-w-4xl">
                         <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Quantum Supremacy Claim</h3>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
                             In 2019, Google AI and NASA claimed to have achieved quantum supremacy using a 54-qubit machine, performing a calculation that no traditional computer could. The claim's validity, however, is still under review.
-                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=David+Deutsch" alt="A placeholder image of David Deutsch" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                        </p>
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Google+Sycamore+Processor" alt="A placeholder image of the Google Sycamore Processor" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
                 </div>
                 <!-- Fifth Page of History -->
-              <div class="history-page">
+                <div class="history-page">
                     <div class="max-w-4xl">
                         <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Harvard's Quantum Leap</h3>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
                             In December 2023, scientists from Harvard University successfully created "quantum circuits" that correct errors more efficiently than alternative methods, which may remove a major obstacle to practical quantum computers.
-                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=David+Deutsch" alt="A placeholder image of David Deutsch" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                        </p>
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Harvard+Quantum+Circuits" alt="A placeholder image of quantum circuits" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
                 </div>              
             </div>
@@ -290,7 +334,7 @@
                     <div class="max-w-4xl text-center">
                         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Superposition</h2>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                            Unlike a classical bit which is either a 0 or a 1, a qubit can be in a **superposition** of both states at the same time. This is like a spinning coin that is both heads and tails until it's measured.
+                            Unlike a classical bit which is either a 0 or a 1, a qubit can be in a <strong>superposition</strong> of both states at the same time. This is like a spinning coin that is both heads and tails until it's measured.
                         </p>
                         <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Superposition+of+States" alt="Abstract representation of a qubit in superposition" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto mx-auto">
                     </div>
@@ -300,7 +344,7 @@
                     <div class="max-w-4xl text-center">
                         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Entanglement</h2>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                            **Entanglement** is a phenomenon where two or more qubits are linked in such a way that the state of one instantly influences the state of the other, no matter the distance between them.
+                            <strong>Entanglement</strong> is a phenomenon where two or more qubits are linked in such a way that the state of one instantly influences the state of the other, no matter the distance between them.
                         </p>
                         <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Entangled+Qubits" alt="Abstract representation of two entangled qubits" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto mx-auto">
                     </div>
@@ -310,7 +354,7 @@
                     <div class="max-w-4xl text-center">
                         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Quantum Tunneling</h2>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                            **Quantum tunneling** is the ability of a particle to pass through a barrier that it classically could not overcome. This principle allows quantum computers to solve optimization problems by finding the most efficient path.
+                            <strong>Quantum tunneling</strong> is the ability of a particle to pass through a barrier that it classically could not overcome. This principle allows quantum computers to solve optimization problems by finding the most efficient path.
                         </p>
                         <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Quantum+Tunneling" alt="Abstract representation of a particle tunneling" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto mx-auto">
                     </div>
@@ -319,25 +363,68 @@
         </section>
     </section>
     
-    <section id="algorithms" class="section">
-        <div class="max-w-6xl flex flex-col-reverse md:flex-row items-center gap-8">
-            <div class="w-full md:w-1/2 flex justify-center">
-                <img src="https://placehold.co/600x400/2a2a2a/ffffff?text=Quantum+Algorithms" alt="Abstract representation of machine learning algorithms" class="rounded-xl shadow-lg animated-float w-full max-w-sm h-auto">
+    <section id="algorithms-wrapper">
+        <section id="algorithms">
+            <!-- This container handles the horizontal scrolling to the right -->
+            <div class="algorithms-container">
+                <!-- First Page of Algorithms -->
+                <div class="algorithms-page">
+                    <div class="max-w-4xl">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Key Algorithms</h2>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                            Quantum algorithms are a new class of computational methods designed to run on a quantum computer. They leverage quantum phenomena like superposition and entanglement to solve certain problems much faster than any classical algorithm.
+                        </p>
+                    </div>
+                </div>
+                <!-- Second Page of Algorithms -->
+                <div class="algorithms-page">
+                    <div class="max-w-4xl">
+                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Shor's Algorithm</h3>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                            Named after Peter Shor, this algorithm can find the prime factors of a large number with exponential speedup over the best-known classical algorithms. This has profound implications for modern cryptography, as many encryption systems (like RSA) rely on the difficulty of this problem.
+                        </p>
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Shor's+Algorithm+Diagram" alt="A diagram representing Shor's algorithm" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                    </div>
+                </div>
+                <!-- Third Page of Algorithms -->
+                <div class="algorithms-page">
+                    <div class="max-w-4xl">
+                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Grover's Algorithm</h3>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                            Grover's algorithm provides a quadratic speedup for searching an unstructured database. While a classical search requires checking every item in the worst case, Grover's algorithm can find a specific item in far fewer steps, making it powerful for search problems.
+                        </p>
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Grover's+Algorithm+Diagram" alt="A diagram representing Grover's algorithm" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                    </div>
+                </div>
+                <!-- Fourth Page of Algorithms -->
+                <div class="algorithms-page">
+                    <div class="max-w-4xl">
+                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Quantum Approximate Optimization Algorithm (QAOA)</h3>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                            QAOA is a hybrid quantum-classical algorithm designed to solve combinatorial optimization problems. It works by using a quantum computer to prepare a specific quantum state and then using a classical computer to find the best parameters to optimize that state, making it suitable for current-generation quantum machines.
+                        </p>
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=QAOA+Diagram" alt="A diagram of the QAOA workflow" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                    </div>
+                </div>
+                <!-- Fifth Page of Algorithms -->
+                <div class="algorithms-page">
+                    <div class="max-w-4xl">
+                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Variational Quantum Eigensolver (VQE)</h3>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                            VQE is another hybrid algorithm used to find the ground state energy of a quantum system, a crucial task in chemistry and materials science. It uses a classical optimizer to tune the parameters of a quantum circuit, making it a promising tool for tackling complex molecular simulations.
+                        </p>
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=VQE+Diagram" alt="A diagram of the VQE workflow" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                    </div>
+                </div>
             </div>
-            <div class="text-center md:text-left md:w-1/2">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Key Algorithms</h2>
-                <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
-                    Two of the most famous quantum algorithms are **Shor's algorithm** and **Grover's algorithm**. Shor's algorithm can find the prime factors of a large number exponentially faster than classical computers, which poses a threat to current encryption methods. Grover's algorithm can search an unstructured database much faster than its classical counterparts.
-                </p>
-            </div>
-        </div>
+        </section>
     </section>
 
     <section id="applications" class="section">
         <div class="max-w-4xl text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Real-World Applications</h2>
             <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
-                The potential of quantum computing is vast. It can revolutionize fields like **drug discovery** by simulating complex molecular interactions, optimize intricate **financial models**, and enable breakthroughs in **materials science** by designing new, more efficient materials.
+                The potential of quantum computing is vast. It can revolutionize fields like <strong>drug discovery</strong> by simulating complex molecular interactions, optimize intricate <strong>financial models</strong>, and enable breakthroughs in <strong>materials science</strong> by designing new, more efficient materials.
             </p>
             <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Quantum+Applications" alt="A placeholder image for quantum applications" class="rounded-xl shadow-lg animated-float w-full h-auto mx-auto max-w-lg">
         </div>
@@ -364,6 +451,8 @@
         const historyWrapper = document.getElementById('history-wrapper');
         const principlesContainer = document.querySelector('.principles-container');
         const principlesWrapper = document.getElementById('principles-wrapper');
+        const algorithmsContainer = document.querySelector('.algorithms-container');
+        const algorithmsWrapper = document.getElementById('algorithms-wrapper');
 
         // This function will automatically scroll the page to the top on load.
         window.onload = function() {
@@ -384,11 +473,11 @@
             // Apply the rotation to the background image.
             introBgImg.style.transform = `translate(-50%, -50%) rotateY(${rotation}deg)`;
             
-            // --- History Section Horizontal Scroll Animation ---
+            // --- History Section Horizontal Scroll Animation (slides left) ---
             // Get the position of the history section wrapper.
             const historyTop = historyWrapper.offsetTop;
             // Get the total horizontal distance to scroll, which is the total width of all pages minus one viewport width.
-            const totalHorizontalDistance = (historyContainer.children.length - 1) * window.innerWidth;
+            const totalHistoryHorizontalDistance = (historyContainer.children.length - 1) * window.innerWidth;
             
             // Check if the user is scrolling within the history section's vertical space.
             if (scrollY >= historyTop && scrollY <= historyTop + historyWrapper.offsetHeight) {
@@ -399,7 +488,7 @@
                 const progressNormalized = scrollProgress / (historyWrapper.offsetHeight - window.innerHeight);
                 
                 // Calculate the horizontal position based on the normalized progress.
-                const horizontalPosition = progressNormalized * totalHorizontalDistance;
+                const horizontalPosition = progressNormalized * totalHistoryHorizontalDistance;
                 
                 // Apply the horizontal translation. Use a negative value to slide the content to the left.
                 historyContainer.style.transform = `translateX(-${horizontalPosition}px)`;
@@ -418,14 +507,33 @@
                 const progressNormalized = scrollProgress / (principlesWrapper.offsetHeight - window.innerHeight);
 
                 // Calculate the rotation angle for the 3 pages.
-                // We rotate from 0deg to -120deg to flip from page 1 to 2, then to -240deg for the last page.
                 const rotationAngle = Math.min(progressNormalized * -240, 0);
                 
                 // Apply the rotation to the principles container.
                 principlesContainer.style.transform = `rotateY(${rotationAngle}deg)`;
             }
+
+            // --- Algorithms Section Horizontal Scroll Animation (slides right) ---
+            // Get the position of the algorithms section wrapper.
+            const algorithmsTop = algorithmsWrapper.offsetTop;
+            // Get the total horizontal distance to scroll.
+            const totalAlgorithmsHorizontalDistance = (algorithmsContainer.children.length - 1) * window.innerWidth;
+
+            // Check if the user is scrolling within the algorithms section's vertical space.
+            if (scrollY >= algorithmsTop && scrollY <= algorithmsTop + algorithmsWrapper.offsetHeight) {
+                // Calculate the scroll progress within this section.
+                const scrollProgress = scrollY - algorithmsTop;
+
+                // Normalize the progress from 0 to 1.
+                const progressNormalized = scrollProgress / (algorithmsWrapper.offsetHeight - window.innerHeight);
+
+                // Calculate the horizontal position. The `totalHorizontalDistance` is already a positive value.
+                const horizontalPosition = progressNormalized * totalAlgorithmsHorizontalDistance;
+
+                // Apply the horizontal translation. Use a positive value to slide the content to the right.
+                algorithmsContainer.style.transform = `translateX(${horizontalPosition}px)`;
+            }
         });
     </script>
 </body>
 </html>
-
