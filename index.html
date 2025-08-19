@@ -376,13 +376,42 @@
         <section id="algorithms">
             <!-- This container handles the horizontal scrolling to the right -->
             <div class="algorithms-container">
+                <div class="algorithms-page">
+                    <div class="max-w-4xl">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Subgroup Problem</h2>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                         Hidden subgroup problem(HSP) is a framework that captures problems such as the factoring, discrete logarithm, graph isomorphism, and the shortest vector problem. That makes it essential in the theory of quantum computing.
+                        </p>
+                        <img src="alg6.jpg" alt="A diagram representing Shor's algorithm" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                    </div>
+                </div>
+                <div class="algorithms-page">
+                    <div class="max-w-4xl">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Scope</h2>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                          Shor developed algorithms for factoring, discrete logarithms, and period-finding. Typically, “Shor’s algorithm” refers to factoring, but all three are cases of the hidden subgroup problem.
+                        </p>
+                        <img src="alg5.jpg" alt="A diagram representing Shor's algorithm" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                    </div>
+                </div>
+                    
+                <div class="algorithms-page">
+                    <div class="max-w-4xl">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Challenges</h2>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+                           The concerns for Shor's algorithm include that factoring numbers of practical significance require more qubits than available in the future. Another concern is that noise in quantum circuits may undermine results.
+                        </p>
+                        <img src="alg4.jpg" alt="A diagram representing Shor's algorithm" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                    </div>
+                </div>
                 <!-- First Page of Algorithms -->
                 <div class="algorithms-page">
                     <div class="max-w-4xl">
-                        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Key Algorithms</h2>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Factorization</h2>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                            Quantum algorithms are a new class of computational methods designed to run on a quantum computer. They leverage quantum phenomena like superposition and entanglement to solve certain problems much faster than any classical algorithm.
+                           Shor’s algorithm efficiently finds prime factors of integers and is one of the few quantum algorithms showing strong evidence of superpolynomial speedup over classical methods.
                         </p>
+                        <img src="alg3.jpg" alt="A diagram representing Shor's algorithm" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
                 </div>
                 <!-- Second Page of Algorithms -->
@@ -390,44 +419,41 @@
                     <div class="max-w-4xl">
                         <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Shor's Algorithm</h3>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                            Named after Peter Shor, this algorithm can find the prime factors of a large number with exponential speedup over the best-known classical algorithms. This has profound implications for modern cryptography, as many encryption systems (like RSA) rely on the difficulty of this problem.
+                           Quantum algorithms include the aforementioned 'Shor's algorithm', which is a widely known quantum algorithm.
                         </p>
-                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Shor's+Algorithm+Diagram" alt="A diagram representing Shor's algorithm" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                        <img src="alg2.jpg" alt="A diagram representing Shor's algorithm" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
                 </div>
                 <!-- Third Page of Algorithms -->
                 <div class="algorithms-page">
                     <div class="max-w-4xl">
-                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Grover's Algorithm</h3>
+                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Algorithm Speedup</h3>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                            Grover's algorithm provides a quadratic speedup for searching an unstructured database. While a classical search requires checking every item in the worst case, Grover's algorithm can find a specific item in far fewer steps, making it powerful for search problems.
+                           Quantum algorithms are categorized by the speedup they offer over classical ones. While it’s not proven that classical algorithms can’t match them, evidence suggests this is unlikely.
                         </p>
-                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Grover's+Algorithm+Diagram" alt="A diagram representing Grover's algorithm" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                        <img src="alg1.jpg" alt="A diagram representing Grover's algorithm" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
                 </div>
                 <!-- Fourth Page of Algorithms -->
                 <div class="algorithms-page">
                     <div class="max-w-4xl">
-                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Quantum Approximate Optimization Algorithm (QAOA)</h3>
+                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow"></h3>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                            QAOA is a hybrid quantum-classical algorithm designed to solve combinatorial optimization problems. It works by using a quantum computer to prepare a specific quantum state and then using a classical computer to find the best parameters to optimize that state, making it suitable for current-generation quantum machines.
                         </p>
-                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=QAOA+Diagram" alt="A diagram of the QAOA workflow" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
                 </div>
                 <!-- Fifth Page of Algorithms -->
                 <div class="algorithms-page">
                     <div class="max-w-4xl">
-                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Variational Quantum Eigensolver (VQE)</h3>
+                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow"></h3>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                            VQE is another hybrid algorithm used to find the ground state energy of a quantum system, a crucial task in chemistry and materials science. It uses a classical optimizer to tune the parameters of a quantum circuit, making it a promising tool for tackling complex molecular simulations.
                         </p>
-                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=VQE+Diagram" alt="A diagram of the VQE workflow" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
                 </div>
             </div>
         </section>
     </section>
+            
     
     <section id="contact" class="section">
         <div class="max-w-2xl w-full text-center">
