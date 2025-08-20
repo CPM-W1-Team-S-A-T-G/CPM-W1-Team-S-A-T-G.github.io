@@ -237,6 +237,78 @@
             padding: 2rem;
             text-align: center;
         }
+        
+        /* --- Quiz Modal Styles --- */
+        .quiz-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+        }
+
+        .quiz-card {
+            background-color: #1a1a1a;
+            border-radius: 1rem;
+            padding: 2rem;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            text-align: center;
+            transform: scale(0.95);
+            animation: zoomIn 0.3s forwards;
+        }
+        
+        @keyframes zoomIn {
+            to {
+                transform: scale(1);
+            }
+        }
+        
+        .quiz-option-btn {
+            background-color: #333;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            margin: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+            font-weight: 600;
+        }
+
+        .quiz-option-btn:hover {
+            background-color: #444;
+            transform: translateY(-2px);
+        }
+
+        .quiz-option-btn.correct {
+            background-color: #34d399; /* Tailwind green-400 */
+        }
+        
+        .quiz-option-btn.wrong {
+            background-color: #ef4444; /* Tailwind red-500 */
+        }
+
+        .quiz-nav-btn {
+            background-color: #FFD700;
+            color: black;
+            font-weight: bold;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            margin-top: 1.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .quiz-nav-btn:hover {
+            background-color: #e5c100;
+        }
     </style>
 </head>
 <body class="bg-black text-white">
@@ -247,14 +319,14 @@
             <div class="space-x-8 hidden md:flex">
                 <a href="#history" class="hover:text-gray-400 transition-colors duration-300">History</a>
                 <a href="#principles" class="hover:text-gray-400 transition-colors duration-300">Principles</a>
-                <a href="#algorithms-wrapper" class="hover:text-gray-400 transition-colors duration-300">Shor's Algorithm</a>
+                <a href="#algorithms-wrapper" class="hover:text-gray-400 transition-colors duration-300">Algorithms</a>
             </div>
             <a href="#" class="bg-white text-black px-6 py-2 rounded-full font-semibold hover:bg-gray-300 transition-colors duration-300 hidden md:block">Team S.A.T.G</a>
         </nav>
     </header>
 
     <section id="intro" class="section">
-        <img src="bg.jpg" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
+        <img src="https://placehold.co/800x800/2a043c/ffffff?text=Quantum+Ring" alt="A glowing abstract quantum ring" class="intro-bg-img" id="intro-bg-img">
         <div class="parallax-layer base flex flex-col items-center">
             <h1 class="text-6xl md:text-8xl font-bold mb-4 tracking-tighter text-glow">Quantum Computing</h1>
             <h2 class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter text-center text-glow">The Quantum Leap</h2>
@@ -298,7 +370,7 @@
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
                             It all originated from modern quantum theory which was developed in the 1920s, used to explain wave-particle duality observed at atomic scales. Thus leading to the creation of digital computers which paved the way to the removal of human computers due to human computers being incapable of doing tedious calculations for long periods of time.
                         </p>
-                        <img src="his1.png" alt="A placeholder image of Peter Shor" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Quantum+Theory" alt="A placeholder image of Quantum Theory concepts" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
                 </div>
                 <!-- Fourth Page of History -->
@@ -306,31 +378,31 @@
                     <div class="max-w-4xl">
                         <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Peter Shor</h3>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                           Quantum computing began in the 1980s when qubits replaced classical bits, and Paul Benioff proposed the Quantum Turing Machine. This led to quantum algorithms, with Peter Shor’s algorithm gaining attention for its ability to break encryption.
+                            Quantum computing began in the 1980s when qubits replaced classical bits, and Paul Benioff proposed the Quantum Turing Machine. This led to quantum algorithms, with Peter Shor’s algorithm gaining attention for its ability to break encryption.
                         </p>
-                        <img src="his2.png" alt="A placeholder image of the Google Sycamore Processor" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Peter+Shor" alt="A placeholder image of Peter Shor" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
                 </div>
                 <!-- Fifth Page of History -->
                 <div class="history-page">
                     <div class="max-w-4xl">
-                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Peter Shor</h3>
+                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Google's Sycamore Processor</h3>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
                             In 2019, Google AI and NASA announced that they had achieved quantum supremacy with a 54-qubit machine, performing a computation that any classical machine cannot replicate. However, the validity of this claim is still being researched.
                         </p>
-                        <img src="his3.png" alt="A placeholder image of quantum circuits" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Google+Sycamore" alt="A placeholder image of the Google Sycamore Processor" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
                 </div>  
 
                 <div class="history-page">
                     <div class="max-w-4xl">
-                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Quantum Supermarcy</h3>
+                        <h3 class="text-3xl md:text-4xl font-bold mb-6 text-glow">Quantum Circuits</h3>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                           In December 2023, scientists from Harvard University successfully created "quantum circuits" that correct errors more efficiently than alternative methods, which may remove a major obstacle to practical quantum computers.
+                            In December 2023, scientists from Harvard University successfully created "quantum circuits" that correct errors more efficiently than alternative methods, which may remove a major obstacle to practical quantum computers.
                         </p>
-                        <img src="his4.png" alt="A placeholder image of quantum circuits" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Quantum+Circuits" alt="A placeholder image of quantum circuits" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
-                </div>   
+                </div>    
             </div>
         </section>
     </section>
@@ -343,8 +415,8 @@
                     <div class="max-w-4xl text-center">
                         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Bits vs Qubits</h2>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                           In classical information theory, a bit is the basic unit that can exist only in two states: 0 or 1. In quantum information, the equivalent unit is the qubit, which is described by the states |0⟩ and |1⟩. These serve as the quantum counterparts of the classical binary states.
-                        <img src="info1.png" alt="Abstract representation of a qubit in superposition" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto mx-auto">
+                            In classical information theory, a bit is the basic unit that can exist only in two states: 0 or 1. In quantum information, the equivalent unit is the qubit, which is described by the states |0⟩ and |1⟩. These serve as the quantum counterparts of the classical binary states.
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Bits+vs+Qubits" alt="Abstract representation of a qubit in superposition" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto mx-auto">
                     </div>
                 </div>
 
@@ -352,9 +424,9 @@
                     <div class="max-w-4xl text-center">
                         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Superposition</h2>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                       The states |0⟩ and |1⟩ form a vector space, meaning they can be scaled and added to create superpositions. A qubit is mathematically represented as a 2D vector, and physicists use Dirac notation, writing it as |Ψ⟩ (“ket psi”), to describe these states.
+                            The states |0⟩ and |1⟩ form a vector space, meaning they can be scaled and added to create superpositions. A qubit is mathematically represented as a 2D vector, and physicists use Dirac notation, writing it as |Ψ⟩ (“ket psi”), to describe these states.
                         </p>
-                        <img src="info2.png" alt="Abstract representation of two entangled qubits" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto mx-auto">
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Superposition+Diagram" alt="Abstract representation of two entangled qubits" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto mx-auto">
                     </div>
                 </div>
 
@@ -362,9 +434,9 @@
                     <div class="max-w-4xl text-center">
                         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Qubit States</h2>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                           A qubit is a 2-state system. Any qubit takes the form α|0> + ß|1> as its standard basis states. While α and ß are the probability amplitudes, which are in general complex numbers. If either α or ß is a zero, the qubit is essentially a classical bit. But when both are non-zero, the qubit is in superposition
+                            A qubit is a 2-state system. Any qubit takes the form α|0⟩ + β|1⟩ as its standard basis states. While α and β are the probability amplitudes, which are in general complex numbers. If either α or β is a zero, the qubit is essentially a classical bit. But when both are non-zero, the qubit is in superposition.
                         </p>
-                        <img src="info3.png" alt="Abstract representation of a particle tunneling" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto mx-auto">
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Qubit+States" alt="Abstract representation of a particle tunneling" class="rounded-xl shadow-lg animated-pulse w-full max-w-sm h-auto mx-auto">
                     </div>
                 </div>
             </div>
@@ -380,9 +452,9 @@
                     <div class="max-w-4xl">
                         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Scope</h2>
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                           Shor developed algorithms for factoring, discrete logarithms, and period-finding. Typically, “Shor’s algorithm” refers to factoring, but all three are cases of the hidden subgroup problem.
+                            Shor developed algorithms for factoring, discrete logarithms, and period-finding. Typically, “Shor’s algorithm” refers to factoring, but all three are cases of the hidden subgroup problem.
                         </p>
-                         <img src="alg6.jpg" alt="A diagram representing Shor's algorithm" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                          <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Shor's+Algorithm+Diagram" alt="A diagram representing Shor's algorithm" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
                 </div>
                 <!-- Second Page of Algorithms -->
@@ -392,7 +464,7 @@
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
                             Shor’s algorithm efficiently finds prime factors of integers and is one of the few quantum algorithms showing strong evidence of superpolynomial speedup over classical methods.
                         </p>
-                        <img src="alg2.jpg" alt="A diagram representing Shor's algorithm" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Factorization+Diagram" alt="A diagram representing Shor's algorithm" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
                 </div>
                 <!-- Third Page of Algorithms -->
@@ -402,7 +474,7 @@
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
                             Quantum algorithms include the aforementioned 'Shor's algorithm', which is a widely known quantum algorithm.
                         </p>
-                        <img src="alg4.jpg" alt="A diagram representing Grover's algorithm" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
+                        <img src="https://placehold.co/600x300/3a3a3a/ffffff?text=Shor's+Algorithm+Logic" alt="A diagram representing Grover's algorithm" class="rounded-xl shadow-lg animated-scale-on-hover w-full h-auto mx-auto max-w-lg">
                     </div>
                 </div>
 
@@ -428,6 +500,17 @@
             </div>
         </section>
     </section>
+
+    <!-- The new quiz section, with a button to trigger it -->
+    <section id="quiz-trigger" class="section">
+        <div class="max-w-2xl w-full text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Test Your Knowledge</h2>
+            <p class="text-lg text-gray-300 mb-8">
+                Think you've got the basics down? Take this quick quiz on quantum algorithms!
+            </p>
+            <button id="take-quiz-btn" class="bg-[#FFD700] text-black px-8 py-3 rounded-full font-bold hover:bg-gray-300 transition-colors duration-300">Take Quiz</button>
+        </div>
+    </section>
     
     <section id="contact" class="section">
         <div class="max-w-2xl w-full text-center">
@@ -442,6 +525,19 @@
         </div>
     </section>
 
+    <!-- Quiz Modal HTML - Hidden by default -->
+    <div id="quiz-modal" class="quiz-modal-overlay hidden">
+        <div class="quiz-card">
+            <h3 id="quiz-question" class="text-2xl md:text-3xl font-bold mb-6 text-glow">Question Text Here</h3>
+            <div id="quiz-options" class="flex flex-col items-stretch space-y-4 mb-4">
+                <!-- Quiz options will be injected here by JavaScript -->
+            </div>
+            <p id="quiz-feedback" class="text-lg font-semibold h-8"></p>
+            <button id="next-btn" class="quiz-nav-btn hidden">Next Question</button>
+            <p id="quiz-results" class="text-2xl font-bold mt-4 hidden"></p>
+        </div>
+    </div>
+
     <script>
         // Get the body and the elements for the parallax and scroll animations
         const body = document.body;
@@ -452,6 +548,47 @@
         const principlesWrapper = document.getElementById('principles-wrapper');
         const algorithmsContainer = document.querySelector('.algorithms-container');
         const algorithmsWrapper = document.getElementById('algorithms-wrapper');
+        
+        // Quiz DOM elements
+        const takeQuizBtn = document.getElementById('take-quiz-btn');
+        const quizModal = document.getElementById('quiz-modal');
+        const quizQuestion = document.getElementById('quiz-question');
+        const quizOptions = document.getElementById('quiz-options');
+        const quizFeedback = document.getElementById('quiz-feedback');
+        const nextBtn = document.getElementById('next-btn');
+        const quizResults = document.getElementById('quiz-results');
+
+        // Quiz data and state
+        const quizData = [
+            {
+                question: "What is Shor's algorithm primarily known for?",
+                options: ["Solving complex chemistry problems", "Factoring large integers", "Optimizing combinatorial problems", "Creating quantum circuits"],
+                answer: "Factoring large integers"
+            },
+            {
+                question: "What type of problem is QAOA designed to solve?",
+                options: ["Prime factorization", "Combinatorial optimization", "Linear equations", "Ground state energy"],
+                answer: "Combinatorial optimization"
+            },
+            {
+                question: "What does VQE stand for?",
+                options: ["Vectorized Quantum Engine", "Variational Quantum Eigensolver", "Virtual Quantum Emulator", "Vibrational Quantum Evolution"],
+                answer: "Variational Quantum Eigensolver"
+            },
+            {
+                question: "Which algorithm is a hybrid quantum-classical algorithm?",
+                options: ["Shor's Algorithm", "Grover's Algorithm", "QAOA", "None of the above"],
+                answer: "QAOA"
+            },
+            {
+                question: "What is a key difference between Shor's Algorithm and VQE?",
+                options: ["Shor's is for chemistry, VQE is for factorization", "Shor's is classical, VQE is quantum", "Shor's is purely quantum, VQE is a hybrid algorithm", "There is no difference"],
+                answer: "Shor's is purely quantum, VQE is a hybrid algorithm"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
 
         // This function will automatically scroll the page to the top on load.
         window.onload = function() {
@@ -533,6 +670,105 @@
                 algorithmsContainer.style.transform = `translateX(${horizontalPosition}px)`;
             }
         });
+        
+        // Function to start the quiz
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            quizModal.classList.remove('hidden');
+            showQuestion();
+        }
+
+        // Function to display the current question and options
+        function showQuestion() {
+            // Hide previous results and feedback
+            quizResults.classList.add('hidden');
+            quizFeedback.textContent = '';
+            nextBtn.classList.add('hidden');
+            nextBtn.textContent = 'Next Question';
+
+            const question = quizData[currentQuestionIndex];
+            quizQuestion.textContent = question.question;
+
+            // Clear previous options
+            quizOptions.innerHTML = '';
+
+            // Create and append a button for each option
+            question.options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('quiz-option-btn');
+                button.addEventListener('click', () => checkAnswer(option, question.answer, button));
+                quizOptions.appendChild(button);
+            });
+        }
+
+        // Function to check the user's answer
+        function checkAnswer(selectedOption, correctAnswer, clickedButton) {
+            // Disable all option buttons after a choice is made
+            const allOptionButtons = quizOptions.querySelectorAll('.quiz-option-btn');
+            allOptionButtons.forEach(btn => btn.disabled = true);
+
+            // Add correct/wrong class for visual feedback
+            if (selectedOption === correctAnswer) {
+                score++;
+                quizFeedback.textContent = 'Correct!';
+                clickedButton.classList.add('correct');
+            } else {
+                quizFeedback.textContent = 'Wrong!';
+                clickedButton.classList.add('wrong');
+                // Highlight the correct answer
+                allOptionButtons.forEach(btn => {
+                    if (btn.textContent === correctAnswer) {
+                        btn.classList.add('correct');
+                    }
+                });
+            }
+
+            // Show the next question button
+            nextBtn.classList.remove('hidden');
+        }
+
+        // Function to move to the next question or show results
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        // Function to display the final results
+        function showResults() {
+            quizQuestion.textContent = 'Quiz Complete!';
+            quizOptions.innerHTML = '';
+            quizFeedback.textContent = '';
+            nextBtn.classList.add('hidden');
+
+            const percentage = (score / quizData.length) * 100;
+            quizResults.textContent = `You scored ${score} out of ${quizData.length} (${percentage.toFixed(0)}%)!`;
+            quizResults.classList.remove('hidden');
+
+            // Change the button to close the quiz or restart
+            const restartBtn = document.createElement('button');
+            restartBtn.textContent = 'Restart Quiz';
+            restartBtn.classList.add('quiz-nav-btn');
+            restartBtn.addEventListener('click', startQuiz);
+            
+            const closeBtn = document.createElement('button');
+            closeBtn.textContent = 'Close';
+            closeBtn.classList.add('quiz-nav-btn');
+            closeBtn.addEventListener('click', () => quizModal.classList.add('hidden'));
+
+            quizOptions.appendChild(restartBtn);
+            quizOptions.appendChild(closeBtn);
+        }
+
+        // Event Listeners
+        takeQuizBtn.addEventListener('click', startQuiz);
+        nextBtn.addEventListener('click', nextQuestion);
+
     </script>
 </body>
 </html>
